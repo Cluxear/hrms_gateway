@@ -1,0 +1,38 @@
+{
+  "hrmsGatewayApp": {
+    "userappCandidate": {
+      "home": {
+        "title": "Candidates",
+        "createLabel": "Create a new Candidate",
+        "createOrEditLabel": "Create or edit a Candidate",
+        "notFound": "No Candidates found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Candidate {{ id }}?"
+      },
+      "detail": {
+        "title": "Candidate"
+      },
+      "personalStatement": "Personal Statement",
+      "phone": "Phone",
+      "user": "User",
+      "address": "Address",
+      "professionalExperience": "Professional Experience",
+      "academicExperience": "Academic Experience",
+      "certifications": "Certifications",
+      "country": "Country",
+      "degree": "Degree",
+      "seniorityLevel": "Seniority Level",
+      "help": {
+        "personalStatement": "The firstname attribute."
+      }
+    }
+  },
+  "userappApp": {
+    "userappCandidate": {
+      "created": "A new Candidate is created with identifier {{ param }}",
+      "updated": "A Candidate is updated with identifier {{ param }}",
+      "deleted": "A Candidate is deleted with identifier {{ param }}"
+    }
+  }
+}

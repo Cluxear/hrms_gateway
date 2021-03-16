@@ -7,6 +7,16 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
+        "userappPosition": "Position",
+        "userappCandidate": "Candidate",
+        "userappProfessionalExperience": "Professional Experience",
+        "userappAcademicExperience": "Academic Experience",
+        "userappCertification": "Certification",
+        "userappCountry": "Country",
+        "userappAddress": "Address",
+        "userappSeniorityLevel": "Seniority Level",
+        "userappDegreeLevel": "Degree Level",
+        "userappEmployee": "Employee",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

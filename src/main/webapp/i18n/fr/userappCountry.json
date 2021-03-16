@@ -1,0 +1,27 @@
+{
+  "hrmsGatewayApp": {
+    "userappCountry": {
+      "home": {
+        "title": "Countries",
+        "createLabel": "Créer un nouveau Country",
+        "createOrEditLabel": "Créer ou éditer un Country",
+        "notFound": "Aucun Country trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Country {{ id }} ?"
+      },
+      "detail": {
+        "title": "Country"
+      },
+      "name": "Name",
+      "candidate": "Candidate"
+    }
+  },
+  "userappApp": {
+    "userappCountry": {
+      "created": "Un nouveau Country a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Country avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Country avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

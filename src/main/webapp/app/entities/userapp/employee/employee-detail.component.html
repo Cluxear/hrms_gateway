@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="employee">
+            <h2><span jhiTranslate="hrmsGatewayApp.userappEmployee.detail.title">Employee</span> {{ employee.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.userappEmployee.salary">Salary</span></dt>
+                <dd>
+                    <span>{{ employee.salary }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappEmployee.phone">Phone</span></dt>
+                <dd>
+                    <span>{{ employee.phone }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappEmployee.user">User</span></dt>
+                <dd>
+                    {{ employee.userId }}
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappEmployee.position">Position</span></dt>
+                <dd>
+                    <div *ngIf="employee.positionId">
+                        <a [routerLink]="['/position', employee.positionId, 'view']">{{ employee.positionId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappEmployee.degree">Degree</span></dt>
+                <dd>
+                    <div *ngIf="employee.degreeId">
+                        <a [routerLink]="['/degree-level', employee.degreeId, 'view']">{{ employee.degreeId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappEmployee.seniorityLevel">Seniority Level</span></dt>
+                <dd>
+                    <div *ngIf="employee.seniorityLevelId">
+                        <a [routerLink]="['/seniority-level', employee.seniorityLevelId, 'view']">{{ employee.seniorityLevelId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/employee', employee.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

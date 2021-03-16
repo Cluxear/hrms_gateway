@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "userappDegreeLevel": {
+      "home": {
+        "title": "Degree Levels",
+        "createLabel": "Create a new Degree Level",
+        "createOrEditLabel": "Create or edit a Degree Level",
+        "notFound": "No Degree Levels found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Degree Level {{ id }}?"
+      },
+      "detail": {
+        "title": "Degree Level"
+      },
+      "name": "Name",
+      "candidate": "Candidate",
+      "employe": "Employe"
+    }
+  },
+  "userappApp": {
+    "userappDegreeLevel": {
+      "created": "A new Degree Level is created with identifier {{ param }}",
+      "updated": "A Degree Level is updated with identifier {{ param }}",
+      "deleted": "A Degree Level is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "userappCertification": {
+      "home": {
+        "title": "Certifications",
+        "createLabel": "Create a new Certification",
+        "createOrEditLabel": "Create or edit a Certification",
+        "notFound": "No Certifications found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Certification {{ id }}?"
+      },
+      "detail": {
+        "title": "Certification"
+      },
+      "title": "Title",
+      "description": "Description",
+      "candidate": "Candidate"
+    }
+  },
+  "userappApp": {
+    "userappCertification": {
+      "created": "A new Certification is created with identifier {{ param }}",
+      "updated": "A Certification is updated with identifier {{ param }}",
+      "deleted": "A Certification is deleted with identifier {{ param }}"
+    }
+  }
+}

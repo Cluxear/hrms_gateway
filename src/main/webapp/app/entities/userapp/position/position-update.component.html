@@ -1,0 +1,74 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-position-heading" jhiTranslate="hrmsGatewayApp.userappPosition.home.createOrEditLabel">Create or edit a Position</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappPosition.jobTitle" for="field_jobTitle">Job Title</label>
+                    <input type="text" class="form-control" name="jobTitle" id="field_jobTitle"
+                           formControlName="jobTitle"/>
+                    <div *ngIf="editForm.get('jobTitle')!.invalid && (editForm.get('jobTitle')!.dirty || editForm.get('jobTitle')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('jobTitle')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('jobTitle')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                        This field is required to be at least 3 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappPosition.minSalary" for="field_minSalary">Min Salary</label>
+                    <input type="number" class="form-control" name="minSalary" id="field_minSalary"
+                           formControlName="minSalary"/>
+                    <div *ngIf="editForm.get('minSalary')!.invalid && (editForm.get('minSalary')!.dirty || editForm.get('minSalary')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('minSalary')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('minSalary')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappPosition.maxSalary" for="field_maxSalary">Max Salary</label>
+                    <input type="number" class="form-control" name="maxSalary" id="field_maxSalary"
+                           formControlName="maxSalary"/>
+                    <div *ngIf="editForm.get('maxSalary')!.invalid && (editForm.get('maxSalary')!.dirty || editForm.get('maxSalary')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('maxSalary')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('maxSalary')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

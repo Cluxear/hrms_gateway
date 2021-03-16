@@ -1,0 +1,31 @@
+{
+  "hrmsGatewayApp": {
+    "userappProfessionalExperience": {
+      "home": {
+        "title": "Professional Experiences",
+        "createLabel": "Create a new Professional Experience",
+        "createOrEditLabel": "Create or edit a Professional Experience",
+        "notFound": "No Professional Experiences found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Professional Experience {{ id }}?"
+      },
+      "detail": {
+        "title": "Professional Experience"
+      },
+      "place": "Place",
+      "post": "Post",
+      "description": "Description",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "candidate": "Candidate"
+    }
+  },
+  "userappApp": {
+    "userappProfessionalExperience": {
+      "created": "A new Professional Experience is created with identifier {{ param }}",
+      "updated": "A Professional Experience is updated with identifier {{ param }}",
+      "deleted": "A Professional Experience is deleted with identifier {{ param }}"
+    }
+  }
+}

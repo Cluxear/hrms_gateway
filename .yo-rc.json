@@ -2,7 +2,8 @@
   "generator-jhipster": {
     "promptValues": {
       "packageName": "com.tw.gateway",
-      "nativeLanguage": "fr"
+      "nativeLanguage": "fr",
+      "microservicePath": "../hrms_userapp"
     },
     "jhipsterVersion": "6.10.5",
     "applicationType": "gateway",

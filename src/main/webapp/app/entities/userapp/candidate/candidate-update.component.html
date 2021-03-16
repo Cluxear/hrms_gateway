@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-candidate-heading" jhiTranslate="hrmsGatewayApp.userappCandidate.home.createOrEditLabel">Create or edit a Candidate</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.personalStatement" for="field_personalStatement" [ngbTooltip]="'hrmsGatewayApp.userappCandidate.help.personalStatement' | translate">Personal Statement</label>
+                    <input type="text" class="form-control" name="personalStatement" id="field_personalStatement"
+                           formControlName="personalStatement"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.phone" for="field_phone">Phone</label>
+                    <input type="number" class="form-control" name="phone" id="field_phone"
+                           formControlName="phone"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="userId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+                
+                 <div class="form-group">
+                    <h2> Address</h2>    
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.street" for="field_address_street">Street</label>
+                    <input type="string" class="form-control" name="street" id="field_address_street"
+                           formControlName="street"/>
+                     <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.postalCode" for="field_address_postalCode">postalCode</label>
+                    <input type="number" class="form-control" name="postalCode" id="field_address_postalCode"
+                           formControlName="postalCode"/>
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.city" for="field_address_city">city</label>
+                    <input type="string" class="form-control" name="city" id="field_address_city"
+                           formControlName="city"/>
+                         <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.address.state" for="field_address_state">State</label>
+                    <input type="string" class="form-control" name="state" id="field_address_state"
+                           formControlName="state"/>
+                         
+                </div>
+
+                 
+                
+              <!-- <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.degree" for="field_degree">Degree</label>
+                    <select class="form-control" id="field_degree" name="degree" formControlName="degreeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="degreeLevelOption.id" *ngFor="let degreeLevelOption of degreelevels; trackBy: trackById">{{ degreeLevelOption.id }}</option>
+                    </select>
+                </div>
+--> 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.seniorityLevel" for="field_seniorityLevel">Seniority Level</label>
+                    <select class="form-control" id="field_seniorityLevel" name="seniorityLevel" formControlName="seniorityLevelId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="seniorityLevelOption.id" *ngFor="let seniorityLevelOption of senioritylevels; trackBy: trackById">{{ seniorityLevelOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

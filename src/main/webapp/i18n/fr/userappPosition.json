@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "userappPosition": {
+      "home": {
+        "title": "Positions",
+        "createLabel": "Créer un nouveau Position",
+        "createOrEditLabel": "Créer ou éditer un Position",
+        "notFound": "Aucun Position trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Position {{ id }} ?"
+      },
+      "detail": {
+        "title": "Position"
+      },
+      "jobTitle": "Job Title",
+      "minSalary": "Min Salary",
+      "maxSalary": "Max Salary"
+    }
+  },
+  "userappApp": {
+    "userappPosition": {
+      "created": "Un nouveau Position a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Position avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Position avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}
