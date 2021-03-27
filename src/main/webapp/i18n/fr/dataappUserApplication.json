@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "dataappUserApplication": {
+      "home": {
+        "title": "UserApplications",
+        "createLabel": "Créer un nouveau User Application",
+        "createOrEditLabel": "Créer ou éditer un User Application",
+        "notFound": "Aucun User Application trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le User Application {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Application"
+      },
+      "userId": "User Id",
+      "applicationId": "Application Id",
+      "jobPostId": "Job Post Id"
+    }
+  },
+  "dataappApp": {
+    "dataappUserApplication": {
+      "created": "Un nouveau User Application a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Application avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Application avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

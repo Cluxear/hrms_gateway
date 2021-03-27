@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="applicationRecrutementStatus">
+            <h2><span jhiTranslate="hrmsGatewayApp.applicationappApplicationRecrutementStatus.detail.title">Application Recrutement Status</span> {{ applicationRecrutementStatus.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.applicationappApplicationRecrutementStatus.addedAt">Added At</span></dt>
+                <dd>
+                    <span>{{ applicationRecrutementStatus.addedAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.applicationappApplicationRecrutementStatus.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hrmsGatewayApp.RecrutementStatus.' + applicationRecrutementStatus.status }}">{{ applicationRecrutementStatus.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.applicationappApplicationRecrutementStatus.application">Application</span></dt>
+                <dd>
+                    <div *ngIf="applicationRecrutementStatus.applicationId">
+                        <a [routerLink]="['/application', applicationRecrutementStatus.applicationId, 'view']">{{ applicationRecrutementStatus.applicationId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/application-recrutement-status', applicationRecrutementStatus.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

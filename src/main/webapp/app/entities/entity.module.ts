@@ -45,6 +45,25 @@ import { RouterModule } from '@angular/router';
         path: 'employee',
         loadChildren: () => import('./userapp/employee/employee.module').then(m => m.UserappEmployeeModule),
       },
+      {
+        path: 'jobpost',
+        loadChildren: () => import('./jobposting/jobpost/jobpost.module').then(m => m.JobpostingJobpostModule),
+      },
+      {
+        path: 'application',
+        loadChildren: () => import('./applicationapp/application/application.module').then(m => m.ApplicationappApplicationModule),
+      },
+      {
+        path: 'application-recrutement-status',
+        loadChildren: () =>
+          import('./applicationapp/application-recrutement-status/application-recrutement-status.module').then(
+            m => m.ApplicationappApplicationRecrutementStatusModule
+          ),
+      },
+      {
+        path: 'user-application',
+        loadChildren: () => import('./dataapp/user-application/user-application.module').then(m => m.DataappUserApplicationModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

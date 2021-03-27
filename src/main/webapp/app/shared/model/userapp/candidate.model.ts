@@ -11,10 +11,14 @@ export interface ICandidate {
   personalStatement?: string;
   phone?: number;
   userId?: string;
+  login?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
   address?: IAddress;
-  professionalExperiences?: IProfessionalExperience[];
-  academicExperiences?: IAcademicExperience[];
-  certifications?: ICertification[];
+  professionalExperience?: IProfessionalExperience[];
+  academicExperience?: IAcademicExperience[];
+  certification?: ICertification[];
   country?: ICountry;
   degreeId?: IDegreeLevel;
   seniorityLevelId?: ISeniorityLevel;
@@ -23,13 +27,17 @@ export interface ICandidate {
 export class Candidate implements ICandidate {
   constructor(
     public id?: string,
+    public firstName?: string,
+    public lastName?: string,
+    public email?: string,
+    public login?: string,
     public personalStatement?: string,
     public phone?: number,
     public userId?: string,
     public address?: IAddress,
-    public professionalExperiences?: IProfessionalExperience[],
-    public academicExperiences?: IAcademicExperience[],
-    public certifications?: ICertification[],
+    public professionalExperience?: IProfessionalExperience[],
+    public academicExperience?: IAcademicExperience[],
+    public certification?: ICertification[],
     public country?: ICountry,
     public degreeId?: IDegreeLevel,
     public seniorityLevelId?: ISeniorityLevel

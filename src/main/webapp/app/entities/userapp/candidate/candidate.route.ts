@@ -11,13 +11,15 @@ import { CandidateService } from './candidate.service';
 import { CandidateComponent } from './candidate.component';
 import { CandidateDetailComponent } from './candidate-detail.component';
 import { CandidateUpdateComponent } from './candidate-update.component';
+import { AccountService } from '../../../core/auth/account.service';
 
 @Injectable({ providedIn: 'root' })
 export class CandidateResolve implements Resolve<ICandidate> {
-  constructor(private service: CandidateService, private router: Router) {}
+  constructor(private service: CandidateService, private authService: AccountService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<ICandidate> | Observable<never> {
     const id = route.params['id'];
+    const jobId = route.params['jpid'];
     if (id) {
       return this.service.find(id).pipe(
         flatMap((candidate: HttpResponse<Candidate>) => {
@@ -30,6 +32,19 @@ export class CandidateResolve implements Resolve<ICandidate> {
         })
       );
     }
+    if (jobId) {
+      return this.service.findByLogin(this.authService.getLogin()).pipe(
+        flatMap((candidate: HttpResponse<Candidate>) => {
+          if (candidate.body) {
+            return of(candidate.body);
+          } else {
+            this.router.navigate(['404']);
+            return EMPTY;
+          }
+        })
+      );
+    }
+
     return of(new Candidate());
   }
 }
@@ -70,6 +85,18 @@ export const candidateRoute: Routes = [
   },
   {
     path: ':id/edit',
+    component: CandidateUpdateComponent,
+    resolve: {
+      candidate: CandidateResolve,
+    },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'hrmsGatewayApp.userappCandidate.home.title',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':jpid/postuler',
     component: CandidateUpdateComponent,
     resolve: {
       candidate: CandidateResolve,

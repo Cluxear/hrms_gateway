@@ -167,10 +167,12 @@ public class UserService {
             user.setLogin((String) details.get("sub"));
         } else {
             user.setId((String) details.get("sub"));
+
         }
         if (details.get("preferred_username") != null) {
             user.setLogin(((String) details.get("preferred_username")).toLowerCase());
         } else if (user.getLogin() == null) {
+            user.setId((String) details.get("sub"));
             user.setLogin(user.getId());
         }
         if (details.get("given_name") != null) {

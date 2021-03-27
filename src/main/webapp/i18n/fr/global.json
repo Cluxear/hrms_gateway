@@ -17,6 +17,12 @@
         "userappSeniorityLevel": "Seniority Level",
         "userappDegreeLevel": "Degree Level",
         "userappEmployee": "Employee",
+        "jobpostingJobpost": "Jobpost",
+        "jobpostingPosition": "Position",
+        "jobpostingDegreeLevel": "Degree Level",
+        "applicationappApplication": "Application",
+        "applicationappApplicationRecrutementStatus": "Application Recrutement Status",
+        "dataappUserApplication": "User Application",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

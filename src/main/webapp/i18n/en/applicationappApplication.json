@@ -1,0 +1,29 @@
+{
+  "hrmsGatewayApp": {
+    "applicationappApplication": {
+      "home": {
+        "title": "Applications",
+        "createLabel": "Create a new Application",
+        "createOrEditLabel": "Create or edit a Application",
+        "notFound": "No Applications found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Application {{ id }}?"
+      },
+      "detail": {
+        "title": "Application"
+      },
+      "shortListed": "Short Listed",
+      "creationDate": "Creation Date",
+      "conclusion": "Conclusion",
+      "status": "Status"
+    }
+  },
+  "applicationappApp": {
+    "applicationappApplication": {
+      "created": "A new Application is created with identifier {{ param }}",
+      "updated": "A Application is updated with identifier {{ param }}",
+      "deleted": "A Application is deleted with identifier {{ param }}"
+    }
+  }
+}

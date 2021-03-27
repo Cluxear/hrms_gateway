@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "applicationappApplicationRecrutementStatus": {
+      "home": {
+        "title": "Application Recrutement Statuses",
+        "createLabel": "Create a new Application Recrutement Status",
+        "createOrEditLabel": "Create or edit a Application Recrutement Status",
+        "notFound": "No Application Recrutement Statuses found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Application Recrutement Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Application Recrutement Status"
+      },
+      "addedAt": "Added At",
+      "status": "Status",
+      "application": "Application"
+    }
+  },
+  "applicationappApp": {
+    "applicationappApplicationRecrutementStatus": {
+      "created": "A new Application Recrutement Status is created with identifier {{ param }}",
+      "updated": "A Application Recrutement Status is updated with identifier {{ param }}",
+      "deleted": "A Application Recrutement Status is deleted with identifier {{ param }}"
+    }
+  }
+}

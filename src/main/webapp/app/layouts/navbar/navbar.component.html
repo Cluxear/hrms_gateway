@@ -87,6 +87,36 @@
                             <span jhiTranslate="global.menu.entities.userappEmployee">Employee</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="jobpost" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.jobpostingJobpost">Jobpost</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="position" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.jobpostingPosition">Position</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="degree-level" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.jobpostingDegreeLevel">Degree Level</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="application" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.applicationappApplication">Application</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="application-recrutement-status" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.applicationappApplicationRecrutementStatus">Application Recrutement Status</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="jobpost">
+            <h2><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.detail.title">Jobpost</span> {{ jobpost.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.title">Title</span></dt>
+                <dd>
+                    <span>{{ jobpost.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.description">Description</span></dt>
+                <dd>
+                    <span>{{ jobpost.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.estimatedSalary">Estimated Salary</span></dt>
+                <dd>
+                    <span>{{ jobpost.estimatedSalary }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.type">Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hrmsGatewayApp.LocationType.' + jobpost.type }}">{{ jobpost.type }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.employmentType">Employment Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hrmsGatewayApp.EmploymentType.' + jobpost.employmentType }}">{{ jobpost.employmentType }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{ jobpost.createdAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.modifiedAt">Modified At</span></dt>
+                <dd>
+                    <span>{{ jobpost.modifiedAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.degreeLevel">Degree Level</span></dt>
+                <dd>
+                    <div *ngIf="jobpost.degreeLevelId">
+                        <a [routerLink]="['/degree-level', jobpost.degreeLevelId, 'view']">{{ jobpost.degreeLevelId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.positon">Positon</span></dt>
+                <dd>
+                    <div *ngIf="jobpost.positonId">
+                        <a [routerLink]="['/position', jobpost.positonId, 'view']">{{ jobpost.positonId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/jobpost', jobpost.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/candidate',  jobpost.id,  'postuler']"
+                    class="btn btn-secondary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Postuler</span>
+            </button>
+        </div>
+    </div>
+</div>

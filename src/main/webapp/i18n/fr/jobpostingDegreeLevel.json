@@ -1,0 +1,26 @@
+{
+  "hrmsGatewayApp": {
+    "jobpostingDegreeLevel": {
+      "home": {
+        "title": "DegreeLevels",
+        "createLabel": "Créer un nouveau Degree Level",
+        "createOrEditLabel": "Créer ou éditer un Degree Level",
+        "notFound": "Aucun Degree Level trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Degree Level {{ id }} ?"
+      },
+      "detail": {
+        "title": "Degree Level"
+      },
+      "name": "Name"
+    }
+  },
+  "jobpostingApp": {
+    "jobpostingDegreeLevel": {
+      "created": "Un nouveau Degree Level a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Degree Level avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Degree Level avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

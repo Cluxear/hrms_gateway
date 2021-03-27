@@ -1,0 +1,13 @@
+export const enum EmploymentType {
+  FULL_TIME = 'FULL_TIME',
+
+  PART_TIME = 'PART_TIME',
+
+  CONTRACT = 'CONTRACT',
+
+  TEMPORARY = 'TEMPORARY',
+
+  SEASONAL = 'SEASONAL',
+
+  INTERNSHIP = 'INTERNSHIP',
+}
