@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "skillappSkill": {
+      "home": {
+        "title": "Skills",
+        "createLabel": "Créer un nouveau Skill",
+        "createOrEditLabel": "Créer ou éditer un Skill",
+        "notFound": "Aucun Skill trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Skill {{ id }} ?"
+      },
+      "detail": {
+        "title": "Skill"
+      },
+      "name": "Name",
+      "description": "Description",
+      "domain": "Domain"
+    }
+  },
+  "skillappApp": {
+    "skillappSkill": {
+      "created": "Un nouveau Skill a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Skill avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Skill avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

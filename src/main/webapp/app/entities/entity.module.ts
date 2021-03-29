@@ -64,6 +64,14 @@ import { RouterModule } from '@angular/router';
         path: 'user-application',
         loadChildren: () => import('./dataapp/user-application/user-application.module').then(m => m.DataappUserApplicationModule),
       },
+      {
+        path: 'skill',
+        loadChildren: () => import('./skillapp/skill/skill.module').then(m => m.SkillappSkillModule),
+      },
+      {
+        path: 'domain',
+        loadChildren: () => import('./skillapp/domain/domain.module').then(m => m.SkillappDomainModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

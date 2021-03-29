@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { ICandidate } from 'app/shared/model/userapp/candidate.model';
+import { ISkill } from '../../../shared/model/skillapp/skill.model';
 
 type EntityResponseType = HttpResponse<ICandidate>;
 type EntityArrayResponseType = HttpResponse<ICandidate[]>;

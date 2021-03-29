@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -32,6 +32,7 @@ import { ApplicationService } from '../../applicationapp/application/application
 import { UserApplicationService } from '../../dataapp/user-application/user-application.service';
 import { IUserApplication } from '../../../shared/model/dataapp/user-application.model';
 import { NgbDateMomentAdapter } from '../../../shared/util/datepicker-adapter';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 type SelectableEntity = IUser | IAddress | IDegreeLevel | ISeniorityLevel;
 
@@ -185,6 +186,7 @@ export class CandidateUpdateComponent implements OnInit {
     });
 
     this.formArrayToProfExp(candidate);
+
     if (candidate.id !== undefined) {
       this.subscribeToSaveResponse(this.candidateService.update(candidate));
     } else {
@@ -194,6 +196,8 @@ export class CandidateUpdateComponent implements OnInit {
 
   private createFromForm(): ICandidate {
     const candidate: Candidate = new Candidate();
+    const ngbMomentDate: NgbDateMomentAdapter = new NgbDateMomentAdapter();
+    //  let testArray: FormArray = new FormArray([]);
 
     // formulating the address
     this.address.city = this.editForm.get(['city'])!.value;
@@ -209,8 +213,14 @@ export class CandidateUpdateComponent implements OnInit {
     candidate.id = this.editForm.get(['id'])!.value;
     candidate.personalStatement = this.editForm.get(['personalStatement'])!.value;
     candidate.phone = this.editForm.get(['phone'])!.value;
-    candidate.professionalExperience = this.editForm.get(['professionalExperiences'])!.value;
-
+    /*testArray = this.editForm.get(['professionalExperiences'])!.value;
+    testArray.controls.forEach(c => {
+      c.patchValue({
+        startDate : ngbMomentDate.toModel(c['startDate']),
+        endDate : ngbMomentDate.toModel(c['endDate']),
+      })
+    })
+    candidate.professionalExperience = testArray.value;*/
     return candidate;
   }
 

@@ -23,6 +23,8 @@
         "applicationappApplication": "Application",
         "applicationappApplicationRecrutementStatus": "Application Recrutement Status",
         "dataappUserApplication": "User Application",
+        "skillappSkill": "Skill",
+        "skillappDomain": "Domain",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
