@@ -1,0 +1,11 @@
+{
+  "hrmsGatewayApp": {
+    "SkillLevel": {
+      "null": "",
+      "NOVICE": "NOVICE",
+      "INTERMEDIATE": "INTERMEDIATE",
+      "ADVANCED": "ADVANCED",
+      "EXPERT": "EXPERT"
+    }
+  }
+}

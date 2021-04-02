@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { ISkill } from 'app/shared/model/skillapp/skill.model';
+import { ICandidateSkillMatrix } from '../../../shared/model/skillapp/CandidateSkillMatrix';
 
 type EntityResponseType = HttpResponse<ISkill>;
 type EntityArrayResponseType = HttpResponse<ISkill[]>;
@@ -33,6 +34,10 @@ export class SkillService {
   }
   findSkillsByUserId(id: string): Observable<EntityArrayResponseType> {
     return this.http.get<ISkill[]>(`${this.resourceUrl}/userId/${id}`, { observe: 'response' });
+  }
+
+  findCandidateSkillsByJobPostId(id: number): Observable<HttpResponse<ICandidateSkillMatrix[]>> {
+    return this.http.get<ICandidateSkillMatrix[]>(`${this.resourceUrl}/jobPostId/${id}`, { observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

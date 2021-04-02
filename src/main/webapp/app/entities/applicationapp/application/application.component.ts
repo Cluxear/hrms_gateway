@@ -7,6 +7,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IApplication } from 'app/shared/model/applicationapp/application.model';
 import { ApplicationService } from './application.service';
 import { ApplicationDeleteDialogComponent } from './application-delete-dialog.component';
+import { ICandidate } from '../../../shared/model/userapp/candidate.model';
+import { ISkill } from '../../../shared/model/skillapp/skill.model';
+import { AccountService } from '../../../core/auth/account.service';
+import { JobpostService } from '../../jobposting/jobpost/jobpost.service';
 
 @Component({
   selector: 'jhi-application',
@@ -18,12 +22,14 @@ export class ApplicationComponent implements OnInit, OnDestroy {
 
   constructor(
     protected applicationService: ApplicationService,
+    protected accountService: AccountService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
   ) {}
 
   loadAll(): void {
-    this.applicationService.query().subscribe((res: HttpResponse<IApplication[]>) => (this.applications = res.body || []));
+    const login = this.accountService.getLogin();
+    this.applicationService.findAll(login).subscribe((res: HttpResponse<IApplication[]>) => (this.applications = res.body || []));
   }
 
   ngOnInit(): void {

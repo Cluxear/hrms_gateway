@@ -28,6 +28,13 @@
                     <input type="number" class="form-control" name="estimatedSalary" id="field_estimatedSalary"
                            formControlName="estimatedSalary"/>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label"  for="field_skills">Skills</label>
+                    <select class="form-control" id="field_skills" name="skills" formControlName="skillId" multiple>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="skillOption.id" *ngFor="let skillOption of skills; trackBy: trackById">{{ skillOption.name }}</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.type" for="field_type">Type</label>
@@ -89,6 +96,7 @@
                     <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
+            {{this.editForm.value | json}}
         </form>
     </div>
 </div>

@@ -14,6 +14,11 @@ import { IDegreeLevel } from 'app/shared/model/jobposting/degree-level.model';
 import { DegreeLevelService } from 'app/entities/jobposting/degree-level/degree-level.service';
 import { IPosition } from 'app/shared/model/jobposting/position.model';
 import { PositionService } from 'app/entities/jobposting/position/position.service';
+import { ISkill } from '../../../shared/model/skillapp/skill.model';
+import { SkillService } from '../../skillapp/skill/skill.service';
+import { ICandidate } from '../../../shared/model/userapp/candidate.model';
+import { SkillJobPostService } from '../../dataapp/skill-job-post/skill-job-post.service';
+import { ISkillJobPost, SkillJobPost } from '../../../shared/model/dataapp/skill-job-post.model';
 
 type SelectableEntity = IDegreeLevel | IPosition;
 
@@ -25,7 +30,9 @@ export class JobpostUpdateComponent implements OnInit {
   isSaving = false;
   degreelevels: IDegreeLevel[] = [];
   positons: IPosition[] = [];
-
+  skills: ISkill[] = [];
+  skillId: [] = [];
+  jobPost: IJobpost = new Jobpost();
   editForm = this.fb.group({
     id: [],
     title: [],
@@ -37,13 +44,16 @@ export class JobpostUpdateComponent implements OnInit {
     modifiedAt: [],
     degreeLevelId: [],
     positonId: [],
+    skillId: [],
   });
 
   constructor(
     protected jobpostService: JobpostService,
     protected degreeLevelService: DegreeLevelService,
     protected positionService: PositionService,
+    protected skillService: SkillService,
     protected activatedRoute: ActivatedRoute,
+    protected skillJobPostService: SkillJobPostService,
     private fb: FormBuilder
   ) {}
 
@@ -101,6 +111,7 @@ export class JobpostUpdateComponent implements OnInit {
           }
         });
     });
+    this.skillService.query().subscribe((res: HttpResponse<ISkill[]>) => (this.skills = res.body || []));
   }
 
   updateForm(jobpost: IJobpost): void {
@@ -113,8 +124,8 @@ export class JobpostUpdateComponent implements OnInit {
       employmentType: jobpost.employmentType,
       createdAt: jobpost.createdAt ? jobpost.createdAt.format(DATE_TIME_FORMAT) : null,
       modifiedAt: jobpost.modifiedAt ? jobpost.modifiedAt.format(DATE_TIME_FORMAT) : null,
-      degreeLevelId: jobpost.degreeLevelId,
-      positonId: jobpost.positonId,
+      //  degreeLevelId: jobpost.degreeLevelId,
+      //  positonId: jobpost.positonId,
     });
   }
 
@@ -125,11 +136,16 @@ export class JobpostUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const jobpost = this.createFromForm();
+    let skillJobPostArray: SkillJobPost[];
+    let response;
     if (jobpost.id !== undefined) {
       this.subscribeToSaveResponse(this.jobpostService.update(jobpost));
     } else {
       this.subscribeToSaveResponse(this.jobpostService.create(jobpost));
     }
+
+    // create an instance of jobPostSkill for each skill
+    // deleteAllJobPostsWhereId
   }
 
   private createFromForm(): IJobpost {
@@ -143,14 +159,18 @@ export class JobpostUpdateComponent implements OnInit {
       employmentType: this.editForm.get(['employmentType'])!.value,
       createdAt: this.editForm.get(['createdAt'])!.value ? moment(this.editForm.get(['createdAt'])!.value, DATE_TIME_FORMAT) : undefined,
       modifiedAt: this.editForm.get(['modifiedAt'])!.value ? moment(this.editForm.get(['modifiedAt'])!.value, DATE_TIME_FORMAT) : undefined,
-      degreeLevelId: this.editForm.get(['degreeLevelId'])!.value,
-      positonId: this.editForm.get(['positonId'])!.value,
+      skillId: this.editForm.get(['skillId'])!.value,
+      //   degreeLevelId: this.editForm.get(['degreeLevelId'])!.value,
+      //   positonId: this.editForm.get(['positonId'])!.value,
     };
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IJobpost>>): void {
     result.subscribe(
-      () => this.onSaveSuccess(),
+      jp => {
+        this.jobPost = jp.body!;
+        this.onSaveSuccess();
+      },
       () => this.onSaveError()
     );
   }

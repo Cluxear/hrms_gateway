@@ -7,6 +7,7 @@ export interface IApplication {
   shortListed?: boolean;
   creationDate?: Moment;
   conclusion?: ConclusionType;
+  jobpostId?: number;
   statuses?: IApplicationRecrutementStatus[];
 }
 
@@ -16,7 +17,8 @@ export class Application implements IApplication {
     public shortListed?: boolean,
     public creationDate?: Moment,
     public conclusion?: ConclusionType,
-    public statuses?: IApplicationRecrutementStatus[]
+    public statuses?: IApplicationRecrutementStatus[],
+    jobpostId?: number
   ) {
     this.shortListed = this.shortListed || false;
   }

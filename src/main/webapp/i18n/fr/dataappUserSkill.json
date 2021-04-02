@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "dataappUserSkill": {
+      "home": {
+        "title": "UserSkills",
+        "createLabel": "Créer un nouveau User Skill",
+        "createOrEditLabel": "Créer ou éditer un User Skill",
+        "notFound": "Aucun User Skill trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le User Skill {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Skill"
+      },
+      "userId": "User Id",
+      "skillId": "Skill Id",
+      "skillLevel": "Skill Level"
+    }
+  },
+  "dataappApp": {
+    "dataappUserSkill": {
+      "created": "Un nouveau User Skill a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Skill avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Skill avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

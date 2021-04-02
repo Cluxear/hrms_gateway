@@ -5,6 +5,7 @@ import { ICountry } from 'app/shared/model/userapp/country.model';
 import { IAddress } from './address.model';
 import { IDegreeLevel } from './degree-level.model';
 import { ISeniorityLevel } from './seniority-level.model';
+import { ISkill } from '../skillapp/skill.model';
 
 export interface ICandidate {
   id?: string;
@@ -22,6 +23,7 @@ export interface ICandidate {
   country?: ICountry;
   degreeId?: IDegreeLevel;
   seniorityLevelId?: ISeniorityLevel;
+  skills?: ISkill[];
 }
 
 export class Candidate implements ICandidate {
@@ -40,6 +42,7 @@ export class Candidate implements ICandidate {
     public certification?: ICertification[],
     public country?: ICountry,
     public degreeId?: IDegreeLevel,
-    public seniorityLevelId?: ISeniorityLevel
+    public seniorityLevelId?: ISeniorityLevel,
+    public skills?: ISkill[]
   ) {}
 }

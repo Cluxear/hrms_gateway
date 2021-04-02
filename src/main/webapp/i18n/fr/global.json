@@ -25,6 +25,8 @@
         "dataappUserApplication": "User Application",
         "skillappSkill": "Skill",
         "skillappDomain": "Domain",
+        "dataappSkillJobPost": "Skill Job Post",
+        "dataappUserSkill": "User Skill",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

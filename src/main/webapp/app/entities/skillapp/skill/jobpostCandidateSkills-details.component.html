@@ -1,0 +1,38 @@
+<!--<div>
+    <h2 id="page-heading">
+
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="skills?.length === 0">
+        <span jhiTranslate="hrmsGatewayApp.skillappSkill.home.notFound">No skills found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="skills && skills.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+
+                <th *ngFor="let skill of candidateSkills.skills;" scope="col"> <span > {{ skill.name }}</span> </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td  *ngFor="let skill of skills ;trackBy: trackId">{{ skill.description }}</td>
+                       <tr *ngFor="let skill of skills ;trackBy: trackId">
+                           <td><a [routerLink]="['/skill', skill.id, 'view']">{{ skill.id }}</a></td>
+                           <td>{{ skill.name }}</td>
+
+                           <td class="text-right">
+
+                           </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+-->

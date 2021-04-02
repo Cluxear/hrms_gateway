@@ -13,6 +13,7 @@ export interface IJobpost {
   modifiedAt?: Moment;
   degreeLevelId?: number;
   positonId?: number;
+  skillId?: [];
 }
 
 export class Jobpost implements IJobpost {
@@ -26,6 +27,7 @@ export class Jobpost implements IJobpost {
     public createdAt?: Moment,
     public modifiedAt?: Moment,
     public degreeLevelId?: number,
-    public positonId?: number
+    public positonId?: number,
+    public skillId?: []
   ) {}
 }

@@ -26,6 +26,7 @@
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.applicationappApplication.shortListed">Short Listed</span></th>
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.applicationappApplication.creationDate">Creation Date</span></th>
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.applicationappApplication.conclusion">Conclusion</span></th>
+                    <th scope="col"> <span> jobPost Details </span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -35,6 +36,13 @@
                     <td>{{ application.shortListed }}</td>
                     <td>{{ application.creationDate | date:'medium' }}</td>
                     <td jhiTranslate="{{ 'hrmsGatewayApp.ConclusionType.' + application.conclusion }}">{{ application.conclusion }}</td>
+                    <td>
+                        <button type="button"
+                                [routerLink]="['/jobpost',  application.jobpostId,  'view']"
+                                class="btn btn-secondary">
+                            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Offre d'emploi concerné</span>
+                        </button>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
