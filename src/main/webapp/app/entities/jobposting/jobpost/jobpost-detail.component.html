@@ -1,17 +1,156 @@
+<main>
+
+    <!-- Hero Area Start
+    <div class="slider-area ">
+        <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="content/img/hero/about.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>UI/UX Designer</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+    <!-- Hero Area End -->
+    <!-- job post company Start -->
+    <div class="job-post-company pt-120 pb-120">
+        <div class="container">
+            <div class="row justify-content-between">
+                <!-- Left Content -->
+                <div class="col-xl-7 col-lg-8">
+                    <!-- job single -->
+                    <div class="single-job-items mb-50">
+                        <div class="job-items">
+                            <div class="company-img company-img-details">
+                                <!--    <a href="#"><img src="content/images/logo-jhipster.png" alt=""></a> -->
+                            </div>
+                            <div class="job-tittle">
+                                <a href="#">
+                                    <h4>Digital Marketer</h4>
+                                </a>
+                                <ul>
+                                    <li>Creative Agency</li>
+                                    <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
+                                    <li>$3500 - $4000</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- job single End -->
+
+                    <div class="job-post-details">
+                        <div class="post-details1 mb-50">
+                            <!-- Small Section Tittle -->
+                            <div class="small-section-tittle">
+                                <h4>Job Description</h4>
+                            </div>
+                            <p>It is a long established fact that a reader will beff distracted by vbthe creadable content of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf mcore or-lgess normal distribution of letters, as opposed to using, Content here content here making it look like readable.</p>
+                        </div>
+                        <div class="post-details2  mb-50">
+                            <!-- Small Section Tittle -->
+                            <div class="small-section-tittle">
+                                <h4>Required Knowledge, Skills, and Abilities</h4>
+                            </div>
+                            <ul>
+                                <li>System Software Development</li>
+                                <li>Mobile Applicationin iOS/Android/Tizen or other platform</li>
+                                <li>Research and code , libraries, APIs and frameworks</li>
+                                <li>Strong knowledge on software development life cycle</li>
+                                <li>Strong problem solving and debugging skills</li>
+                            </ul>
+                        </div>
+                        <div class="post-details2  mb-50">
+                            <!-- Small Section Tittle -->
+                            <div class="small-section-tittle">
+                                <h4>Education + Experience</h4>
+                            </div>
+                            <ul>
+                                <li>3 or more years of professional design experience</li>
+                                <li>Direct response email experience</li>
+                                <li>Ecommerce website design experience</li>
+                                <li>Familiarity with mobile and web apps preferred</li>
+                                <li>Experience using Invision a plus</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Right Content -->
+                <div class="col-xl-4 col-lg-4">
+                    <div class="post-details3  mb-50">
+                        <!-- Small Section Tittle -->
+                        <div class="small-section-tittle">
+                            <h4>Job Overview</h4>
+                        </div>
+                        <ul>
+                            <li>Posted date : <span>12 Aug 2019</span></li>
+                            <li>Location : <span>New York</span></li>
+                            <li>Vacancy : <span>02</span></li>
+                            <li>Job nature : <span>Full time</span></li>
+                            <li>Salary :  <span>$7,800 yearly</span></li>
+                            <li>Application date : <span>12 Sep 2020</span></li>
+                        </ul>
+                        <div class="apply-btn2">
+                            <div *ngIf="jobpost">
+                            <a [routerLink]="['/candidate',  jobpost.id,  'postuler']" class="btn">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-details4  mb-50">
+                        <!-- Small Section Tittle -->
+                        <div class="small-section-tittle">
+                            <h4>Company Information</h4>
+                        </div>
+                        <span>Colorlib</span>
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                        <ul>
+                            <li>Name: <span>Colorlib </span></li>
+                            <li>Web : <span> colorlib.com</span></li>
+                            <li>Email: <span>carrier.colorlib@gmail.com</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- job post company End -->
+
+</main>
+
+<!--
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="jobpost">
-            <h2><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.detail.title">Jobpost</span> {{ jobpost.id }}</h2>
+            <h2><span> {{jobpost.title}} </span> </h2>
 
+                <span>
+
+                    <ng-container *ngIf="jobpost.type!.toString() === 'REMOTE' ">
+                              <h2>  <b> Remote </b> </h2>
+                               </ng-container>
+
+                               <ng-container *ngIf="jobpost.type!.toString() === 'ON_SITE' ">
+                                 <h2> <b> On site </b> </h2>
+                               </ng-container>
+
+
+
+                </span>
+            <button type="button"
+                    [routerLink]="['/candidate',  jobpost.id,  'postuler']"
+                    class="btn btn-primary btn-lg" >
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span> Postuler pour ce job </span>
+            </button>
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.title">Title</span></dt>
-                <dd>
-                    <span>{{ jobpost.title }}</span>
-                </dd>
+
                 <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.description">Description</span></dt>
                 <dd>
                     <span>{{ jobpost.description }}</span>
@@ -20,22 +159,7 @@
                 <dd>
                     <span>{{ jobpost.estimatedSalary }}</span>
                 </dd>
-                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.type">Type</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'hrmsGatewayApp.LocationType.' + jobpost.type }}">{{ jobpost.type }}</span>
-                </dd>
-                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.employmentType">Employment Type</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'hrmsGatewayApp.EmploymentType.' + jobpost.employmentType }}">{{ jobpost.employmentType }}</span>
-                </dd>
-                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.createdAt">Created At</span></dt>
-                <dd>
-                    <span>{{ jobpost.createdAt }}</span>
-                </dd>
-                <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.modifiedAt">Modified At</span></dt>
-                <dd>
-                    <span>{{ jobpost.modifiedAt }}</span>
-                </dd>
+
                 <dt><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.degreeLevel">Degree Level</span></dt>
                 <dd>
                     <div *ngIf="jobpost.degreeLevelId">
@@ -50,23 +174,26 @@
                 </dd>
             </dl>
 
+           <h2> <span> Compétence requise </span> </h2>
+
+                <div *ngFor="let skill of jobpost.skills">
+                    {{skill.name}} <br>
+                </div>
+
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
+          <!--  <button type="button"
                     [routerLink]="['/jobpost', jobpost.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/candidate',  jobpost.id,  'postuler']"
-                    class="btn btn-secondary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Postuler</span>
-            </button>
+
         </div>
     </div>
 </div>
+-->

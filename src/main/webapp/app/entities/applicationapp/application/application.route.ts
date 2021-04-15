@@ -80,4 +80,16 @@ export const applicationRoute: Routes = [
     },
     canActivate: [UserRouteAccessService],
   },
+  {
+    path: ':jpid/jobpost',
+    component: ApplicationComponent,
+    resolve: {
+      application: ApplicationResolve,
+    },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'hrmsGatewayApp.applicationappApplication.home.title',
+    },
+    canActivate: [UserRouteAccessService],
+  },
 ];

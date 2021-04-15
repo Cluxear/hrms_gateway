@@ -12,6 +12,7 @@ import { SkillComponent } from './skill.component';
 import { SkillDetailComponent } from './skill-detail.component';
 import { SkillUpdateComponent } from './skill-update.component';
 import { SkillMatrixComponent } from './skill-matrix.component';
+import { JobpostCandidateSkillsDetailsComponent } from './jobpostCandidateSkills-details.component';
 
 @Injectable({ providedIn: 'root' })
 export class SkillResolve implements Resolve<ISkill> {
@@ -84,6 +85,18 @@ export const skillRoute: Routes = [
   {
     path: 'matrix-skills',
     component: SkillMatrixComponent,
+    resolve: {
+      skill: SkillResolve,
+    },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'hrmsGatewayApp.skillappSkill.home.title',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':jpid/candidates-skills',
+    component: JobpostCandidateSkillsDetailsComponent,
     resolve: {
       skill: SkillResolve,
     },

@@ -11,6 +11,8 @@ import { ICandidate } from '../../../shared/model/userapp/candidate.model';
 import { ISkill } from '../../../shared/model/skillapp/skill.model';
 import { AccountService } from '../../../core/auth/account.service';
 import { JobpostService } from '../../jobposting/jobpost/jobpost.service';
+import { UserService } from '../../../core/user/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'jhi-application',
@@ -24,12 +26,27 @@ export class ApplicationComponent implements OnInit, OnDestroy {
     protected applicationService: ApplicationService,
     protected accountService: AccountService,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected userService: UserService,
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   loadAll(): void {
     const login = this.accountService.getLogin();
-    this.applicationService.findAll(login).subscribe((res: HttpResponse<IApplication[]>) => (this.applications = res.body || []));
+    this.accountService.identity().subscribe(account => {
+      if (account!.authorities.includes('ROLE_USER')) {
+        this.applicationService.findAll(login).subscribe((res: HttpResponse<IApplication[]>) => (this.applications = res.body || []));
+      }
+      this.activatedRoute.params.subscribe(param => {
+        if (param.jpid) {
+          if (account!.authorities.includes('ROLE_ADMIN')) {
+            this.applicationService
+              .findByJobPost(param.jpid)
+              .subscribe((res: HttpResponse<IApplication[]>) => (this.applications = res.body || []));
+          }
+        }
+      });
+    });
   }
 
   ngOnInit(): void {

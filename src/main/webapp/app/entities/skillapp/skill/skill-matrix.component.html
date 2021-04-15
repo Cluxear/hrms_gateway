@@ -21,7 +21,11 @@
             </thead>
             <tbody>
             <tr>
-            <td  *ngFor="let skill of skills ;trackBy: trackId">{{ skill.description }}</td>
+            <td  *ngFor="let skill of skills ;trackBy: trackId">
+                {{  skill.skillLevel   }}
+
+
+            </td>
      <!--       <tr *ngFor="let skill of skills ;trackBy: trackId">
                 <td><a [routerLink]="['/skill', skill.id, 'view']">{{ skill.id }}</a></td>
                 <td>{{ skill.name }}</td>

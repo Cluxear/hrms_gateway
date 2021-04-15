@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { LocationType } from 'app/shared/model/enumerations/location-type.model';
 import { EmploymentType } from 'app/shared/model/enumerations/employment-type.model';
+import { ISkill } from '../skillapp/skill.model';
 
 export interface IJobpost {
   id?: number;
@@ -13,7 +14,10 @@ export interface IJobpost {
   modifiedAt?: Moment;
   degreeLevelId?: number;
   positonId?: number;
+  positionName?: string;
+  degreeLevelName?: string;
   skillId?: [];
+  skills?: ISkill[];
 }
 
 export class Jobpost implements IJobpost {
@@ -28,6 +32,9 @@ export class Jobpost implements IJobpost {
     public modifiedAt?: Moment,
     public degreeLevelId?: number,
     public positonId?: number,
-    public skillId?: []
+    public positionName?: string,
+    public degreeLevelName?: string,
+    public skillId?: [],
+    public skills?: ISkill[]
   ) {}
 }

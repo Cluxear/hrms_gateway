@@ -32,12 +32,16 @@ export class SkillService {
     const options = createRequestOption(req);
     return this.http.get<ISkill[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
+
+  findJpSkills(jpid: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISkill[]>(`${this.resourceUrl}/jobpostid/${jpid}`, { observe: 'response' });
+  }
   findSkillsByUserId(id: string): Observable<EntityArrayResponseType> {
     return this.http.get<ISkill[]>(`${this.resourceUrl}/userId/${id}`, { observe: 'response' });
   }
 
   findCandidateSkillsByJobPostId(id: number): Observable<HttpResponse<ICandidateSkillMatrix[]>> {
-    return this.http.get<ICandidateSkillMatrix[]>(`${this.resourceUrl}/jobPostId/${id}`, { observe: 'response' });
+    return this.http.get<ICandidateSkillMatrix[]>(`${this.resourceUrl}/matrix/jobpostId/${id}`, { observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

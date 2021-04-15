@@ -48,6 +48,11 @@ export class ApplicationService {
       .get<IApplication[]>(`${this.resourceUrl}/userId/${userId}`, { observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
+  findByJobPost(id: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IApplication[]>(`${this.resourceUrl}/jobpost/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });

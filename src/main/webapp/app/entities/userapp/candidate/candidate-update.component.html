@@ -1,7 +1,8 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-candidate-heading" >Faire une candidature</h2>
+        <form class="form-horizontal form-material" name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+
+            {{this.editForm.value | json}}
 
 
             <div>
@@ -14,7 +15,7 @@
 -->
                 <div class="form-group">
                     <label class="form-control-label" for="field_firstName">Prénom</label>
-                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                    <input type="text" class="form-control form-control-line" name="firstName" id="field_firstName"
                            formControlName="firstName"/>
                 </div>
 
@@ -38,7 +39,6 @@
 
 
                  <div class="form-group">
-                    <h3> Address</h3>
                     <label class="form-control-label" for="field_address_street">Rue</label>
                     <input type="string" class="form-control" name="street" id="field_address_street"
                            formControlName="street"/>
@@ -69,30 +69,33 @@
                             -->
 
                             <div formArrayName="professionalExperiences">
-
+                                <h3> Experience Professionelle   </h3> <br>
                                 <div *ngFor="let exp of professionalExperiences.controls; let i=index">
 
                               <div [formGroupName]="i">
-                            <br> <br>
-                         <h3> Experience Professionelle  {{i + 1}} : </h3> <br>
+
+
                          <label class="form-control-label" for="field_place">Nom de l'entreprise</label>
                          <input type="string" class="form-control" formControlName="place" placeholder="Item name" id="field_exp_place{{i}}">
 
 
                          <label class="form-control-label" for="field_post"> Position</label>
-                         <input type="string" class="form-control" formControlName="post" placeholder="Item name" id="field_exp_post{{i}}">
+                                  <select class="form-control" id="field_position{{i}}" name="position{{i}}" formControlName="position_id" >
+                                      <option [ngValue]="null"></option>
+                                      <option  [ngValue]="positionOptions.id" [selected] = findPosition(exp.value.positionId)  *ngFor="let positionOptions of positions; trackBy: trackById">{{  positionOptions.jobTitle }}</option>
+                                  </select>
 
                        <label class="form-control-label" for="description">Description</label>
                          <textarea class="form-control" formControlName="description" placeholder="Item name" id="field_exp_description{{i}}"> </textarea>
 
                          <label class="form-control-label" for="field_start_date"> Date de début</label>
-                         <input type="text"   ngbDatepicker placeholder=" yyyy-MM-dd  "   class="form-control" formControlName="startDate"  id="field_exp_start_date{{i}}">
+                         <input type="text"     ngbDatepicker placeholder=" yyyy-MM-dd  "   class="form-control" formControlName="startDate"  id="field_exp_start_date{{i}}">
 
 
                              <!--  <button (click)="removeSkill(i)">Remove</button> -->
                             </div>
                              </div>
-                                <button type="button" class="btn-secondary" (click)="addProfessionalExperience()">Ajouter Une experience </button>
+                                <button type="button" class=" btn btn-info " (click)="addProfessionalExperience()">Ajouter Une experience </button>
 
                             </div>
                     </div>
@@ -111,15 +114,12 @@
 
                                 </div>
                                 -->
-
+                        <br> <br>
                     <div formArrayName="skills">
 
                         <div *ngFor="let exp of userskills.controls; let i=index">
-
+                            <div class="card">
                             <div [formGroupName]="i">
-                                <br> <br>
-                                <h3> Compétence  {{i + 1}} : </h3> <br>
-
                                     <label class="form-control-label" for="field_skill_name{{i}}">Competence</label>
                                          <div *ngIf=" exp.value.changeable; else elseBlock">
                                     <select class="form-control" id="field_skills{{i}}" name="skills{{i}}" formControlName="id" >
@@ -147,8 +147,9 @@
 
                                 <!--  <button (click)="removeSkill(i)">Remove</button> -->
                             </div>
+                            </div>
                         </div>
-                        <button type="button" class="btn-secondary" (click)="addSkill()">Ajouter une compétence </button>
+                        <button type="button" class="btn btn-info" (click)="addSkill()">Ajouter une compétence </button>
 
                     </div>
                 </div>
@@ -168,15 +169,12 @@
 -->
 
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-success">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
-                {{this.editForm.value | json}}
 
 
         </form>

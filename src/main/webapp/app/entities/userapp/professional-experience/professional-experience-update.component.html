@@ -31,13 +31,13 @@
                     <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappProfessionalExperience.post" for="field_post">Post</label>
                     <input type="text" class="form-control" name="post" id="field_post"
                            formControlName="post"/>
-                    <div *ngIf="editForm.get('post')!.invalid && (editForm.get('post')!.dirty || editForm.get('post')!.touched)">
+                    <div *ngIf="editForm.get('positionId')!.invalid && (editForm.get('positionId')!.dirty || editForm.get('positionId')!.touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('post')?.errors?.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('positionId')?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('post')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                               *ngIf="editForm.get('positionId')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
                         This field is required to be at least 3 characters.
                         </small>
                     </div>

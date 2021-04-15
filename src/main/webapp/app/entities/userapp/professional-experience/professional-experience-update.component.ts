@@ -17,13 +17,14 @@ import { CandidateService } from 'app/entities/userapp/candidate/candidate.servi
   templateUrl: './professional-experience-update.component.html',
 })
 export class ProfessionalExperienceUpdateComponent implements OnInit {
+  //TODO: Fix position instance fetch.
   isSaving = false;
   candidates: ICandidate[] = [];
 
   editForm = this.fb.group({
     id: [],
     place: [null, [Validators.required, Validators.minLength(3)]],
-    post: [null, [Validators.required, Validators.minLength(3)]],
+    positionId: [null, [Validators.required, Validators.minLength(3)]],
     description: [],
     startDate: [],
     endDate: [],
@@ -55,7 +56,7 @@ export class ProfessionalExperienceUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: professionalExperience.id,
       place: professionalExperience.place,
-      post: professionalExperience.post,
+      post: professionalExperience.positionId,
       description: professionalExperience.description,
       startDate: professionalExperience.startDate ? professionalExperience.startDate.format(DATE_TIME_FORMAT) : null,
       endDate: professionalExperience.endDate ? professionalExperience.endDate.format(DATE_TIME_FORMAT) : null,
@@ -82,7 +83,7 @@ export class ProfessionalExperienceUpdateComponent implements OnInit {
       ...new ProfessionalExperience(),
       id: this.editForm.get(['id'])!.value,
       place: this.editForm.get(['place'])!.value,
-      post: this.editForm.get(['post'])!.value,
+      positionId: this.editForm.get(['positionId'])!.value,
       description: this.editForm.get(['description'])!.value,
       startDate: this.editForm.get(['startDate'])!.value ? moment(this.editForm.get(['startDate'])!.value, DATE_TIME_FORMAT) : undefined,
       endDate: this.editForm.get(['endDate'])!.value ? moment(this.editForm.get(['endDate'])!.value, DATE_TIME_FORMAT) : undefined,

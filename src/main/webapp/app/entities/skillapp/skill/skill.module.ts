@@ -21,5 +21,6 @@ import { JobpostCandidateSkillsDetailsComponent } from './jobpostCandidateSkills
     JobpostCandidateSkillsDetailsComponent,
   ],
   entryComponents: [SkillDeleteDialogComponent],
+  exports: [SkillMatrixComponent],
 })
 export class SkillappSkillModule {}

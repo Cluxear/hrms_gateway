@@ -14,6 +14,9 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HrmsGatewayProfileModule } from 'app/profile/profile.module';
+import { SidebarComponent } from 'app/layouts/sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -21,11 +24,20 @@ import { ErrorComponent } from './layouts/error/error.component';
     HrmsGatewaySharedModule,
     HrmsGatewayCoreModule,
     HrmsGatewayHomeModule,
+    HrmsGatewayProfileModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     HrmsGatewayEntityModule,
     HrmsGatewayAppRoutingModule,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent,
+    SidebarComponent,
+  ],
   bootstrap: [MainComponent],
 })
 export class HrmsGatewayAppModule {}

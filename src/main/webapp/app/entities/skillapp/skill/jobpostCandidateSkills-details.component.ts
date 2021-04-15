@@ -21,6 +21,7 @@ import { ICandidateSkillMatrix } from '../../../shared/model/skillapp/CandidateS
 })
 export class JobpostCandidateSkillsDetailsComponent implements OnInit, OnDestroy {
   candidateSkills?: ICandidateSkillMatrix[];
+  skills?: ISkill[];
   user: ICandidate = new Candidate();
   jobPostId?: number;
   eventSubscriber?: Subscription;
@@ -35,17 +36,18 @@ export class JobpostCandidateSkillsDetailsComponent implements OnInit, OnDestroy
   ) {}
 
   loadAll(): void {
-    this.activatedRoute.params.subscribe(params => (this.jobPostId = params.jpId));
+    this.activatedRoute.params.subscribe(params => (this.jobPostId = params.jpid));
     // Collect a list of the Skills needed for the jobPost
 
     this.skillService
       .findCandidateSkillsByJobPostId(this.jobPostId!)
       .subscribe((res: HttpResponse<ICandidateSkillMatrix[]>) => (this.candidateSkills = res.body || []));
+
+    this.skillService.findJpSkills(this.jobPostId!).subscribe((res: HttpResponse<ISkill[]>) => (this.skills = res.body || []));
   }
 
   ngOnInit(): void {
     this.loadAll();
-
     this.registerChangeInSkills();
   }
 

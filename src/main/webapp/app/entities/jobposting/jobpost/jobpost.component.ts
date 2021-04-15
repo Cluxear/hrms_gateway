@@ -7,6 +7,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IJobpost } from 'app/shared/model/jobposting/jobpost.model';
 import { JobpostService } from './jobpost.service';
 import { JobpostDeleteDialogComponent } from './jobpost-delete-dialog.component';
+import { AccountService } from '../../../core/auth/account.service';
+import { UserService } from '../../../core/user/user.service';
+import { IDegreeLevel } from '../../../shared/model/jobposting/degree-level.model';
+import { DegreeLevelService } from '../degree-level/degree-level.service';
 
 @Component({
   selector: 'jhi-jobpost',
@@ -15,11 +19,26 @@ import { JobpostDeleteDialogComponent } from './jobpost-delete-dialog.component'
 export class JobpostComponent implements OnInit, OnDestroy {
   jobposts?: IJobpost[];
   eventSubscriber?: Subscription;
-
-  constructor(protected jobpostService: JobpostService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  degreeLevel?: IDegreeLevel;
+  constructor(
+    protected degreeLevelService: DegreeLevelService,
+    protected userService: UserService,
+    protected accountService: AccountService,
+    protected jobpostService: JobpostService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal
+  ) {}
 
   loadAll(): void {
-    this.jobpostService.query().subscribe((res: HttpResponse<IJobpost[]>) => (this.jobposts = res.body || []));
+    this.accountService.identity().subscribe(account => {
+      if (account!.authorities.includes('ROLE_CANDIDATE')) {
+        this.jobpostService.findCurrentUserUnappliedForJobposts().subscribe((res: HttpResponse<IJobpost[]>) => {
+          this.jobposts = res.body || [];
+        });
+      } else {
+        this.jobpostService.query().subscribe((res: HttpResponse<IJobpost[]>) => (this.jobposts = res.body || []));
+      }
+    });
   }
 
   ngOnInit(): void {

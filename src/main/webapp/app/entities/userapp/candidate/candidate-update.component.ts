@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -35,8 +35,10 @@ import { NgbDateMomentAdapter } from '../../../shared/util/datepicker-adapter';
 import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { SkillService } from '../../skillapp/skill/skill.service';
 import { ISkill, Skill } from '../../../shared/model/skillapp/skill.model';
+import { PositionService } from 'app/entities/userapp/position/position.service';
+import { IPosition } from 'app/shared/model/userapp/position.model';
 
-type SelectableEntity = IUser | IAddress | IDegreeLevel | ISeniorityLevel | ISkill;
+type SelectableEntity = IUser | IAddress | IDegreeLevel | ISeniorityLevel | ISkill | IPosition;
 
 @Component({
   selector: 'jhi-candidate-update',
@@ -56,7 +58,8 @@ export class CandidateUpdateComponent implements OnInit {
   availableSkills: ISkill[] = [];
   skills: ISkill[] = [];
   candidateSaved: ICandidate = new Candidate();
-
+  positions: IPosition[] = [];
+  url: UrlSegment[] = [];
   editForm = this.fb.group({
     id: [],
     personalStatement: [],
@@ -94,6 +97,7 @@ export class CandidateUpdateComponent implements OnInit {
     protected professionalExperienceService: ProfessionalExperienceService,
     protected certificationService: CertificationService,
     protected countryService: CountryService,
+    protected positionService: PositionService,
     protected skillService: SkillService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -140,6 +144,7 @@ export class CandidateUpdateComponent implements OnInit {
     });
 
     this.skillService.query().subscribe((res: HttpResponse<ISkill[]>) => (this.availableSkills = res.body || []));
+    this.positionService.query().subscribe((res: HttpResponse<IPosition[]>) => (this.positions = res.body || []));
   }
 
   updateForm(candidate: ICandidate): void {
@@ -148,9 +153,9 @@ export class CandidateUpdateComponent implements OnInit {
     }
 
     this.editForm.patchValue({
-      id: candidate.id,
-      personalStatement: candidate.personalStatement,
-      firstName: candidate.firstName,
+      id: candidate.id != null ? candidate.id : '',
+      personalStatement: candidate.personalStatement != null ? candidate.personalStatement : '',
+      firstName: candidate.firstName != null ? candidate.firstName : '',
       lastName: candidate.lastName,
       email: candidate.email,
       phone: candidate.phone,
@@ -279,6 +284,9 @@ export class CandidateUpdateComponent implements OnInit {
   }
   protected onSaveSuccess(): void {
     this.isSaving = false;
+
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! LAALALALALALALALALLA' + this.url);
+
     this.previousState();
   }
 
@@ -310,21 +318,26 @@ export class CandidateUpdateComponent implements OnInit {
   }
   protected profExpToFormArray(exp: ProfessionalExperience[]): void {
     const ngbMomentDate: NgbDateMomentAdapter = new NgbDateMomentAdapter();
-
+    let position: IPosition;
     // iterate over every element of the array
     if (exp && exp.length > 0) {
       exp.forEach(element => {
-        this.professionalExperiences.push(
-          this.fb.group({
-            id: element.id,
-            place: element.place,
-            post: element.post,
-            description: element.description,
-            startDate: ngbMomentDate.fromModel(element.startDate!),
-            endDate: ngbMomentDate.fromModel(element.endDate!),
-            candidateId: element.candidateId,
-          })
-        );
+        if (element.positionId) {
+          this.positionService.find(element.positionId).subscribe(val => {
+            position = val.body!;
+            this.professionalExperiences.push(
+              this.fb.group({
+                id: element.id,
+                place: element.place,
+                positionId: position.id,
+                description: element.description,
+                startDate: ngbMomentDate.fromModel(element.startDate!),
+                endDate: ngbMomentDate.fromModel(element.endDate!),
+                candidateId: element.candidateId,
+              })
+            );
+          });
+        }
       });
     }
   }
@@ -337,7 +350,7 @@ export class CandidateUpdateComponent implements OnInit {
     this.professionalExperiences.push(
       this.fb.group({
         place: '',
-        post: '',
+        positionId: '',
         description: '',
         startDate: '',
       })
@@ -358,5 +371,17 @@ export class CandidateUpdateComponent implements OnInit {
   }
   trackByName(index: number, item: ISkill): string {
     return item.name!;
+  }
+
+  findPosition(control: number): boolean {
+    if (
+      this.positions.findIndex(pos => {
+        return pos.id === control;
+      }) > -1
+    )
+      return true;
+    else {
+      return false;
+    }
   }
 }

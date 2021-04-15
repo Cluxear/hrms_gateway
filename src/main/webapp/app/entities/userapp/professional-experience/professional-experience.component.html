@@ -36,7 +36,7 @@
                 <tr *ngFor="let professionalExperience of professionalExperiences ;trackBy: trackId">
                     <td><a [routerLink]="['/professional-experience', professionalExperience.id, 'view']">{{ professionalExperience.id }}</a></td>
                     <td>{{ professionalExperience.place }}</td>
-                    <td>{{ professionalExperience.post }}</td>
+                    <td>{{ professionalExperience.positionId }}</td>
                     <td>{{ professionalExperience.description }}</td>
                     <td>{{ professionalExperience.startDate | date:'medium' }}</td>
                     <td>{{ professionalExperience.endDate | date:'medium' }}</td>

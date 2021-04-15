@@ -1,15 +1,17 @@
 package com.tw.gateway.web.rest;
 
+import com.tw.gateway.security.SecurityUtils;
 import com.tw.gateway.service.UserService;
 import com.tw.gateway.service.dto.UserDTO;
 
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import java.security.Principal;
 
@@ -53,4 +55,5 @@ public class AccountResource {
             throw new AccountResourceException("User could not be found");
         }
     }
+
 }

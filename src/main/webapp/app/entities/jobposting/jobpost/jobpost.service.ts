@@ -43,7 +43,11 @@ export class JobpostService {
       .get<IJobpost[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
-
+  findCurrentUserUnappliedForJobposts(): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IJobpost[]>(`${this.resourceUrl}/unappliedforposts/`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

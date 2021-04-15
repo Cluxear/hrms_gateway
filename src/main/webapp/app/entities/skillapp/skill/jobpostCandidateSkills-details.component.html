@@ -1,4 +1,4 @@
-<!--<div>
+<div>
     <h2 id="page-heading">
 
     </h2>
@@ -7,26 +7,40 @@
 
     <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="skills?.length === 0">
-        <span jhiTranslate="hrmsGatewayApp.skillappSkill.home.notFound">No skills found</span>
+    <div class="alert alert-warning" id="no-result" *ngIf="candidateSkills?.length === 0">
+        <span jhiTranslate="hrmsGatewayApp.skillappSkill.home.notFound">Aucun candidat pour ce poste</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="skills && skills.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr>
-
-                <th *ngFor="let skill of candidateSkills.skills;" scope="col"> <span > {{ skill.name }}</span> </th>
+                <th scope="col">  candidate name  </th>
+                <th *ngFor="let skill of skills;" scope="col"> <span > {{ skill.name }}</span> </th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td  *ngFor="let skill of skills ;trackBy: trackId">{{ skill.description }}</td>
-                       <tr *ngFor="let skill of skills ;trackBy: trackId">
-                           <td><a [routerLink]="['/skill', skill.id, 'view']">{{ skill.id }}</a></td>
-                           <td>{{ skill.name }}</td>
 
-                           <td class="text-right">
+
+                       <tr *ngFor="let candidateMatrix of candidateSkills;">
+                           <td> {{candidateMatrix.firstName}}  </td>
+                           <td *ngFor="let candidateSkill of candidateMatrix.skills;">
+
+                               <ng-container *ngIf="candidateSkill.skillLevel!.toString() === 'NOVICE' ">
+                                   0
+                               </ng-container>
+
+                               <ng-container *ngIf="candidateSkill.skillLevel!.toString() === 'INTERMEDIATE' ">
+                                   1
+                               </ng-container>
+
+                               <ng-container *ngIf="candidateSkill.skillLevel!.toString() === 'ADVANCED' ">
+                                   2
+                               </ng-container>
+
+                               <ng-container *ngIf="candidateSkill.skillLevel!.toString() === 'EXPERT' ">
+                                   3
+                               </ng-container>
 
                            </td>
 
@@ -35,4 +49,4 @@
         </table>
     </div>
 </div>
--->
+

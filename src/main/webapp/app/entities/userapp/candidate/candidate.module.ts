@@ -12,5 +12,6 @@ import { candidateRoute } from './candidate.route';
   imports: [HrmsGatewaySharedModule, RouterModule.forChild(candidateRoute)],
   declarations: [CandidateComponent, CandidateDetailComponent, CandidateUpdateComponent, CandidateDeleteDialogComponent],
   entryComponents: [CandidateDeleteDialogComponent],
+  exports: [CandidateUpdateComponent],
 })
 export class UserappCandidateModule {}

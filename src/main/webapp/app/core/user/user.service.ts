@@ -24,4 +24,7 @@ export class UserService {
   update(user: IUser): Observable<EntityResponseType> {
     return this.http.put<IUser>(this.resourceUrl, user, { observe: 'response' });
   }
+  findByLogin(login: string): Observable<EntityResponseType> {
+    return this.http.get<IUser>(`${this.resourceUrl}/${login}`, { observe: 'response' });
+  }
 }

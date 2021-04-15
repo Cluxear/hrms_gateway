@@ -9,6 +9,8 @@ export interface IApplication {
   conclusion?: ConclusionType;
   jobpostId?: number;
   statuses?: IApplicationRecrutementStatus[];
+  fullName?: string;
+  userId?: string;
 }
 
 export class Application implements IApplication {
@@ -18,6 +20,8 @@ export class Application implements IApplication {
     public creationDate?: Moment,
     public conclusion?: ConclusionType,
     public statuses?: IApplicationRecrutementStatus[],
+    public fullName?: string,
+    public userId?: string,
     jobpostId?: number
   ) {
     this.shortListed = this.shortListed || false;

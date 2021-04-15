@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-
+import { map } from 'rxjs/operators';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ICandidate, Candidate } from 'app/shared/model/userapp/candidate.model';
@@ -20,6 +20,8 @@ export class CandidateResolve implements Resolve<ICandidate> {
   resolve(route: ActivatedRouteSnapshot): Observable<ICandidate> | Observable<never> {
     const id = route.params['id'];
     const jobId = route.params['jpid'];
+    const login = route.params['login'];
+
     if (id) {
       return this.service.find(id).pipe(
         flatMap((candidate: HttpResponse<Candidate>) => {
@@ -33,6 +35,18 @@ export class CandidateResolve implements Resolve<ICandidate> {
       );
     }
     if (jobId) {
+      return this.service.findByLogin(this.authService.getLogin()).pipe(
+        flatMap((candidate: HttpResponse<Candidate>) => {
+          if (candidate.body) {
+            return of(candidate.body);
+          } else {
+            this.router.navigate(['404']);
+            return EMPTY;
+          }
+        })
+      );
+    }
+    if (route.url.toString() === 'profile') {
       return this.service.findByLogin(this.authService.getLogin()).pipe(
         flatMap((candidate: HttpResponse<Candidate>) => {
           if (candidate.body) {

@@ -11,6 +11,7 @@ import { JobpostService } from './jobpost.service';
 import { JobpostComponent } from './jobpost.component';
 import { JobpostDetailComponent } from './jobpost-detail.component';
 import { JobpostUpdateComponent } from './jobpost-update.component';
+import { JoblistingComponent } from './joblisting-component';
 
 @Injectable({ providedIn: 'root' })
 export class JobpostResolve implements Resolve<IJobpost> {
@@ -74,6 +75,15 @@ export const jobpostRoute: Routes = [
     resolve: {
       jobpost: JobpostResolve,
     },
+    data: {
+      authorities: [Authority.USER],
+      pageTitle: 'hrmsGatewayApp.jobpostingJobpost.home.title',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'joblisting',
+    component: JoblistingComponent,
     data: {
       authorities: [Authority.USER],
       pageTitle: 'hrmsGatewayApp.jobpostingJobpost.home.title',
