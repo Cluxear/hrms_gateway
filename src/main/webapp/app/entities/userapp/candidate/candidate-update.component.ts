@@ -37,6 +37,7 @@ import { SkillService } from '../../skillapp/skill/skill.service';
 import { ISkill, Skill } from '../../../shared/model/skillapp/skill.model';
 import { PositionService } from 'app/entities/userapp/position/position.service';
 import { IPosition } from 'app/shared/model/userapp/position.model';
+import { IUserDetails, UserDetails } from 'app/shared/model/userapp/cvUserDetails.model';
 
 type SelectableEntity = IUser | IAddress | IDegreeLevel | ISeniorityLevel | ISkill | IPosition;
 
@@ -60,6 +61,7 @@ export class CandidateUpdateComponent implements OnInit {
   candidateSaved: ICandidate = new Candidate();
   positions: IPosition[] = [];
   url: UrlSegment[] = [];
+  _candidate: ICandidate = new Candidate();
   editForm = this.fb.group({
     id: [],
     personalStatement: [],
@@ -79,6 +81,7 @@ export class CandidateUpdateComponent implements OnInit {
     academicExperiences: [],
     certifications: [],
     country: [],
+    degreeId: [],
     allSkills: [],
     skills: this.fb.array([]),
     professionalExperiences: this.fb.array([]),
@@ -105,6 +108,7 @@ export class CandidateUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ candidate }) => {
+      this._candidate = candidate;
       this.updateForm(candidate);
 
       //getting candidateId
@@ -137,12 +141,12 @@ export class CandidateUpdateComponent implements OnInit {
           }
         });
 
-      this.degreeLevelService.query().subscribe((res: HttpResponse<IDegreeLevel[]>) => (this.degreelevels = res.body || []));
+
 
       this.seniorityLevelService.query().subscribe((res: HttpResponse<ISeniorityLevel[]>) => (this.senioritylevels = res.body || []));
       */
     });
-
+    this.degreeLevelService.query().subscribe((res: HttpResponse<IDegreeLevel[]>) => (this.degreelevels = res.body || []));
     this.skillService.query().subscribe((res: HttpResponse<ISkill[]>) => (this.availableSkills = res.body || []));
     this.positionService.query().subscribe((res: HttpResponse<IPosition[]>) => (this.positions = res.body || []));
   }
@@ -195,28 +199,6 @@ export class CandidateUpdateComponent implements OnInit {
       this.subscribeToSaveResponse(this.candidateService.create(candidate));
     }
 
-    let jobPostId: number;
-    this.activatedRoute.params.subscribe(param => {
-      jobPostId = param.jpid;
-      if (jobPostId) {
-        const application = {} as IApplication;
-
-        application.shortListed = false;
-        application.creationDate = moment(Date.now());
-        application.conclusion = ConclusionType.PENDING;
-
-        this.applicationService.create(application).subscribe(app => {
-          application.id = app.body?.id;
-          const userapplication = {} as IUserApplication;
-          userapplication.applicationId = application.id;
-          userapplication.userId = this.candidateSaved.id;
-          userapplication.jobPostId = jobPostId;
-
-          this.userApplicationService.create(userapplication).subscribe(() => this.onSaveSuccess());
-        });
-      }
-    });
-
     this.formArrayToProfExp(candidate);
   }
 
@@ -240,6 +222,7 @@ export class CandidateUpdateComponent implements OnInit {
     candidate.personalStatement = this.editForm.get(['personalStatement'])!.value;
     candidate.phone = this.editForm.get(['phone'])!.value;
     candidate.skills = this.editForm.get(['skills'])!.value;
+    candidate.degreeId = this.editForm.get(['degreeId'])!.value;
 
     const exp = this.professionalExperiences;
     const test = this.convertDateFromFormArray(exp);
@@ -255,6 +238,8 @@ export class CandidateUpdateComponent implements OnInit {
         console.log('START DATE !!!!!!!!!!!!!!!!!!' + exp['startDate']);
         const startDate = ngbMomentDate.toModel(exp['startDate']);
         exp['startDate'] = startDate;
+        const endDate = ngbMomentDate.toModel(exp['endDate']);
+        exp['endDate'] = endDate;
         console.log('START DATE MODIFIED HEREEEEE !!!!!!!!!!!!!!!!!!');
       });
     }
@@ -265,12 +250,37 @@ export class CandidateUpdateComponent implements OnInit {
     result.subscribe(
       cand => {
         this.candidateSaved = cand.body!;
+        this.createAnApplication();
         this.onSaveSuccess();
       },
       () => this.onSaveError()
     );
   }
 
+  protected createAnApplication(): void {
+    let jobPostId: number;
+    this.activatedRoute.params.subscribe(param => {
+      jobPostId = param.jpid;
+      if (jobPostId) {
+        const application = {} as IApplication;
+
+        application.shortListed = false;
+        application.creationDate = moment(Date.now());
+        application.conclusion = ConclusionType.PENDING;
+
+        this.applicationService.create(application).subscribe(app => {
+          application.id = app.body?.id;
+          const userapplication = {} as IUserApplication;
+          userapplication.applicationId = application.id;
+
+          userapplication.userId = this.candidateSaved.id;
+          userapplication.jobPostId = jobPostId;
+
+          this.userApplicationService.create(userapplication).subscribe(() => this.onSaveSuccess());
+        });
+      }
+    });
+  }
   protected subscribeToSaveResponseUser(result: Observable<HttpResponse<IUser>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
@@ -299,6 +309,7 @@ export class CandidateUpdateComponent implements OnInit {
   get userskills(): FormArray {
     return this.editForm.get('skills') as FormArray;
   }
+
   protected skillToFormArray(exp: ISkill[]): void {
     // itterate over every element of the array
     // what do we want to show for each skill from the server : the skill and its level.
@@ -353,6 +364,7 @@ export class CandidateUpdateComponent implements OnInit {
         positionId: '',
         description: '',
         startDate: '',
+        endDate: '',
       })
     );
   }
@@ -373,15 +385,25 @@ export class CandidateUpdateComponent implements OnInit {
     return item.name!;
   }
 
-  findPosition(control: number): boolean {
-    if (
-      this.positions.findIndex(pos => {
-        return pos.id === control;
-      }) > -1
-    )
-      return true;
-    else {
-      return false;
-    }
+  findPosition(control: number): number {
+    return this.positions.findIndex(pos => {
+      return pos.id === control;
+    });
+  }
+  uploadFile(event: Event): void {
+    // TODO: check user authority and based on it update accordingly
+    const HTMLevent = event as HTMLInputEvent;
+    const file: File = (HTMLevent.target.files as FileList)[0];
+    /** call the extract  **/
+    let userDetails: IUserDetails = new UserDetails();
+    this.userService.getUserInfoFromCV(file).subscribe(res => {
+      userDetails = res.body!;
+      this._candidate.firstName = userDetails.persoInfo?.firstName;
+      this._candidate.lastName = userDetails.persoInfo?.lastName;
+      console.log('new first name ' + res.body!.persoInfo?.firstName);
+      this.updateForm(this._candidate);
+    });
+
+    //file.text().then(fi => console.log(fi.toString()));
   }
 }

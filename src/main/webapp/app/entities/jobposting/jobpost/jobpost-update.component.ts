@@ -160,8 +160,8 @@ export class JobpostUpdateComponent implements OnInit {
       createdAt: this.editForm.get(['createdAt'])!.value ? moment(this.editForm.get(['createdAt'])!.value, DATE_TIME_FORMAT) : undefined,
       modifiedAt: this.editForm.get(['modifiedAt'])!.value ? moment(this.editForm.get(['modifiedAt'])!.value, DATE_TIME_FORMAT) : undefined,
       skillId: this.editForm.get(['skillId'])!.value,
-      //   degreeLevelId: this.editForm.get(['degreeLevelId'])!.value,
-      //   positonId: this.editForm.get(['positonId'])!.value,
+      degreeLevelId: this.editForm.get(['degreeLevelId'])!.value,
+      positonId: this.editForm.get(['positonId'])!.value,
     };
   }
 

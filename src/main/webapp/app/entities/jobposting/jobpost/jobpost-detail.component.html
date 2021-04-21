@@ -18,7 +18,7 @@
     <!-- Hero Area End -->
     <!-- job post company Start -->
     <div class="job-post-company pt-120 pb-120">
-        <div class="container">
+        <div *ngIf="jobpost" class="container">
             <div class="row justify-content-between">
                 <!-- Left Content -->
                 <div class="col-xl-7 col-lg-8">
@@ -30,7 +30,7 @@
                             </div>
                             <div class="job-tittle">
                                 <a href="#">
-                                    <h4>Digital Marketer</h4>
+                                    <h4>{{jobpost.positionName}}</h4>
                                 </a>
                                 <ul>
                                     <li>Creative Agency</li>
@@ -48,12 +48,12 @@
                             <div class="small-section-tittle">
                                 <h4>Job Description</h4>
                             </div>
-                            <p>It is a long established fact that a reader will beff distracted by vbthe creadable content of a page when looking at its layout. The pointf of using Lorem Ipsum is that it has ahf mcore or-lgess normal distribution of letters, as opposed to using, Content here content here making it look like readable.</p>
+                            <p> {{jobpost.description}}</p>
                         </div>
                         <div class="post-details2  mb-50">
                             <!-- Small Section Tittle -->
                             <div class="small-section-tittle">
-                                <h4>Required Knowledge, Skills, and Abilities</h4>
+                                <h4>Profile recherché</h4>
                             </div>
                             <ul>
                                 <li>System Software Development</li>
@@ -66,14 +66,10 @@
                         <div class="post-details2  mb-50">
                             <!-- Small Section Tittle -->
                             <div class="small-section-tittle">
-                                <h4>Education + Experience</h4>
+                                <h4>Compétence requise</h4>
                             </div>
                             <ul>
-                                <li>3 or more years of professional design experience</li>
-                                <li>Direct response email experience</li>
-                                <li>Ecommerce website design experience</li>
-                                <li>Familiarity with mobile and web apps preferred</li>
-                                <li>Experience using Invision a plus</li>
+                                <li *ngFor="let skill  of jobpost.skills">  {{skill.name}} </li>
                             </ul>
                         </div>
                     </div>
@@ -84,19 +80,19 @@
                     <div class="post-details3  mb-50">
                         <!-- Small Section Tittle -->
                         <div class="small-section-tittle">
-                            <h4>Job Overview</h4>
+                            <h4>Details de l'offre</h4>
                         </div>
                         <ul>
-                            <li>Posted date : <span>12 Aug 2019</span></li>
-                            <li>Location : <span>New York</span></li>
+                            <li>Posted date : <span>{{jobpost.createdAt | date : 'mediumDate'}}</span></li>
+                            <li>Location : <span>{{jobpost.type}}</span></li>
                             <li>Vacancy : <span>02</span></li>
-                            <li>Job nature : <span>Full time</span></li>
-                            <li>Salary :  <span>$7,800 yearly</span></li>
+                            <li>Type d'emploi : <span>{{jobpost.employmentType}}</span></li>
+                            <li>Salaire annuel :  <span> {{jobpost.estimatedSalary}} TND</span></li>
                             <li>Application date : <span>12 Sep 2020</span></li>
                         </ul>
                         <div class="apply-btn2">
                             <div *ngIf="jobpost">
-                            <a [routerLink]="['/candidate',  jobpost.id,  'postuler']" class="btn">Apply Now</a>
+                            <a [routerLink]="['/candidate',  jobpost.id,  'postuler']" class=" apply-job">Postuler Maintenant</a>
                             </div>
                         </div>
                     </div>

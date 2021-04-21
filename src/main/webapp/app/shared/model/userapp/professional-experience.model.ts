@@ -8,6 +8,7 @@ export interface IProfessionalExperience {
   startDate?: Moment;
   endDate?: Moment;
   candidateId?: number;
+  positionTitle?: string;
 }
 
 export class ProfessionalExperience implements IProfessionalExperience {
@@ -18,6 +19,7 @@ export class ProfessionalExperience implements IProfessionalExperience {
     public description?: string,
     public startDate?: Moment,
     public endDate?: Moment,
-    public candidateId?: number
+    public candidateId?: number,
+    public positionTitle?: string
   ) {}
 }

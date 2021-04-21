@@ -6,10 +6,12 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption, Pagination } from 'app/shared/util/request-util';
 import { IUser } from './user.model';
 import { ICandidate } from '../../shared/model/userapp/candidate.model';
+import { IUserDetails } from 'app/shared/model/userapp/cvUserDetails.model';
 type EntityResponseType = HttpResponse<IUser>;
 @Injectable({ providedIn: 'root' })
 export class UserService {
   public resourceUrl = SERVER_API_URL + 'api/users';
+  public userResourceUrl = SERVER_API_URL + 'services/userapp/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -26,5 +28,13 @@ export class UserService {
   }
   findByLogin(login: string): Observable<EntityResponseType> {
     return this.http.get<IUser>(`${this.resourceUrl}/${login}`, { observe: 'response' });
+  }
+
+  getUserInfoFromCV(cv: File): Observable<HttpResponse<IUserDetails>> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', cv);
+
+    return this.http.post<IUserDetails>(`${this.userResourceUrl}/detailsOfCV`, formData, { observe: 'response' });
   }
 }

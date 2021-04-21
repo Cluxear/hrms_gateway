@@ -2,8 +2,12 @@
     <div class="col-8">
         <form class="form-horizontal form-material" name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
 
-            {{this.editForm.value | json}}
-
+            <div class="form-group">
+                <label for="file">Choose File</label>
+                <input type="file"
+                       id="file"
+                       (change)="uploadFile($event)">
+            </div>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,7 +16,7 @@
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
--->
+-->                 <h3 class="form-title"> Information Personnel</h3>
                 <div class="form-group">
                     <label class="form-control-label" for="field_firstName">Prénom</label>
                     <input type="text" class="form-control form-control-line" name="firstName" id="field_firstName"
@@ -22,7 +26,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_lastName">Nom</label>
-                    <input type="text" class="form-control" name="firstName" id="field_lastName"
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
                            formControlName="lastName"/>
                 </div>
 
@@ -69,28 +73,30 @@
                             -->
 
                             <div formArrayName="professionalExperiences">
-                                <h3> Experience Professionelle   </h3> <br>
+                                <h3 class="form-title"> Experience Professionelle   </h3> <br>
                                 <div *ngFor="let exp of professionalExperiences.controls; let i=index">
 
                               <div [formGroupName]="i">
 
 
                          <label class="form-control-label" for="field_place">Nom de l'entreprise</label>
-                         <input type="string" class="form-control" formControlName="place" placeholder="Item name" id="field_exp_place{{i}}">
+                         <input type="string" class="form-control" formControlName="place" placeholder="entreprise" id="field_exp_place{{i}}">
 
 
                          <label class="form-control-label" for="field_post"> Position</label>
-                                  <select class="form-control" id="field_position{{i}}" name="position{{i}}" formControlName="position_id" >
+                                  <select class="form-control" id="field_position{{i}}" name="position{{i}}" formControlName="positionId" [selectedIndex]="findPosition(exp.value.positionId)" >
                                       <option [ngValue]="null"></option>
-                                      <option  [ngValue]="positionOptions.id" [selected] = findPosition(exp.value.positionId)  *ngFor="let positionOptions of positions; trackBy: trackById">{{  positionOptions.jobTitle }}</option>
+                                      <option  [ngValue]="positionOptions.id"  *ngFor="let positionOptions of positions; trackBy: trackById">{{  positionOptions.jobTitle }}</option>
                                   </select>
 
                        <label class="form-control-label" for="description">Description</label>
-                         <textarea class="form-control" formControlName="description" placeholder="Item name" id="field_exp_description{{i}}"> </textarea>
+                         <textarea class="form-control" formControlName="description" placeholder="description" id="field_exp_description{{i}}"> </textarea>
 
                          <label class="form-control-label" for="field_start_date"> Date de début</label>
-                         <input type="text"     ngbDatepicker placeholder=" yyyy-MM-dd  "   class="form-control" formControlName="startDate"  id="field_exp_start_date{{i}}">
+                         <input type="text"     ngbDatepicker #d="ngbDatepicker" placeholder=" yyyy-MM-dd  "   class="form-control" formControlName="startDate"  id="field_exp_start_date{{i}}">
 
+                                  <label class="form-control-label" for="field_end_date"> Date de fin</label>
+                                  <input type="text"     ngbDatepicker #d="ngbDatepicker" placeholder=" yyyy-MM-dd  "   class="form-control" formControlName="endDate"  id="field_exp_end_date{{i}}">
 
                              <!--  <button (click)="removeSkill(i)">Remove</button> -->
                             </div>
@@ -116,10 +122,12 @@
                                 -->
                         <br> <br>
                     <div formArrayName="skills">
+                        <h3 class="form-title">  Compétences    </h3> <br>
+                        <div class="row">
+                        <div  *ngFor="let exp of userskills.controls; let i=index">
 
-                        <div *ngFor="let exp of userskills.controls; let i=index">
-                            <div class="card">
-                            <div [formGroupName]="i">
+                            <div class="col-lg-4" >
+                            <div [formGroupName]="i" >
                                     <label class="form-control-label" for="field_skill_name{{i}}">Competence</label>
                                          <div *ngIf=" exp.value.changeable; else elseBlock">
                                     <select class="form-control" id="field_skills{{i}}" name="skills{{i}}" formControlName="id" >
@@ -132,7 +140,7 @@
                                     <input type="string" class="form-control" formControlName="name" placeholder="Item name" id="field_skill{{i}}" readonly>
                                 </ng-template>
                                     <div class="form-group">
-                                        <label class="form-control-label"  for="field_level{{i}}">Niveau actuelle</label>
+                                        <label class="form-control-label"  for="field_level{{i}}">Niveau </label>
                                         <select class="form-control" name="employmentType" formControlName="skillLevel" id="field_level{{i}}">
                                             <option value="NOVICE"> Novice </option>
                                             <option value="INTERMEDIATE">Intermediare</option>
@@ -149,6 +157,7 @@
                             </div>
                             </div>
                         </div>
+                        </div>
                         <button type="button" class="btn btn-info" (click)="addSkill()">Ajouter une compétence </button>
 
                     </div>
@@ -159,14 +168,13 @@
 
 
 
-              <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.degree" for="field_degree">Degree</label>
-                    <select class="form-control" id="field_degree" name="degree" formControlName="degreeId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="degreeLevelOption.id" *ngFor="let degreeLevelOption of degreelevels; trackBy: trackById">{{ degreeLevelOption.id }}</option>
+               <div class="form-group">
+                    <label class="form-control-label" for="field_degree"><h3 class="form-title"> Niveau Educatif   </h3> <br></label>
+                    <select class="form-control" id="field_degree" name="degree" formControlName="degreeId" >
+                        <option [ngValue]="null" hidden> niveau educatif </option>
+                        <option [ngValue]="degreeLevelOption.id"  *ngFor="let degreeLevelOption of degreelevels; trackBy: trackById">{{ degreeLevelOption.name }}</option>
                     </select>
                 </div>
--->
 
             <div>
 

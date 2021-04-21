@@ -29,6 +29,9 @@ export class SkillJobPostService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<ISkillJobPost>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+  findByJobPostId(jpid: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISkillJobPost[]>(`${this.resourceUrl}/jobpost/${jpid}`, { observe: 'response' });
+  }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);

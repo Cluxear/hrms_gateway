@@ -44,7 +44,7 @@
 
 
  <!--   <div class="col-lg-8 col-xlg-9 col-md-7"> -->
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <div class="card">
 
                 <div class="card-body profile-center">
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
         <div class="card">
             <!-- Tab panes -->
 
@@ -161,22 +161,31 @@
                                     <tbody>
                                     <tr>
                                         <th> Nom et prénom</th>
-                                        <td class="text-bold-500">Michael Right</td>
+                                        <td class="text-bold-500">{{candidate.firstName}} {{ candidate.lastName}}</td>
 
                                     </tr>
                                     <tr>
                                         <th> Téléphone </th>
-                                        <td class="text-bold-500">Morgan Vanblum</td>
+                                        <td class="text-bold-500">{{candidate.phone}}</td>
 
                                     </tr>
                                     <tr>
                                         <th> Address mail</th>
-                                        <td class="text-bold-500">Tiffani Blogz</td>
+                                        <td class="text-bold-500">{{candidate.email}}</td>
 
                                     </tr>
                                     <tr>
                                         <th> Address actuelle</th>
-                                        <td class="text-bold-500">Ashley Boul</td>
+                                        <td class="text-bold-500" >
+                                            <div *ngIf="candidate.address">
+                                                {{candidate.address.street}}
+
+                                                {{candidate.address.city}}
+                                                {{candidate.address.state}}
+                                            </div>
+
+
+                                        </td>
 
                                     </tr>
 
@@ -191,7 +200,7 @@
             </div>
         </div>
     </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <div class="card">
 
                 <div class="card-body profile-center">
@@ -208,27 +217,28 @@
 
                 <div class="card-body">
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" *ngIf=" candidate.professionalExperience && candidate.professionalExperience.length > 0">
                         <table class="table mb-0">
                             <thead class="thead-light">
-                            <th> Diplome </th>
-                            <th> Institut </th>
+                            <th> Entreprise </th>
+                            <th> Position </th>
+
                             </thead>
                             <tbody>
-                            <tr>
-                                <td> License </td>
-                                <td> ISI Ariana </td>
-                            </tr>
-                            <tr>
-                                <td> Ingenieurie </td>
-                                <td> ESPRIT </td>
+                            <tr *ngFor="let exp of candidate.professionalExperience">
+                               <td> {{exp.place}}</td>
+                                <td> {{exp.positionTitle}}</td>
+
                             </tr>
                             </tbody>
                         </table>
                     </div>
+
+                    <h1 *ngIf="candidate.professionalExperience && candidate.professionalExperience.length <= 0"> Pas d'experience precedente </h1>
                 </div>
 
     </div>
+
         </div>
     </div>
 <jhi-skill-matrix [userId]="candidate.id"></jhi-skill-matrix>

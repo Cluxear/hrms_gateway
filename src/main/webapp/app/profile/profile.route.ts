@@ -28,7 +28,7 @@ export const DASHBOARD_ROUTE: Route = {
   },
 };
 export const USER_DETAILS_ROUTE: Route = {
-  path: 'user_details/:id',
+  path: 'user_details/:id/:id2',
   component: UserDetailsComponent,
   resolve: {
     candidate: CandidateResolve,

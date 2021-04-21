@@ -24,7 +24,6 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.title">Title</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.description">Description</span></th>
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.estimatedSalary">Estimated Salary</span></th>
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.type">Type</span></th>
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.employmentType">Employment Type</span></th>
@@ -36,10 +35,11 @@
                 </tr>
             </thead>
             <tbody>
+
+
                 <tr *ngFor="let jobpost of jobposts ;trackBy: trackId">
                     <td><a [routerLink]="['/jobpost', jobpost.id, 'view']">{{ jobpost.id }}</a></td>
                     <td>{{ jobpost.title }}</td>
-                    <td>{{ jobpost.description }}</td>
                     <td>{{ jobpost.estimatedSalary }}</td>
                     <td jhiTranslate="{{ 'hrmsGatewayApp.LocationType.' + jobpost.type }}">{{ jobpost.type }}</td>
                     <td jhiTranslate="{{ 'hrmsGatewayApp.EmploymentType.' + jobpost.employmentType }}">{{ jobpost.employmentType }}</td>

@@ -36,12 +36,20 @@
             <tbody>
                 <tr *ngFor="let application of applications ;trackBy: trackId">
                     <td *jhiHasAnyAuthority="'ROLE_ADMIN'" ><a [routerLink]="['/application', application.id, 'view']">{{ application.fullName }}</a></td>
-                    <td>{{ application.shortListed }}</td>
+                    <td>
+                        <ng-container *ngIf="application.shortListed">
+                            oui
+                        </ng-container>
+                        <ng-container *ngIf="!application.shortListed ">
+                            non
+                        </ng-container>
+
+                    </td>
                     <td>{{ application.creationDate | date:'medium' }}</td>
                     <td>{{ application.conclusion }}</td>
                     <td *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <button type="button"
-                                [routerLink]="['/application',  application.id,  'view']"
+                                [routerLink]="['/user_details',application.candidateId,  application.id ]"
                                 class="btn btn-secondary">
                             <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Détails de la candidature </span>
                         </button>
