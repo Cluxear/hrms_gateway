@@ -1,0 +1,9 @@
+{
+  "hrmsGatewayApp": {
+    "LocationType": {
+      "null": "",
+      "REMOTE": "REMOTE",
+      "ON_SITE": "ON_SITE"
+    }
+  }
+}

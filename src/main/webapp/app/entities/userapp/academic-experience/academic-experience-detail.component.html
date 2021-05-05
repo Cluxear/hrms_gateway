@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="academicExperience">
+            <h2><span jhiTranslate="hrmsGatewayApp.userappAcademicExperience.detail.title">Academic Experience</span> {{ academicExperience.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.userappAcademicExperience.place">Place</span></dt>
+                <dd>
+                    <span>{{ academicExperience.place }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappAcademicExperience.degreeName">Degree Name</span></dt>
+                <dd>
+                    <span>{{ academicExperience.degreeName }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappAcademicExperience.description">Description</span></dt>
+                <dd>
+                    <span>{{ academicExperience.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappAcademicExperience.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{ academicExperience.startDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappAcademicExperience.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{ academicExperience.endDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappAcademicExperience.candidate">Candidate</span></dt>
+                <dd>
+                    <div *ngIf="academicExperience.candidateId">
+                        <a [routerLink]="['/candidate', academicExperience.candidateId, 'view']">{{ academicExperience.candidateId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/academic-experience', academicExperience.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

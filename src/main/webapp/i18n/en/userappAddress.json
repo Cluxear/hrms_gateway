@@ -1,0 +1,29 @@
+{
+  "hrmsGatewayApp": {
+    "userappAddress": {
+      "home": {
+        "title": "Addresses",
+        "createLabel": "Create a new Address",
+        "createOrEditLabel": "Create or edit a Address",
+        "notFound": "No Addresses found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Address {{ id }}?"
+      },
+      "detail": {
+        "title": "Address"
+      },
+      "street": "Street",
+      "postalCode": "Postal Code",
+      "city": "City",
+      "state": "State"
+    }
+  },
+  "userappApp": {
+    "userappAddress": {
+      "created": "A new Address is created with identifier {{ param }}",
+      "updated": "A Address is updated with identifier {{ param }}",
+      "deleted": "A Address is deleted with identifier {{ param }}"
+    }
+  }
+}

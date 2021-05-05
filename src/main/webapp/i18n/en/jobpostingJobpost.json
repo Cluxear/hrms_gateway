@@ -1,0 +1,34 @@
+{
+  "hrmsGatewayApp": {
+    "jobpostingJobpost": {
+      "home": {
+        "title": "Jobposts",
+        "createLabel": "Create a new Jobpost",
+        "createOrEditLabel": "Create or edit a Jobpost",
+        "notFound": "No Jobposts found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Jobpost {{ id }}?"
+      },
+      "detail": {
+        "title": "Jobpost"
+      },
+      "title": "Title",
+      "description": "Description",
+      "estimatedSalary": "Estimated Salary",
+      "type": "Type",
+      "employmentType": "Employment Type",
+      "createdAt": "Created At",
+      "modifiedAt": "Modified At",
+      "degreeLevel": "Degree Level",
+      "positon": "Positon"
+    }
+  },
+  "jobpostingApp": {
+    "jobpostingJobpost": {
+      "created": "A new Jobpost is created with identifier {{ param }}",
+      "updated": "A Jobpost is updated with identifier {{ param }}",
+      "deleted": "A Jobpost is deleted with identifier {{ param }}"
+    }
+  }
+}

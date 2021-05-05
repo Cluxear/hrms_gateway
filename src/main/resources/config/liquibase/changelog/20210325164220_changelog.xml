@@ -1,0 +1,39 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="cluxe (generated)" id="1616690558700-1">
+        <dropUniqueConstraint constraintName="ux_candidate_address_id" tableName="candidate"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-2">
+        <dropUniqueConstraint constraintName="ux_employee_position_id" tableName="employee"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-3">
+        <dropTable tableName="academic_experience"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-4">
+        <dropTable tableName="address"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-5">
+        <dropTable tableName="candidate"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-6">
+        <dropTable tableName="certification"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-7">
+        <dropTable tableName="country"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-8">
+        <dropTable tableName="degree_level"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-9">
+        <dropTable tableName="employee"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-10">
+        <dropTable tableName="position"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-11">
+        <dropTable tableName="professional_experience"/>
+    </changeSet>
+    <changeSet author="cluxe (generated)" id="1616690558700-12">
+        <dropTable tableName="seniority_level"/>
+    </changeSet>
+</databaseChangeLog>

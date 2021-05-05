@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="candidate">
+            <h2><span jhiTranslate="hrmsGatewayApp.userappCandidate.detail.title">Candidate</span> {{ candidate.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.userappCandidate.personalStatement" [ngbTooltip]="'hrmsGatewayApp.userappCandidate.help.personalStatement' | translate">Personal Statement</span></dt>
+                <dd>
+                    <span>{{ candidate.personalStatement }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappCandidate.phone">Phone</span></dt>
+                <dd>
+                    <span>{{ candidate.phone }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappCandidate.user">User</span></dt>
+                <dd>
+                    {{ candidate.userId }}
+                </dd>
+                
+               
+                <dt><span jhiTranslate="hrmsGatewayApp.userappCandidate.degree">Degree</span></dt>
+                <dd>
+                    <div *ngIf="candidate.degreeId">
+                        <a [routerLink]="['/degree-level', candidate.degreeId, 'view']">{{ candidate.degreeId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappCandidate.seniorityLevel">Seniority Level</span></dt>
+                <dd>
+                    <div *ngIf="candidate.seniorityLevelId">
+                        <a [routerLink]="['/seniority-level', candidate.seniorityLevelId, 'view']">{{ candidate.seniorityLevelId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/candidate', candidate.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

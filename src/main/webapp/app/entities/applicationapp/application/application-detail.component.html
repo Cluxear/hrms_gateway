@@ -1,0 +1,40 @@
+<!-- <jhi-user-details> </jhi-user-details>  -->
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="application">
+            <h2><span jhiTranslate="hrmsGatewayApp.applicationappApplication.detail.title">Application</span> {{ application.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.applicationappApplication.shortListed">Short Listed</span></dt>
+                <dd>
+                    <span>{{ application.shortListed }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.applicationappApplication.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{ application.creationDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.applicationappApplication.conclusion">Conclusion</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hrmsGatewayApp.ConclusionType.' + application.conclusion }}">{{ application.conclusion }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/application', application.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

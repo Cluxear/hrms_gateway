@@ -1,0 +1,92 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="hrmsGatewayApp.applicationappApplication.home.title">Candidatures</span>
+        <!--
+                <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-application" [routerLink]="['/application/new']">
+                    <fa-icon icon="plus"></fa-icon>
+                   <span  jhiTranslate="hrmsGatewayApp.applicationappApplication.home.createLabel">
+                    Create a new Application
+                    </span>
+
+        </button>
+        -->
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="applications?.length === 0">
+        <span jhiTranslate="hrmsGatewayApp.applicationappApplication.home.notFound">No applications found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="applications && applications.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+
+                    <th scope="col" *jhiHasAnyAuthority="'ROLE_ADMIN'" ><span >Candidat</span></th>
+                    <th scope="col" ><span>Presélection</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.applicationappApplication.creationDate">Date d'application</span></th>
+                    <th scope="col" ><span>Status</span></th>
+                    <th scope="col"  *jhiHasAnyAuthority="'ROLE_ADMIN'" > <span> Détails de la candidatures </span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let application of applications ;trackBy: trackId">
+                    <td *jhiHasAnyAuthority="'ROLE_ADMIN'" ><a [routerLink]="['/application', application.id, 'view']">{{ application.fullName }}</a></td>
+                    <td>
+                        <ng-container *ngIf="application.shortListed">
+                            oui
+                        </ng-container>
+                        <ng-container *ngIf="!application.shortListed ">
+                            non
+                        </ng-container>
+
+                    </td>
+                    <td>{{ application.creationDate | date:'medium' }}</td>
+                    <td>{{ application.conclusion }}</td>
+                    <td *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button type="button"
+                                [routerLink]="['/user_details',application.candidateId,  application.id ]"
+                                class="btn btn-secondary">
+                            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Détails de la candidature </span>
+                        </button>
+                    </td>
+                    <td *jhiHasAnyAuthority="'ROLE_CANDIDATE'">
+                        <button type="button"
+                                [routerLink]="['/jobpost',  application.jobpostId,  'view']"
+                                class="btn btn-secondary">
+                            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Offre d'emploi concerné</span>
+                        </button>
+                    </td>
+
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/application', application.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/application', application.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(application)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

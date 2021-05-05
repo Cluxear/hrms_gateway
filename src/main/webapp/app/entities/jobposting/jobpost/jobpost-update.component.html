@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-jobpost-heading" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.home.createOrEditLabel">Create or edit a Jobpost</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.title" for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                           formControlName="title"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description"
+                           formControlName="description"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.estimatedSalary" for="field_estimatedSalary">Estimated Salary</label>
+                    <input type="number" class="form-control" name="estimatedSalary" id="field_estimatedSalary"
+                           formControlName="estimatedSalary"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label"  for="field_skills">Skills</label>
+                    <select class="form-control" id="field_skills" name="skills" formControlName="skillId" multiple>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="skillOption.id" *ngFor="let skillOption of skills; trackBy: trackById">{{ skillOption.name }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="REMOTE">{{ 'hrmsGatewayApp.LocationType.REMOTE' | translate }}</option>
+                        <option value="ON_SITE">{{ 'hrmsGatewayApp.LocationType.ON_SITE' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.employmentType" for="field_employmentType">Employment Type</label>
+                    <select class="form-control" name="employmentType" formControlName="employmentType" id="field_employmentType">
+                        <option value="FULL_TIME">{{ 'hrmsGatewayApp.EmploymentType.FULL_TIME' | translate }}</option>
+                        <option value="PART_TIME">{{ 'hrmsGatewayApp.EmploymentType.PART_TIME' | translate }}</option>
+                        <option value="CONTRACT">{{ 'hrmsGatewayApp.EmploymentType.CONTRACT' | translate }}</option>
+                        <option value="TEMPORARY">{{ 'hrmsGatewayApp.EmploymentType.TEMPORARY' | translate }}</option>
+                        <option value="SEASONAL">{{ 'hrmsGatewayApp.EmploymentType.SEASONAL' | translate }}</option>
+                        <option value="INTERNSHIP">{{ 'hrmsGatewayApp.EmploymentType.INTERNSHIP' | translate }}</option>
+                    </select>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.degreeLevel" for="field_degreeLevel">Degree Level</label>
+                    <select class="form-control" id="field_degreeLevel" name="degreeLevel" formControlName="degreeLevelId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="degreeLevelOption.id" *ngFor="let degreeLevelOption of degreelevels; trackBy: trackById">{{ degreeLevelOption.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.jobpostingJobpost.positon" for="field_positon">Positon</label>
+                    <select class="form-control" id="field_positon" name="positon" formControlName="positonId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="positionOption.id" *ngFor="let positionOption of positons; trackBy: trackById">{{ positionOption.jobTitle }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+            {{this.editForm.value | json}}
+        </form>
+    </div>
+</div>

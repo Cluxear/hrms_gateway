@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "userappSeniorityLevel": {
+      "home": {
+        "title": "SeniorityLevels",
+        "createLabel": "Créer un nouveau Seniority Level",
+        "createOrEditLabel": "Créer ou éditer un Seniority Level",
+        "notFound": "Aucun Seniority Level trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Seniority Level {{ id }} ?"
+      },
+      "detail": {
+        "title": "Seniority Level"
+      },
+      "name": "Name",
+      "employe": "Employe",
+      "candidate": "Candidate"
+    }
+  },
+  "userappApp": {
+    "userappSeniorityLevel": {
+      "created": "Un nouveau Seniority Level a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Seniority Level avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Seniority Level avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

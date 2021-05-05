@@ -1,0 +1,27 @@
+{
+  "hrmsGatewayApp": {
+    "dataappSkillJobPost": {
+      "home": {
+        "title": "SkillJobPosts",
+        "createLabel": "Créer un nouveau Skill Job Post",
+        "createOrEditLabel": "Créer ou éditer un Skill Job Post",
+        "notFound": "Aucun Skill Job Post trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Skill Job Post {{ id }} ?"
+      },
+      "detail": {
+        "title": "Skill Job Post"
+      },
+      "skillId": "Skill Id",
+      "jobPostId": "Job Post Id"
+    }
+  },
+  "dataappApp": {
+    "dataappSkillJobPost": {
+      "created": "Un nouveau Skill Job Post a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Skill Job Post avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Skill Job Post avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "hrmsGatewayApp": {
+    "RecrutementStatus": {
+      "null": "",
+      "PRE_SELECTED": "PRE_SELECTED",
+      "HR_INTERVIEW_FIXED": "HR_INTERVIEW_FIXED",
+      "HR_INTERVIEW_PASSED": "HR_INTERVIEW_PASSED",
+      "HR_INTERVIEW_FAILED": "HR_INTERVIEW_FAILED"
+    }
+  }
+}

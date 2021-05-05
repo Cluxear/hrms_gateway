@@ -1,0 +1,27 @@
+{
+  "hrmsGatewayApp": {
+    "skillappDomain": {
+      "home": {
+        "title": "Domains",
+        "createLabel": "Créer un nouveau Domain",
+        "createOrEditLabel": "Créer ou éditer un Domain",
+        "notFound": "Aucun Domain trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Domain {{ id }} ?"
+      },
+      "detail": {
+        "title": "Domain"
+      },
+      "name": "Name",
+      "skill": "Skill"
+    }
+  },
+  "skillappApp": {
+    "skillappDomain": {
+      "created": "Un nouveau Domain a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Domain avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Domain avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

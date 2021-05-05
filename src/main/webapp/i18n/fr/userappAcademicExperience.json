@@ -1,0 +1,31 @@
+{
+  "hrmsGatewayApp": {
+    "userappAcademicExperience": {
+      "home": {
+        "title": "AcademicExperiences",
+        "createLabel": "Créer un nouveau Academic Experience",
+        "createOrEditLabel": "Créer ou éditer un Academic Experience",
+        "notFound": "Aucun Academic Experience trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Academic Experience {{ id }} ?"
+      },
+      "detail": {
+        "title": "Academic Experience"
+      },
+      "place": "Place",
+      "degreeName": "Degree Name",
+      "description": "Description",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "candidate": "Candidate"
+    }
+  },
+  "userappApp": {
+    "userappAcademicExperience": {
+      "created": "Un nouveau Academic Experience a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Academic Experience avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Academic Experience avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}
