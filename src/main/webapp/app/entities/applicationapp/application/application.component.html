@@ -1,13 +1,14 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="hrmsGatewayApp.applicationappApplication.home.title">Candidatures</span>
+        <div *ngIf="jobpostInQuestion">
+        <span *jhiHasAnyAuthority="'ROLE_ADMIN'">Candidatures pour le poste <a [routerLink]="['/jobpost', jobpostInQuestion.id, 'view']"> {{ jobpostInQuestion.positionName }}  </a> </span>
+        </div>
         <!--
                 <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-application" [routerLink]="['/application/new']">
                     <fa-icon icon="plus"></fa-icon>
                    <span  jhiTranslate="hrmsGatewayApp.applicationappApplication.home.createLabel">
                     Create a new Application
                     </span>
-
         </button>
         -->
     </h2>
@@ -29,7 +30,6 @@
                     <th scope="col" ><span>Presélection</span></th>
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.applicationappApplication.creationDate">Date d'application</span></th>
                     <th scope="col" ><span>Status</span></th>
-                    <th scope="col"  *jhiHasAnyAuthority="'ROLE_ADMIN'" > <span> Détails de la candidatures </span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -47,13 +47,6 @@
                     </td>
                     <td>{{ application.creationDate | date:'medium' }}</td>
                     <td>{{ application.conclusion }}</td>
-                    <td *jhiHasAnyAuthority="'ROLE_ADMIN'">
-                        <button type="button"
-                                [routerLink]="['/user_details',application.candidateId,  application.id ]"
-                                class="btn btn-secondary">
-                            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Détails de la candidature </span>
-                        </button>
-                    </td>
                     <td *jhiHasAnyAuthority="'ROLE_CANDIDATE'">
                         <button type="button"
                                 [routerLink]="['/jobpost',  application.jobpostId,  'view']"
@@ -64,24 +57,24 @@
 
                     <td class="text-right">
                         <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/application', application.id, 'view']"
+                            <button type="submit"  *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                    [routerLink]="['/user_details',application.candidateId,  application.id ]"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                <span class="d-none d-md-inline">détails de la candidatures</span>
                             </button>
 
                             <button type="submit"
                                     [routerLink]="['/application', application.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                <span class="d-none d-md-inline">Accepter</span>
                             </button>
 
                             <button type="submit" (click)="delete(application)"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                                <span class="d-none d-md-inline">Rejeter</span>
                             </button>
                         </div>
                     </td>

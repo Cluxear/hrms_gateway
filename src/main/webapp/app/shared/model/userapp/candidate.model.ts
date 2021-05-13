@@ -22,7 +22,9 @@ export interface ICandidate {
   certification?: ICertification[];
   country?: ICountry;
   degreeId?: IDegreeLevel;
+  degreeName?: string;
   seniorityLevelId?: ISeniorityLevel;
+
   skills?: ISkill[];
 }
 
@@ -42,6 +44,7 @@ export class Candidate implements ICandidate {
     public certification?: ICertification[],
     public country?: ICountry,
     public degreeId?: IDegreeLevel,
+    public degreeName?: string,
     public seniorityLevelId?: ISeniorityLevel,
     public skills?: ISkill[]
   ) {}

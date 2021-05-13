@@ -6279,7 +6279,7 @@ form.search-box .search-form a {
   color: #fff;
 }
 .form-title {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   font-weight: bold;
 }
 .apply-job {

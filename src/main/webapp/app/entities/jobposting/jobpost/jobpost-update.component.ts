@@ -20,7 +20,7 @@ import { ICandidate } from '../../../shared/model/userapp/candidate.model';
 import { SkillJobPostService } from '../../dataapp/skill-job-post/skill-job-post.service';
 import { ISkillJobPost, SkillJobPost } from '../../../shared/model/dataapp/skill-job-post.model';
 
-type SelectableEntity = IDegreeLevel | IPosition;
+type SelectableEntity = IDegreeLevel | IPosition| ISkill;
 
 @Component({
   selector: 'jhi-jobpost-update',

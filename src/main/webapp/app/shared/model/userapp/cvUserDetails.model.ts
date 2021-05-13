@@ -1,9 +1,9 @@
 import { IPersoInfo } from 'app/shared/model/userapp/perso-info.model';
 
 export interface IUserDetails {
-  persoInfo?: IPersoInfo;
+  info_perso?: IPersoInfo;
 }
 
 export class UserDetails implements IUserDetails {
-  constructor(public persoInfo?: IPersoInfo) {}
+  constructor(public info_perso?: IPersoInfo) {}
 }

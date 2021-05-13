@@ -38,6 +38,7 @@ import { ISkill, Skill } from '../../../shared/model/skillapp/skill.model';
 import { PositionService } from 'app/entities/userapp/position/position.service';
 import { IPosition } from 'app/shared/model/userapp/position.model';
 import { IUserDetails, UserDetails } from 'app/shared/model/userapp/cvUserDetails.model';
+import {finished} from "stream";
 
 type SelectableEntity = IUser | IAddress | IDegreeLevel | ISeniorityLevel | ISkill | IPosition;
 
@@ -62,6 +63,8 @@ export class CandidateUpdateComponent implements OnInit {
   positions: IPosition[] = [];
   url: UrlSegment[] = [];
   _candidate: ICandidate = new Candidate();
+
+  currentIndex = -1;
   editForm = this.fb.group({
     id: [],
     personalStatement: [],
@@ -146,13 +149,31 @@ export class CandidateUpdateComponent implements OnInit {
       this.seniorityLevelService.query().subscribe((res: HttpResponse<ISeniorityLevel[]>) => (this.senioritylevels = res.body || []));
       */
     });
-    this.degreeLevelService.query().subscribe((res: HttpResponse<IDegreeLevel[]>) => (this.degreelevels = res.body || []));
+    this.degreeLevelService.query().subscribe((res: HttpResponse<IDegreeLevel[]>) => {
+      (this.degreelevels = res.body || []);
+    },
+
+      () => {
+
+      },
+      ()=> {
+        this.degreelevels.forEach((val, index) => {
+
+
+          if (val.name === this._candidate.degreeName) {
+
+            val.selected = true;
+          }
+
+        });
+      })
     this.skillService.query().subscribe((res: HttpResponse<ISkill[]>) => (this.availableSkills = res.body || []));
     this.positionService.query().subscribe((res: HttpResponse<IPosition[]>) => (this.positions = res.body || []));
   }
 
   updateForm(candidate: ICandidate): void {
     if (candidate.professionalExperience !== undefined) {
+      this.currentIndex = 0;
       this.exp = candidate.professionalExperience;
     }
 
@@ -233,14 +254,13 @@ export class CandidateUpdateComponent implements OnInit {
   protected convertDateFromFormArray(profExp: FormArray): FormArray {
     const ngbMomentDate: NgbDateMomentAdapter = new NgbDateMomentAdapter();
     if (profExp) {
-      console.log(' Professional experience array', profExp.controls);
       profExp.controls.forEach(exp => {
-        console.log('START DATE !!!!!!!!!!!!!!!!!!' + exp['startDate']);
+
         const startDate = ngbMomentDate.toModel(exp['startDate']);
         exp['startDate'] = startDate;
         const endDate = ngbMomentDate.toModel(exp['endDate']);
         exp['endDate'] = endDate;
-        console.log('START DATE MODIFIED HEREEEEE !!!!!!!!!!!!!!!!!!');
+
       });
     }
     return profExp;
@@ -295,8 +315,6 @@ export class CandidateUpdateComponent implements OnInit {
   protected onSaveSuccess(): void {
     this.isSaving = false;
 
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! LAALALALALALALALALLA' + this.url);
-
     this.previousState();
   }
 
@@ -333,6 +351,8 @@ export class CandidateUpdateComponent implements OnInit {
     // iterate over every element of the array
     if (exp && exp.length > 0) {
       exp.forEach(element => {
+
+
         if (element.positionId) {
           this.positionService.find(element.positionId).subscribe(val => {
             position = val.body!;
@@ -342,8 +362,14 @@ export class CandidateUpdateComponent implements OnInit {
                 place: element.place,
                 positionId: position.id,
                 description: element.description,
-                startDate: ngbMomentDate.fromModel(element.startDate!),
-                endDate: ngbMomentDate.fromModel(element.endDate!),
+                startDate: ngbMomentDate.fromModel(moment(element.startDate)),
+                startDay: ngbMomentDate.fromModel(moment(element.startDate))!.day,
+                startMonth: ngbMomentDate.fromModel(moment(element.startDate))!.month,
+                startYear: ngbMomentDate.fromModel(moment(element.startDate))!.year,
+                endDay: ngbMomentDate.fromModel(moment(element.endDate))!.day,
+                endMonth: ngbMomentDate.fromModel(moment(element.endDate))!.month,
+                endYear: ngbMomentDate.fromModel(moment(element.endDate))!.year,
+                endDate: ngbMomentDate.fromModel(moment(element.endDate)),
                 candidateId: element.candidateId,
               })
             );
@@ -358,6 +384,7 @@ export class CandidateUpdateComponent implements OnInit {
     candidate.professionalExperience?.map((v, index) => this.professionalExperiences.at(index) as FormArray);
   }
   addProfessionalExperience(): void {
+    this.currentIndex += 1;
     this.professionalExperiences.push(
       this.fb.group({
         place: '',
@@ -367,6 +394,21 @@ export class CandidateUpdateComponent implements OnInit {
         endDate: '',
       })
     );
+  }
+
+  next() : void {
+
+    this.currentIndex +=1;
+  }
+  previous() : void {
+
+    this.currentIndex -=1;
+  }
+  isLastExp() : boolean {
+     return  !(this.currentIndex + 1 < this.professionalExperiences.length);
+  }
+  isFirstExp() : boolean {
+    return !(this.currentIndex - 1 >= 0) ;
   }
   addSkill(): void {
     this.userskills.push(
@@ -397,13 +439,19 @@ export class CandidateUpdateComponent implements OnInit {
     /** call the extract  **/
     let userDetails: IUserDetails = new UserDetails();
     this.userService.getUserInfoFromCV(file).subscribe(res => {
+
       userDetails = res.body!;
-      this._candidate.firstName = userDetails.persoInfo?.firstName;
-      this._candidate.lastName = userDetails.persoInfo?.lastName;
-      console.log('new first name ' + res.body!.persoInfo?.firstName);
+
+      this._candidate.firstName = userDetails.info_perso?.firstName;
+      this._candidate.lastName = userDetails.info_perso?.lastName;
+      this._candidate.email = userDetails.info_perso?.email;
       this.updateForm(this._candidate);
     });
 
     //file.text().then(fi => console.log(fi.toString()));
+  }
+  selectEducationLevel() : void {
+      //degreeLevel
+
   }
 }

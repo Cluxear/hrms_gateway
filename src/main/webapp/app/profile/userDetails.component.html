@@ -9,9 +9,7 @@
             <li class="breadcrumb-item active">Profile</li>
         </ol>
     </div>
-    <div class="col-md-7 align-self-center">
-        <a href="https://wrappixel.com/templates/adminwrap/" class="btn waves-effect waves-light btn btn-info pull-right hidden-sm-down"> Upgrade to Pro</a>
-    </div>
+
 </div>
 <!-- ============================================================== -->
 <!-- End Bread crumb and right sidebar toggle -->
@@ -22,7 +20,7 @@
 <!-- Row -->
 <div class="row">
     <!-- Column -->
-    <div class="col-lg-4 col-xlg-3 col-md-5">
+    <div class="col-lg-3 col-xlg-3 col-md-5">
         <div class="card">
             <div class="card-body">
                 <!-- Add css class to center image -->
@@ -63,7 +61,7 @@
 
                 <div class="table-responsive">
                     <table class="table mb-0">
-                        <thead>
+                        <thead class="thead-light">
                         <th> Diplome </th>
                         <th> Institut </th>
                         </thead>
@@ -222,13 +220,15 @@
                             <thead class="thead-light">
                             <th> Entreprise </th>
                             <th> Position </th>
-
+                            <th> Date de début</th>
+                            <th> Date de fin</th>
                             </thead>
                             <tbody>
                             <tr *ngFor="let exp of candidate.professionalExperience">
                                <td> {{exp.place}}</td>
                                 <td> {{exp.positionTitle}}</td>
-
+                                <td> {{ exp.startDate | date: 'mediumDate'}}</td>
+                                <td> {{ exp.endDate | date: 'mediumDate'}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -240,8 +240,11 @@
     </div>
 
         </div>
+        <div class="col-lg-12">
+        <jhi-skill-matrix [userId]="candidate.id"></jhi-skill-matrix>
+            </div>
     </div>
-<jhi-skill-matrix [userId]="candidate.id"></jhi-skill-matrix>
+
     <!-- Column -->
 
 <!-- Row -->

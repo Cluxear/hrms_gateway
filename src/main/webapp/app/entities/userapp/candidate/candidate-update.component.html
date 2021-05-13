@@ -2,9 +2,9 @@
     <div class="col-8">
         <form class="form-horizontal form-material" name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
 
-            <div class="form-group">
-                <label for="file">Uploader un cv</label>
-                <input type="file"
+            <div class="form-group text-right">
+                <label for="file">Upload un cv</label>
+                <input type="file" class="btn-file"
                        id="file"
                        (change)="uploadFile($event)">
             </div>
@@ -31,104 +31,80 @@
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="first-name-column">First Name</label>
-                                                        <input type="text" id="first-name-column" class="form-control"
-                                                               placeholder="First Name" name="fname-column">
+                                                        <label class="form-control-label" for="field_firstName">Prénom</label>
+                                                        <input type="text" class="form-control form-control-line" name="firstName" id="field_firstName"
+                                                               formControlName="firstName"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="last-name-column">Last Name</label>
-                                                        <input type="text" id="last-name-column" class="form-control"
-                                                               placeholder="Last Name" name="lname-column">
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_lastName">Nom</label>
+                                                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                                                           formControlName="lastName"/>
+                                                </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="city-column">City</label>
-                                                        <input type="text" id="city-column" class="form-control" placeholder="City"
-                                                               name="city-column">
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_address_street">Address email</label>
+                                                    <input type="email" class="form-control" name="email" id="field_email"
+                                                           formControlName="email"/>
+                                                </div>
                                                 </div>
                                                 <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="country-floating">Country</label>
-                                                        <input type="text" id="country-floating" class="form-control"
-                                                               name="country-floating" placeholder="Country">
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Téléphone</label>
+                                                    <input type="number" class="form-control" name="phone" id="field_phone"
+                                                           formControlName="phone"/>
                                                 </div>
+                                                </div>
+
                                                 <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="company-column">Company</label>
-                                                        <input type="text" id="company-column" class="form-control"
-                                                               name="company-column" placeholder="Company">
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_address_street">Rue</label>
+                                                    <input type="string" class="form-control" name="street" id="field_address_street"
+                                                           formControlName="street"/>
                                                 </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="email-id-column">Email</label>
-                                                        <input type="email" id="email-id-column" class="form-control"
-                                                               name="email-id-column" placeholder="Email">
-                                                    </div>
                                                 </div>
-                                                <div class="form-group col-12">
-                                                    <div class='form-check'>
-                                                        <div class="checkbox">
-                                                            <input type="checkbox" id="checkbox5" class='form-check-input' checked>
-                                                            <label for="checkbox5">Remember Me</label>
+                                                    <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                    <label class="form-control-label" for="field_address_postalcode">Code postal</label>
+                                                    <input type="number" class="form-control" name="postalCode" id="field_address_postalCode"
+                                                           formControlName="postalCode"/>
                                                         </div>
                                                     </div>
+                                                        <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                    <label class="form-control-label" for="field_address_city">ville</label>
+                                                    <input type="string" class="form-control" name="city" id="field_address_city"
+                                                           formControlName="city"/>
+                                                        </div>
+                                                        </div>
+                                                            <div class="col-md-6 col-12">
+                                                            <div class="form-group">
+                                                    <label class="form-control-label" for="field_address_state">Gouvernerat</label>
+                                                    <input type="string" class="form-control" name="state" id="field_address_state"
+                                                           formControlName="state"/>
+                                                            </div>
+                                                            </div>
+                                                <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_address_state">Niveau d'étude</label>
+                                                    <select class="form-control" id="field_degree" name="degree" formControlName="degreeId" >
+                                                        <option [ngValue]="null" hidden> choisir... </option>
+                                                        <option [ngValue]="degreeLevelOption.id"  *ngFor="let degreeLevelOption of degreelevels; trackBy: trackById" [selected]="degreeLevelOption.selected == true">{{ degreeLevelOption.name }}</option>
+                                                    </select>
                                                 </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                 </section>
-                <h3 class="form-title"> Information Personnel</h3>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_firstName">Prénom</label>
-                    <input type="text" class="form-control form-control-line" name="firstName" id="field_firstName"
-                           formControlName="firstName"/>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_lastName">Nom</label>
-                    <input type="text" class="form-control" name="lastName" id="field_lastName"
-                           formControlName="lastName"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_address_street">Address email</label>
-                    <input type="email" class="form-control" name="email" id="field_email"
-                           formControlName="email"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappCandidate.phone" for="field_phone">Téléphone</label>
-                    <input type="number" class="form-control" name="phone" id="field_phone"
-                           formControlName="phone"/>
-                </div>
-
-
-                 <div class="form-group">
-                    <label class="form-control-label" for="field_address_street">Rue</label>
-                    <input type="string" class="form-control" name="street" id="field_address_street"
-                           formControlName="street"/>
-                    <label class="form-control-label" for="field_address_postalcode">Code postal</label>
-                    <input type="number" class="form-control" name="postalCode" id="field_address_postalCode"
-                           formControlName="postalCode"/>
-                    <label class="form-control-label" for="field_address_city">ville</label>
-                    <input type="string" class="form-control" name="city" id="field_address_city"
-                           formControlName="city"/>
-                    <label class="form-control-label" for="field_address_state">Gouvernerat</label>
-                    <input type="string" class="form-control" name="state" id="field_address_state"
-                           formControlName="state"/>
-
-                </div>
-
 
 
                 <!--    <div class="form-group"  *ngIf="hrmsGatewayApp.userappCandidate.professionalExperiences.length > 0">
@@ -144,38 +120,89 @@
                             -->
 
                             <div formArrayName="professionalExperiences">
-                                <h3 class="form-title"> Experience Professionelle   </h3> <br>
-                                <div *ngFor="let exp of professionalExperiences.controls; let i=index">
+                                <section id="multiple-column-form1">
+                                    <div class="row match-height">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="form-title">Experience professionelle</h3>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div *ngFor="let exp of professionalExperiences.controls; let i=index">
+                                                            <div *ngIf="exp === professionalExperiences.controls[currentIndex]">
+                                                            <div [formGroupName]="i">
+                                                                <div class="row">
+                                                                <div class="col-md-6 col-12">
+                                                                    <div class="form-group">
+                                                                <label class="form-control-label" for="field_place">Nom de l'entreprise</label>
+                                                                <input type="string" class="form-control" formControlName="place" placeholder="entreprise" id="field_exp_place{{i}}">
+                                                                    </div>
+                                                                </div>
+                                                                        <div class="col-md-6 col-12">
+                                                                            <div class="form-group">
+                                                                <label class="form-control-label" for="field_post"> Position</label>
+                                                                <select class="form-control" id="field_position{{i}}" name="position{{i}}" formControlName="positionId" [selectedIndex]="findPosition(exp.value.positionId)" >
+                                                                    <option [ngValue]="null"></option>
+                                                                    <option  [ngValue]="positionOptions.id"  *ngFor="let positionOptions of positions; trackBy: trackById">{{  positionOptions.jobTitle }}</option>
+                                                                </select>
+                                                                                </div>
+                                                                            </div>
+                                                                </div>
 
-                              <div [formGroupName]="i">
+                                                                                    <div class="form-group">
+                                                                <label class="form-control-label" for="description">Description</label>
+                                                                <textarea class="form-control" formControlName="description" placeholder="description" id="field_exp_description{{i}}"> </textarea>
+                                                                                    </div>
+
+                                                                <div class="row">
+                                                                                        <div class="col-md-6 col-12">
+                                                                                            <div class="form-group">
+
+                                                                <label class="form-control-label" for="field_start_date"> Date de début</label>
+                                                                <ngb-datepicker  #d="ngbDatepicker" #d [startDate]="{year: exp.value.startYear, month:exp.value.startMonth, day: exp.value.startDay}"   class="form-control" formControlName="startDate"  id="field_exp_start_date{{i}}">
+                                                                </ngb-datepicker>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                                <div class="col-md-6 col-12">
+                                                                                                    <div class="form-group">
+                                                                <label class="form-control-label" for="field_end_date"> Date de fin</label>
+                                                                <ngb-datepicker
+                                                                         #d="ngbDatepicker" #d [startDate]="{year: exp.value.endYear, month:exp.value.endMonth, day: exp.value.endDay}"
+                                                                            class="form-control" formControlName="endDate"  id="field_exp_end_date{{i}}">
+                                                                    </ngb-datepicker>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                <!--  <button (click)="removeSkill(i)">Remove</button> -->
+                                                                </div>
+
+                                                            </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <button type="button" class=" btn btn-info  " [disabled]="isFirstExp()"  (click)="previous()">prec </button>
+                                                            <button type="button" class=" btn btn-info  " [disabled]="isLastExp()"  (click)="next()">suiv </button>
+
+                                                        </div>
+                                                        <button type="button" class=" btn-info btn-sm " (click)="addProfessionalExperience()">Ajouter Une experience </button>
 
 
-                         <label class="form-control-label" for="field_place">Nom de l'entreprise</label>
-                         <input type="string" class="form-control" formControlName="place" placeholder="entreprise" id="field_exp_place{{i}}">
+                                                    </div>
+                                                </div>
 
 
-                         <label class="form-control-label" for="field_post"> Position</label>
-                                  <select class="form-control" id="field_position{{i}}" name="position{{i}}" formControlName="positionId" [selectedIndex]="findPosition(exp.value.positionId)" >
-                                      <option [ngValue]="null"></option>
-                                      <option  [ngValue]="positionOptions.id"  *ngFor="let positionOptions of positions; trackBy: trackById">{{  positionOptions.jobTitle }}</option>
-                                  </select>
 
-                       <label class="form-control-label" for="description">Description</label>
-                         <textarea class="form-control" formControlName="description" placeholder="description" id="field_exp_description{{i}}"> </textarea>
 
-                         <label class="form-control-label" for="field_start_date"> Date de début</label>
-                         <input type="text"     ngbDatepicker #d="ngbDatepicker" placeholder=" yyyy-MM-dd  "   class="form-control" formControlName="startDate"  id="field_exp_start_date{{i}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </section>
+                                        </div>
+                                    </div>
 
-                                  <label class="form-control-label" for="field_end_date"> Date de fin</label>
-                                  <input type="text"     ngbDatepicker #d="ngbDatepicker" placeholder=" yyyy-MM-dd  "   class="form-control" formControlName="endDate"  id="field_exp_end_date{{i}}">
 
-                             <!--  <button (click)="removeSkill(i)">Remove</button> -->
-                            </div>
-                             </div>
-                                <button type="button" class=" btn btn-info " (click)="addProfessionalExperience()">Ajouter Une experience </button>
 
-                            </div>
-                    </div>
 
           <!-- List of skills-->
                 <div class="form-group">
@@ -193,70 +220,74 @@
                                 -->
                         <br> <br>
                     <div formArrayName="skills">
-                        <h3 class="form-title">  Compétences    </h3> <br>
-                        <div class="row">
-                        <div  *ngFor="let exp of userskills.controls; let i=index">
+                        <section id="multiple-column-form3">
+                            <div class="row match-height">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="form-title">Competence</h3>
 
-                            <div class="col-lg-4" >
-                            <div [formGroupName]="i" >
-                                    <label class="form-control-label" for="field_skill_name{{i}}">Competence</label>
-                                         <div *ngIf=" exp.value.changeable; else elseBlock">
-                                    <select class="form-control" id="field_skills{{i}}" name="skills{{i}}" formControlName="id" >
-                                        <option [ngValue]="null"></option>
-                                        <option [ngValue]="skillOption.id" *ngFor="let skillOption of availableSkills; trackBy: trackById">{{  skillOption.name }}</option>
-                                    </select>
-                                         </div>
-                                <ng-template #elseBlock>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div  *ngFor="let exp of userskills.controls; let i=index">
 
-                                    <input type="string" class="form-control" formControlName="name" placeholder="Item name" id="field_skill{{i}}" readonly>
-                                </ng-template>
-                                    <div class="form-group">
-                                        <label class="form-control-label"  for="field_level{{i}}">Niveau </label>
-                                        <select class="form-control" name="employmentType" formControlName="skillLevel" id="field_level{{i}}">
-                                            <option value="NOVICE"> Novice </option>
-                                            <option value="INTERMEDIATE">Intermediare</option>
-                                            <option value="ADVANCED">avancé</option>
-                                            <option value="EXPERT">expert</option>
-                                            <!--  -->
-                                        </select>
+    <div class="row">
+                                                    <div class="col-lg-3" >
+                                                        <div [formGroupName]="i" >
+
+                                                            <div *ngIf=" exp.value.changeable; else elseBlock">
+                                                                <select class="form-control" id="field_skills{{i}}" name="skills{{i}}" formControlName="id" >
+                                                                    <option [ngValue]="null"></option>
+                                                                    <option [ngValue]="skillOption.id" *ngFor="let skillOption of availableSkills; trackBy: trackById">{{  skillOption.name }}</option>
+                                                                </select>
+                                                            </div>
+                                                            <ng-template #elseBlock>
+                                                                <div class="form-group">
+                                                                    <input type="string" class="form-control" formControlName="name" placeholder="Item name" id="field_skill{{i}}" readonly>
+
+                                                                </div>
+                                                            </ng-template>
+                                                            <div class="form-group">
+                                                                <label class="form-control-label"  for="field_level{{i}}">Niveau </label>
+                                                                <select class="form-control" name="employmentType" formControlName="skillLevel" id="field_level{{i}}">
+                                                                    <option value="NOVICE"> Novice </option>
+                                                                    <option value="INTERMEDIATE">Intermediare</option>
+                                                                    <option value="ADVANCED">Avancé</option>
+                                                                    <option value="EXPERT">Expert</option>
+                                                                    <!--  -->
+                                                                </select>
+                                                            </div>
+
+
+                                                            <!--  <button (click)="removeSkill(i)">Remove</button> -->
+                                                        </div>
+                                                    </div>
+        </div>
+                                                </div>
+                                                <button type="button" class="btn-info btn-sm" (click)="addSkill()">Ajouter une compétence </button>
+
+                                            </div>
+
+                                        </div>
+                                                </div>
+</div>
+                                        </div>
+                        </section>
+
                                     </div>
 
-
-
-
-                                <!--  <button (click)="removeSkill(i)">Remove</button> -->
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        <button type="button" class="btn btn-info" (click)="addSkill()">Ajouter une compétence </button>
-
+                    <div class="text-right">
+                        <button type="submit"  id="save-entity" [disabled]="editForm.invalid || isSaving" class=" btn-success btn-sm">
+                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                        </button>
                     </div>
-                </div>
+                            </div>
 
-
-
-
-
-
-               <div class="form-group">
-                    <label class="form-control-label" for="field_degree"><h3 class="form-title"> Niveau Educatif   </h3> <br></label>
-                    <select class="form-control" id="field_degree" name="degree" formControlName="degreeId" >
-                        <option [ngValue]="null" hidden> niveau educatif </option>
-                        <option [ngValue]="degreeLevelOption.id"  *ngFor="let degreeLevelOption of degreelevels; trackBy: trackById">{{ degreeLevelOption.name }}</option>
-                    </select>
-                </div>
-
-            <div>
-
-
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-success">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
 
 
         </form>
     </div>
 </div>
+
 

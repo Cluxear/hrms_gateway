@@ -13,6 +13,7 @@ import { AccountService } from '../../../core/auth/account.service';
 import { JobpostService } from '../../jobposting/jobpost/jobpost.service';
 import { UserService } from '../../../core/user/user.service';
 import { ActivatedRoute } from '@angular/router';
+import {IJobpost} from "../../../shared/model/jobposting/jobpost.model";
 
 @Component({
   selector: 'jhi-application',
@@ -20,11 +21,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ApplicationComponent implements OnInit, OnDestroy {
   applications?: IApplication[];
+  jobpostInQuestion?: IJobpost;
   eventSubscriber?: Subscription;
 
   constructor(
     protected applicationService: ApplicationService,
     protected accountService: AccountService,
+    protected jobPostService: JobpostService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected userService: UserService,
@@ -39,10 +42,13 @@ export class ApplicationComponent implements OnInit, OnDestroy {
       }
       this.activatedRoute.params.subscribe(param => {
         if (param.jpid) {
+          this.jobPostService.find(param.jpid).subscribe((jp) => (this.jobpostInQuestion = jp.body!))
           if (account!.authorities.includes('ROLE_ADMIN')) {
             this.applicationService
               .findByJobPost(param.jpid)
               .subscribe((res: HttpResponse<IApplication[]>) => (this.applications = res.body || []));
+
+
           }
         }
       });
