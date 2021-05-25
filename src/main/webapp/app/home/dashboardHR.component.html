@@ -6,9 +6,7 @@
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
     </div>
-    <div class="col-md-7 align-self-center">
-        <a href="https://wrappixel.com/templates/adminwrap/" class="btn waves-effect waves-light btn btn-info pull-right hidden-sm-down"> Upgrade to Pro</a>
-    </div>
+
 </div>
 <!-- ============================================================== -->
 <!-- End Bread crumb and right sidebar toggle -->
@@ -35,62 +33,54 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div>
-                        <h5 class="card-title">Projects of the Month</h5>
+                        <h5 class="card-title">Candidatures</h5>
                     </div>
                     <div class="ml-auto">
-                        <select class="custom-select b-0">
-                            <option selected="">January</option>
-                            <option value="1">February</option>
-                            <option value="2">March</option>
-                            <option value="3">April</option>
+                        <select class="custom-select b-0" #t (change) = filterCandidates(t.value) [selectedIndex]="isCurrentMonth()">
+
+                            <option  value="0">Janvier</option>
+                            <option value="1">Fevrier</option>
+                            <option value="2">Mars</option>
+                            <option value="3">Avril</option>
+                            <option value="4">Mai</option>
+                            <option value="5">Juin</option>
+                            <option value="6">Juillet</option>
+                            <option value="7">Aout</option>
+                            <option value="8">Septembre</option>
+                            <option value="9">Octobre</option>
+                            <option value="10">Novembre</option>
+                            <option value="11">Decembre</option>
+
+
                         </select>
                     </div>
                 </div>
                 <div class="table-responsive m-t-20 no-wrap">
                     <table class="table vm no-th-brd pro-of-month">
                         <thead>
-                        <tr>
-                            <th colspan="2">Assigned</th>
-                            <th>Name</th>
-                            <th>Budget</th>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                            <th colspan="2">Candidat</th>
+                            <th scope="col" jhiSortBy="id" >Email</th>
+                            <th>Experience</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr *ngFor="let candidate of candidates ;trackBy: trackId">
                             <td style="width:50px;"><span class="round">S</span></td>
                             <td>
-                                <h6>Sunil Joshi</h6><small class="text-muted">Web Designer</small></td>
-                            <td>Elite Admin</td>
-                            <td>$3.9K</td>
+                                <h6>{{candidate.fullName}}</h6><small class="text-muted"></small></td>
+                            <td>{{candidate.email}}</td>
+                            <td>{{ candidate.experienceDurationName}}</td>
+                            <td>   <button type="submit"
+                                           [routerLink]="['/user_details',  candidate.candidateId,  candidate.id ]"
+                                           class=" btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">détails</span>
+                            </button></td>
                         </tr>
-                        <tr class="active">
-                            <td><span class="round">  <!--<img src="assets/images/users/2.jpg" alt="user" width="50"> --> </span></td>
-                            <td>
-                                <h6>Andrew</h6><small class="text-muted">Project Manager</small></td>
-                            <td>Real Homes</td>
-                            <td>$23.9K</td>
-                        </tr>
-                        <tr>
-                            <td><span class="round round-success">B</span></td>
-                            <td>
-                                <h6>Bhavesh patel</h6><small class="text-muted">Developer</small></td>
-                            <td>MedicalPro Theme</td>
-                            <td>$12.9K</td>
-                        </tr>
-                        <tr>
-                            <td><span class="round round-primary">N</span></td>
-                            <td>
-                                <h6>Nirav Joshi</h6><small class="text-muted">Frontend Eng</small></td>
-                            <td>Elite Admin</td>
-                            <td>$10.9K</td>
-                        </tr>
-                        <tr>
-                            <td><span class="round round-warning">M</span></td>
-                            <td>
-                                <h6>Micheal Doe</h6><small class="text-muted">Content Writer</small></td>
-                            <td>Helping Hands</td>
-                            <td>$12.9K</td>
-                        </tr>
+
+
                         </tbody>
                     </table>
                 </div>

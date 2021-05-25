@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
         <div class="card">
             <!-- Tab panes -->
 
@@ -64,15 +64,15 @@
                         <thead class="thead-light">
                         <th> Diplome </th>
                         <th> Institut </th>
+                        <th> Date de début</th>
+                        <th> Date de fin </th>
                         </thead>
                         <tbody>
-                        <tr>
-                        <td> License </td>
-                        <td> ISI Ariana </td>
-                        </tr>
-                        <tr>
-                            <td> Ingenieurie </td>
-                            <td> ESPRIT </td>
+                        <tr *ngFor="let exp of candidate.academicExperience">
+                            <td> {{exp.degreeName}}</td>
+                            <td> {{exp.place}}</td>
+                            <td> {{ exp.startDate | date: 'mediumDate'}}</td>
+                            <td> {{ exp.endDate | date: 'mediumDate'}}</td>
                         </tr>
                         </tbody>
                     </table>

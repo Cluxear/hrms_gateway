@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.home.title">Jobposts</span>
+        <span>Poste d'emploi</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-jobpost" [routerLink]="['/jobpost/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="hrmsGatewayApp.jobpostingJobpost.home.createLabel">
-            Create a new Jobpost
+            <span>
+            Ajouter un nouveau poste
             </span>
         </button>
     </h2>
@@ -19,17 +19,17 @@
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="jobposts && jobposts.length > 0">
-        <table  class="table table-striped" aria-describedby="page-heading">
+        <table  class="table vm no-th-brd pro-of-month" aria-describedby="page-heading" id="table1">
             <thead>
                 <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.title">Title</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.estimatedSalary">Estimated Salary</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.type">Type</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.employmentType">Employment Type</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.createdAt">Created At</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.modifiedAt">Modified At</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.degreeLevel">Degree Level</span></th>
+
+                    <th scope="col" ><span >titre</span></th>
+                    <th scope="col" ><span>salaire</span></th>
+                    <th scope="col" ><span>Mode de travail</span></th>
+                    <th scope="col" ><span >type d'emploi</span></th>
+                  <!--  <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.createdAt">Created At</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.modifiedAt">Modified At</span></th> -->
+                    <th scope="col" ><span >Niveau d'étude</span></th>
                     <th scope="col" ><span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.positon">Positon</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -38,13 +38,26 @@
 
 
                 <tr *ngFor="let jobpost of jobposts ;trackBy: trackId">
-                    <td><a [routerLink]="['/jobpost', jobpost.id, 'view']">{{ jobpost.id }}</a></td>
                     <td>{{ jobpost.title }}</td>
-                    <td>{{ jobpost.estimatedSalary }}</td>
-                    <td jhiTranslate="{{ 'hrmsGatewayApp.LocationType.' + jobpost.type }}">{{ jobpost.type }}</td>
-                    <td jhiTranslate="{{ 'hrmsGatewayApp.EmploymentType.' + jobpost.employmentType }}">{{ jobpost.employmentType }}</td>
-                    <td>{{ jobpost.createdAt | date:'medium' }}</td>
-                    <td>{{ jobpost.modifiedAt | date:'medium' }}</td>
+                    <td>{{ jobpost.estimatedSalary }} TND</td>
+                    <td >
+                        <span *ngIf="jobpost.type==='REMOTE' else otherType"> Télétravail </span>
+                        <ng-template #otherType>
+                            <span>  Présentiel </span>
+                        </ng-template>
+
+
+                    </td>
+                    <td>
+
+                        <span *ngIf="jobpost.employmentType==='FULL_TIME'"  >Plein temps</span>
+                        <span *ngIf="jobpost.employmentType==='PART_TIME'"  >Mi-temps</span>
+                        <span *ngIf="jobpost.employmentType==='SEASONAL'"  >Seasonier</span>
+                        <span *ngIf="jobpost.employmentType==='INTERNSHIP'"  >Intern</span>
+
+                    </td>
+                  <!--  <td>{{ jobpost.createdAt | date:'medium' }}</td>
+                    <td>{{ jobpost.modifiedAt | date:'medium' }}</td> -->
                     <td>
                         <div *ngIf="jobpost.degreeLevelId">
                             <a [routerLink]="['/degree-level', jobpost.degreeLevelId , 'view']" >{{ jobpost.degreeLevelName }}</a>
@@ -58,34 +71,35 @@
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
+                                    [routerLink]="['/application', jobpost.id, 'jobpost']"
+                                    class="btn-success btm-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Candidatures</span>
+                            </button>
+                            <button type="submit"
                                     [routerLink]="['/jobpost', jobpost.id, 'view']"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <button type="submit"
+                        <!--    <button type="submit"
                                     [routerLink]="['/skill', jobpost.id, 'candidates-skills']"
-                                    class="btn btn-light btn-sm">
+                                    class="btn btn-dark btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline">matrice de compétence</span>
-                            </button>
+                            </button> -->
+
 
                             <button type="submit"
-                                    [routerLink]="['/application', jobpost.id, 'jobpost']"
-                                    class="btn btn-done btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline">applications</span>
-                            </button>
-                            <button type="submit"
                                     [routerLink]="['/jobpost', jobpost.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
+                                    class=" btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
 
                             <button type="submit" (click)="delete(jobpost)"
-                                    class="btn btn-danger btn-sm">
+                                    class=" btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                             </button>
@@ -95,4 +109,11 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
 </div>
+

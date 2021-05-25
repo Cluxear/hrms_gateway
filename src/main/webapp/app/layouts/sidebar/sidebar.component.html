@@ -4,27 +4,39 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <li> <a class="waves-effect waves-dark" href="index.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'"> <a class="waves-effect waves-dark" href="index.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" routerLink="profile" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a>
+                <li *jhiHasAnyAuthority="'ROLE_CANDIDATE'"> <a class="waves-effect waves-dark" routerLink="profile" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a>
                 </li>
 
                 <li *jhiHasAnyAuthority="'ROLE_CANDIDATE'" > <a class="waves-effect waves-dark" routerLink="/jobpost/joblisting"  aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Jobs</span></a>
                 </li>
                 <li *jhiHasAnyAuthority="'ROLE_ADMIN'" > <a class="waves-effect waves-dark" routerLink="/jobpost"  aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Jobs</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="table-basic.html" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'"> <a class="waves-effect waves-dark" routerLink="/candidate" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Candidats</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" routerLink="/application" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Applications</span></a>
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'"> <a class="waves-effect waves-dark" routerLink="/employee" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Employés</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="icon-fontawesome.html" aria-expanded="false"><i class="fa fa-smile-o"></i><span class="hide-menu">Icons</span></a>
+              <!--  <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu"> -->
+                    <li *ngIf="isAuthenticated()">
+                        <a class="dropdown-item" (click)="logout()" id="logout">
+                            <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.account.logout">Sign out</span>
+                        </a>
+                    </li>
+                    <li *ngIf=" !isAuthenticated()">
+                        <a class="dropdown-item" (click)="login()" id="login">
+                            <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.account.login">Sign in</span>
+                        </a>
+                    </li>
+                <li *ngIf=" !isAuthenticated()">
+                    <a class="dropdown-item" routerLink="register" id="register">
+                        <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
+                        <span jhiTranslate="global.menu.account.register">S'inscrire</span>
+                    </a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="map-google.html" aria-expanded="false"><i class="fa fa-globe"></i><span class="hide-menu">Map</span></a>
-                </li>
-                <li> <a class="waves-effect waves-dark" href="pages-blank.html" aria-expanded="false"><i class="fa fa-bookmark-o"></i><span class="hide-menu">Blank</span></a>
-                </li>
-                <li> <a class="waves-effect waves-dark" href="pages-error-404.html" aria-expanded="false"><i class="fa fa-question-circle"></i><span class="hide-menu">404</span></a>
-                </li>
+               <!-- </ul> -->
             </ul>
 
         </nav>

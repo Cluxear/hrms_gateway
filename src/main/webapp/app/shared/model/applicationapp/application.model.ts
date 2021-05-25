@@ -10,6 +10,8 @@ export interface IApplication {
   jobpostId?: number;
   statuses?: IApplicationRecrutementStatus[];
   fullName?: string;
+  experienceDurationName?: string;
+  email?: string;
   candidateId?: string;
 }
 
@@ -21,6 +23,8 @@ export class Application implements IApplication {
     public conclusion?: ConclusionType,
     public statuses?: IApplicationRecrutementStatus[],
     public fullName?: string,
+    public email?: string,
+    public experienceDurationName?: string,
     public candidateId?: string,
     jobpostId?: number
   ) {

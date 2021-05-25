@@ -30,12 +30,20 @@
                             </div>
                             <div class="job-tittle">
                                 <a href="#">
-                                    <h4>{{jobpost.positionName}}</h4>
+                                    <h4>{{jobpost.title}}</h4>
                                 </a>
                                 <ul>
-                                    <li>Creative Agency</li>
-                                    <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                    <li>$3500 - $4000</li>
+                                    <li> {{jobpost.positionName}}</li>
+                                    <li> <i class="fas fa-map-marker-alt"></i> <span *ngIf="jobpost.type==='REMOTE' else otherType"> Télétravail </span>
+                                        <ng-template #otherType>
+                                            <span>  Présentiel </span>
+                                        </ng-template>
+                                    </li>
+
+
+
+                                    <li>{{jobpost.estimatedSalary}} TND</li>
+
                                 </ul>
                             </div>
                         </div>
@@ -84,21 +92,30 @@
                         </div>
                         <ul>
                             <li>Posted date : <span>{{jobpost.createdAt | date : 'mediumDate'}}</span></li>
-                            <li>Location : <span>{{jobpost.type}}</span></li>
-                            <li>Vacancy : <span>02</span></li>
-                            <li>Type d'emploi : <span>{{jobpost.employmentType}}</span></li>
+                            <li>Location : <span *ngIf="jobpost.type==='REMOTE' else otherType"> Télétravail </span>
+                                    <ng-template #otherType>
+                                        <span>  Sur place </span>
+                                    </ng-template>
+                                </li>
+                            <li>Poste ouvert : <span>02</span></li>
+                            <li>Type d'emploi : <span *ngIf="jobpost.employmentType==='FULL_TIME'"  >Plein temps</span>
+                                <span *ngIf="jobpost.employmentType==='PART_TIME'"  >Mi-temps</span>
+                                <span *ngIf="jobpost.employmentType==='SEASONAL'"  >Seasonier</span>
+                                <span *ngIf="jobpost.employmentType==='INTERNSHIP'"  >Intern</span>
+
+                            </li>
                             <li>Salaire annuel :  <span> {{jobpost.estimatedSalary}} TND</span></li>
-                            <li>Application date : <span>12 Sep 2020</span></li>
+                           <!-- <li>Application date : <span>12 Sep 2020</span></li> -->
                         </ul>
                         <div class="apply-btn2">
                             <div *ngIf="jobpost">
-                            <a [routerLink]="['/candidate',  jobpost.id,  'postuler']" class=" apply-job">Postuler Maintenant</a>
+                            <a [routerLink]="['/candidate',  jobpost.id,  'postuler']" class="  apply-job">Postuler Maintenant</a>
                             </div>
                         </div>
                     </div>
                     <div class="post-details4  mb-50">
                         <!-- Small Section Tittle -->
-                        <div class="small-section-tittle">
+                       <!-- <div class="small-section-tittle">
                             <h4>Company Information</h4>
                         </div>
                         <span>Colorlib</span>
@@ -107,7 +124,7 @@
                             <li>Name: <span>Colorlib </span></li>
                             <li>Web : <span> colorlib.com</span></li>
                             <li>Email: <span>carrier.colorlib@gmail.com</span></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>

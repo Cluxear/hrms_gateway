@@ -17,7 +17,7 @@ import { DegreeLevelService } from 'app/entities/userapp/degree-level/degree-lev
 import { ISeniorityLevel } from 'app/shared/model/userapp/seniority-level.model';
 import { SeniorityLevelService } from 'app/entities/userapp/seniority-level/seniority-level.service';
 import { IProfessionalExperience, ProfessionalExperience } from 'app/shared/model/userapp/professional-experience.model';
-import { IAcademicExperience } from 'app/shared/model/userapp/academic-experience.model';
+import {AcademicExperience, IAcademicExperience} from 'app/shared/model/userapp/academic-experience.model';
 import { ICertification } from 'app/shared/model/userapp/certification.model';
 import { ICountry } from 'app/shared/model/userapp/country.model';
 import { AcademicExperienceService } from '../academic-experience/academic-experience.service';
@@ -39,8 +39,10 @@ import { PositionService } from 'app/entities/userapp/position/position.service'
 import { IPosition } from 'app/shared/model/userapp/position.model';
 import { IUserDetails, UserDetails } from 'app/shared/model/userapp/cvUserDetails.model';
 import {finished} from "stream";
+import {IExperienceDuration} from "app/shared/model/userapp/experience-duration.model";
+import {ExperienceDurationService} from "app/entities/userapp/experience-duration/experience-duration.service";
 
-type SelectableEntity = IUser | IAddress | IDegreeLevel | ISeniorityLevel | ISkill | IPosition;
+type SelectableEntity = IUser | IAddress | IDegreeLevel | ISeniorityLevel | ISkill | IPosition | IExperienceDuration;
 
 @Component({
   selector: 'jhi-candidate-update',
@@ -52,7 +54,8 @@ export class CandidateUpdateComponent implements OnInit {
   address: IAddress = new Address();
   degreelevels: IDegreeLevel[] = [];
   senioritylevels: ISeniorityLevel[] = [];
-  academicExperiences: IAcademicExperience[] = [];
+  academicExperience: IAcademicExperience[] = [];
+  experienceDurations: IExperienceDuration[] = [];
   certifications: ICertification[] = [];
   country: ICountry[] = [];
   exp: IProfessionalExperience[] = [];
@@ -65,6 +68,7 @@ export class CandidateUpdateComponent implements OnInit {
   _candidate: ICandidate = new Candidate();
 
   currentIndex = -1;
+  currentIndexExpAcademic = -1;
   editForm = this.fb.group({
     id: [],
     personalStatement: [],
@@ -81,13 +85,15 @@ export class CandidateUpdateComponent implements OnInit {
     address: [],
     degreeLevel: [],
     seniorityLevel: [],
-    academicExperiences: [],
+    experienceDurationId: [],
+
     certifications: [],
     country: [],
     degreeId: [],
     allSkills: [],
     skills: this.fb.array([]),
     professionalExperiences: this.fb.array([]),
+    academicExperiences: this.fb.array([]),
   });
 
   constructor(
@@ -103,6 +109,7 @@ export class CandidateUpdateComponent implements OnInit {
     protected professionalExperienceService: ProfessionalExperienceService,
     protected certificationService: CertificationService,
     protected countryService: CountryService,
+    protected experienceDurationService: ExperienceDurationService,
     protected positionService: PositionService,
     protected skillService: SkillService,
     protected activatedRoute: ActivatedRoute,
@@ -169,13 +176,35 @@ export class CandidateUpdateComponent implements OnInit {
       })
     this.skillService.query().subscribe((res: HttpResponse<ISkill[]>) => (this.availableSkills = res.body || []));
     this.positionService.query().subscribe((res: HttpResponse<IPosition[]>) => (this.positions = res.body || []));
-  }
+    this.experienceDurationService.query().subscribe(
+      (res: HttpResponse<IExperienceDuration[]>) => {
+        this.experienceDurations = res.body || [];},
+      () => {
+
+      },
+      ()=> {
+        this.experienceDurations.forEach((val, index) => {
+
+
+          if (val.id === this._candidate.experienceDurationId) {
+
+            val.selected = true;
+          }
+        })
+      });
+
+        }
 
   updateForm(candidate: ICandidate): void {
     if (candidate.professionalExperience !== undefined) {
       this.currentIndex = 0;
       this.exp = candidate.professionalExperience;
     }
+    if (candidate.academicExperience !== undefined) {
+      this.currentIndexExpAcademic = 0;
+      this.academicExperience = candidate.academicExperience;
+    }
+
 
     this.editForm.patchValue({
       id: candidate.id != null ? candidate.id : '',
@@ -184,6 +213,7 @@ export class CandidateUpdateComponent implements OnInit {
       lastName: candidate.lastName,
       email: candidate.email,
       phone: candidate.phone,
+      experienceDurationId: candidate.experienceDurationId,
       userId: candidate.userId,
       street: candidate.address?.street,
       postalCode: candidate.address?.postalCode,
@@ -193,6 +223,7 @@ export class CandidateUpdateComponent implements OnInit {
       skills: this.skillToFormArray(candidate.skills!),
       allSkills: this.availableSkills,
       professionalExperiences: this.profExpToFormArray(this.exp),
+      academicExperiences: this.acadExpToFormArray(this.academicExperience),
     });
   }
 
@@ -238,6 +269,7 @@ export class CandidateUpdateComponent implements OnInit {
     candidate.lastName = this.editForm.get(['lastName'])!.value;
     candidate.email = this.editForm.get(['email'])!.value;
     candidate.address = this.address;
+    candidate.experienceDurationId = this.editForm.get(['experienceDurationId'])!.value;
     candidate.userId = this.editForm.get(['userId'])!.value;
     candidate.id = this.editForm.get(['id'])!.value;
     candidate.personalStatement = this.editForm.get(['personalStatement'])!.value;
@@ -246,9 +278,14 @@ export class CandidateUpdateComponent implements OnInit {
     candidate.degreeId = this.editForm.get(['degreeId'])!.value;
 
     const exp = this.professionalExperiences;
+    const acad = this.academicExperiences;
     const test = this.convertDateFromFormArray(exp);
-    candidate.professionalExperience = test.value;
+    const test2 = this.convertDateFromFormArray(acad);
 
+
+
+    candidate.professionalExperience = test.value;
+    candidate.academicExperience = test2.value;
     return candidate;
   }
   protected convertDateFromFormArray(profExp: FormArray): FormArray {
@@ -324,6 +361,10 @@ export class CandidateUpdateComponent implements OnInit {
   get professionalExperiences(): FormArray {
     return this.editForm.get('professionalExperiences') as FormArray;
   }
+
+  get academicExperiences(): FormArray {
+    return this.editForm.get('academicExperiences') as FormArray;
+  }
   get userskills(): FormArray {
     return this.editForm.get('skills') as FormArray;
   }
@@ -343,6 +384,36 @@ export class CandidateUpdateComponent implements OnInit {
           })
         );
       });
+    }
+  }
+  protected acadExpToFormArray(acad: AcademicExperience[]): void {
+    const ngbMomentDate: NgbDateMomentAdapter = new NgbDateMomentAdapter();
+    let position: IPosition;
+    // iterate over every element of the array
+    if (acad && acad.length > 0) {
+      acad.forEach(element => {
+
+
+        this.academicExperiences.push(
+          this.fb.group({
+            id: element.id,
+            place: element.place,
+            degreeName: element.degreeName,
+            description: element.description,
+            startDate: ngbMomentDate.fromModel(moment(element.startDate)),
+            startDay: ngbMomentDate.fromModel(moment(element.startDate))!.day,
+            startMonth: ngbMomentDate.fromModel(moment(element.startDate))!.month,
+            startYear: ngbMomentDate.fromModel(moment(element.startDate))!.year,
+            endDay: ngbMomentDate.fromModel(moment(element.endDate))!.day,
+            endMonth: ngbMomentDate.fromModel(moment(element.endDate))!.month,
+            endYear: ngbMomentDate.fromModel(moment(element.endDate))!.year,
+            endDate: ngbMomentDate.fromModel(moment(element.endDate)),
+            candidateId: element.candidateId,
+          })
+        )
+
+
+      })
     }
   }
   protected profExpToFormArray(exp: ProfessionalExperience[]): void {
@@ -395,6 +466,19 @@ export class CandidateUpdateComponent implements OnInit {
       })
     );
   }
+  addAcademicExperience() : void {
+    this.currentIndexExpAcademic += 1;
+    this.academicExperiences.push(
+      this.fb.group({
+        place: '',
+        degreeName:'',
+        description: '',
+        startDate: '',
+        endDate: '',
+      })
+    );
+
+  }
 
   next() : void {
 
@@ -404,11 +488,26 @@ export class CandidateUpdateComponent implements OnInit {
 
     this.currentIndex -=1;
   }
+  previousAcad() : void {
+    this.currentIndexExpAcademic -=1;
+  }
+
+  nextAcad() : void  {
+    this.currentIndexExpAcademic +=1;
+  }
   isLastExp() : boolean {
      return  !(this.currentIndex + 1 < this.professionalExperiences.length);
   }
   isFirstExp() : boolean {
     return !(this.currentIndex - 1 >= 0) ;
+  }
+
+  isFirstAcadExp() : boolean {
+    return !(this.currentIndexExpAcademic - 1 >= 0) ;
+  }
+
+  isLastAcadExp() : boolean{
+    return  !(this.currentIndexExpAcademic + 1 < this.academicExperiences.length);
   }
   addSkill(): void {
     this.userskills.push(
@@ -454,4 +553,7 @@ export class CandidateUpdateComponent implements OnInit {
       //degreeLevel
 
   }
+
+
+
 }

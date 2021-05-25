@@ -12,17 +12,28 @@
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="skills && skills.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
+        <table class="table " aria-describedby="page-heading">
+            <thead class="thead-light">
             <tr>
-                <th> <span> skill</span></th>
+
                 <th *ngFor="let skill of skills;" scope="col"> <span > {{ skill.name }}</span> </th>
             </tr>
             </thead>
             <tbody>
             <tr>
             <td  *ngFor="let skill of skills ;trackBy: trackId">
-                {{  skill.skillLevel   }}
+                <span *ngIf="skill.skillLevel!.toString() === 'ADVANCED'">
+                    avancée
+                </span>
+                <span *ngIf="skill.skillLevel!.toString() === 'EXPERT'">
+                    expert
+                </span>
+                <span *ngIf="skill.skillLevel!.toString() === 'Novice'">
+                    débutant
+                </span>
+                <span *ngIf="skill.skillLevel!.toString() === 'INTERMEDIATE'">
+                    moyen
+                </span>
 
 
             </td>

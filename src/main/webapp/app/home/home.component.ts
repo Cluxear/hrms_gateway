@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'app/core/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
+import {CandidateService} from "app/entities/userapp/candidate/candidate.service";
+import {Candidate} from "app/shared/model/userapp/candidate.model";
 
 @Component({
   selector: 'jhi-home',
@@ -12,10 +14,12 @@ import { Account } from 'app/core/user/account.model';
 export class HomeComponent implements OnInit {
   account: Account | null = null;
 
+
   constructor(private accountService: AccountService, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => (this.account = account));
+
   }
 
   isAuthenticated(): boolean {

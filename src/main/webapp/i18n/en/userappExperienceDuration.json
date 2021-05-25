@@ -1,0 +1,27 @@
+{
+  "hrmsGatewayApp": {
+    "userappExperienceDuration": {
+      "home": {
+        "title": "Experience Durations",
+        "createLabel": "Create a new Experience Duration",
+        "createOrEditLabel": "Create or edit a Experience Duration",
+        "notFound": "No Experience Durations found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Experience Duration {{ id }}?"
+      },
+      "detail": {
+        "title": "Experience Duration"
+      },
+      "value": "Value",
+      "candidate": "Candidate"
+    }
+  },
+  "userappApp": {
+    "userappExperienceDuration": {
+      "created": "A new Experience Duration is created with identifier {{ param }}",
+      "updated": "A Experience Duration is updated with identifier {{ param }}",
+      "deleted": "A Experience Duration is deleted with identifier {{ param }}"
+    }
+  }
+}

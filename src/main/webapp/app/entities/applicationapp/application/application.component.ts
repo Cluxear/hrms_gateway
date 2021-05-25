@@ -7,7 +7,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IApplication } from 'app/shared/model/applicationapp/application.model';
 import { ApplicationService } from './application.service';
 import { ApplicationDeleteDialogComponent } from './application-delete-dialog.component';
-import { ICandidate } from '../../../shared/model/userapp/candidate.model';
 import { ISkill } from '../../../shared/model/skillapp/skill.model';
 import { AccountService } from '../../../core/auth/account.service';
 import { JobpostService } from '../../jobposting/jobpost/jobpost.service';

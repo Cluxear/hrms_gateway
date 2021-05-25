@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { CandidateResolve } from 'app/entities/userapp/candidate/candidate.route';
 import { AccountService } from 'app/core/auth/account.service';
-import { DashboardHRComponent } from 'app/profile/dashboardHR.component';
+import { DashboardHRComponent } from 'app/home/dashboardHR.component';
 import { UserDetailsComponent } from 'app/profile/userDetails.component';
 
 export const PROFILE_ROUTE: Route = {

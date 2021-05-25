@@ -2,6 +2,21 @@
 .white-bg {
   background: #ffffff;
 }
+.index-page-background {
+background-image: url("../images/h1_hero.jpg");
+  background-size: cover;
+  width:100%;
+}
+.select-itms {
+  width: 100%;
+  height: 70px;
+  background: #fff;
+  border-radius: 0px;
+  padding: 11px 19px 11px 10px;
+  color: #616875;
+  line-height: 54px;
+  border: 0;
+}
 .gray-bg {
   background: #f5f5f5;
 }
@@ -1736,8 +1751,8 @@ hr {
 }
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .section-pad-t30 {
-    padding-top: 195px;
-    padding-bottom: 195px;
+    padding-top: 50px;
+    padding-bottom: 100px;
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -6283,7 +6298,7 @@ form.search-box .search-form a {
   font-weight: bold;
 }
 .apply-job {
-  background: #fb246a;
+  background: #0987e9;
   text-transform: capitalize;
   color: #fff;
   display: inline-block;

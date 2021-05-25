@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IEmployee } from 'app/shared/model/userapp/employee.model';
+import {IManagedUser} from "../../../core/user/managedUser.model";
 
 type EntityResponseType = HttpResponse<IEmployee>;
 type EntityArrayResponseType = HttpResponse<IEmployee[]>;
@@ -19,7 +20,7 @@ export class EmployeeService {
     return this.http.post<IEmployee>(this.resourceUrl, employee, { observe: 'response' });
   }
 
-  update(employee: IEmployee): Observable<EntityResponseType> {
+  update(employee: IManagedUser): Observable<EntityResponseType> {
     return this.http.put<IEmployee>(this.resourceUrl, employee, { observe: 'response' });
   }
 

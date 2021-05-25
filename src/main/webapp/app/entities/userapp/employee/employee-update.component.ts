@@ -16,6 +16,8 @@ import { IDegreeLevel } from 'app/shared/model/userapp/degree-level.model';
 import { DegreeLevelService } from 'app/entities/userapp/degree-level/degree-level.service';
 import { ISeniorityLevel } from 'app/shared/model/userapp/seniority-level.model';
 import { SeniorityLevelService } from 'app/entities/userapp/seniority-level/seniority-level.service';
+import {IManagedUser, ManagedUser} from "../../../core/user/managedUser.model";
+import {Authority} from "../../../shared/constants/authority.constants";
 
 type SelectableEntity = IUser | IPosition | IDegreeLevel | ISeniorityLevel;
 
@@ -24,19 +26,27 @@ type SelectableEntity = IUser | IPosition | IDegreeLevel | ISeniorityLevel;
   templateUrl: './employee-update.component.html',
 })
 export class EmployeeUpdateComponent implements OnInit {
+
+  /** TODO: Changing account info for already existing accounts **/
   isSaving = false;
   users: IUser[] = [];
   positions: IPosition[] = [];
   degreelevels: IDegreeLevel[] = [];
   senioritylevels: ISeniorityLevel[] = [];
+  loading = false;
+  submitted = false;
 
   editForm = this.fb.group({
     id: [],
     salary: [],
-    phone: [],
-    userId: [],
+    login:[],
+    firstName: [],
+    lastName: [],
+    email : [],
+    password: [],
     positionId: [],
     degreeId: [],
+
     seniorityLevelId: [],
   });
 
@@ -89,6 +99,7 @@ export class EmployeeUpdateComponent implements OnInit {
       id: employee.id,
       salary: employee.salary,
       phone: employee.phone,
+      login: employee.login,
       userId: employee.userId,
       positionId: employee.positionId,
       degreeId: employee.degreeId,
@@ -106,20 +117,26 @@ export class EmployeeUpdateComponent implements OnInit {
     if (employee.id !== undefined) {
       this.subscribeToSaveResponse(this.employeeService.update(employee));
     } else {
-      this.subscribeToSaveResponse(this.employeeService.create(employee));
+      console.log("In save");
+      this.subscribeToSaveResponse(this.userService.register(employee));
     }
   }
 
-  private createFromForm(): IEmployee {
+  private createFromForm(): IManagedUser {
     return {
-      ...new Employee(),
+      ...new ManagedUser(),
       id: this.editForm.get(['id'])!.value,
       salary: this.editForm.get(['salary'])!.value,
-      phone: this.editForm.get(['phone'])!.value,
-      userId: this.editForm.get(['userId'])!.value,
+
       positionId: this.editForm.get(['positionId'])!.value,
       degreeId: this.editForm.get(['degreeId'])!.value,
       seniorityLevelId: this.editForm.get(['seniorityLevelId'])!.value,
+      password : this.editForm.get(['password'])?.value,
+      email: this.editForm.get(['email'])?.value,
+      login: this.editForm.get(['login'])?.value,
+      firstName: this.editForm.get(['firstName'])?.value,
+      lastName: this.editForm.get(['lastName'])?.value,
+      authorities: [Authority.EMPLOYEE, Authority.USER],
     };
   }
 

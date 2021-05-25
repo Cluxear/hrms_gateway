@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="experienceDuration">
+            <h2><span jhiTranslate="hrmsGatewayApp.userappExperienceDuration.detail.title">Experience Duration</span> {{ experienceDuration.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.userappExperienceDuration.value">Value</span></dt>
+                <dd>
+                    <span>{{ experienceDuration.value }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.userappExperienceDuration.candidate">Candidate</span></dt>
+                <dd>
+                    <div *ngIf="experienceDuration.candidate">
+                        <a [routerLink]="['/candidate', experienceDuration.candidate?.id, 'view']">{{ experienceDuration.candidate?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/experience-duration', experienceDuration.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

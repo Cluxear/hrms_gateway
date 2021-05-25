@@ -86,6 +86,8 @@
                                                            formControlName="state"/>
                                                             </div>
                                                             </div>
+                                                </div>
+                                                <div class="row">
                                                 <div class="col-md-6 col-12">
                                                 <div class="form-group">
                                                     <label class="form-control-label" for="field_address_state">Niveau d'étude</label>
@@ -95,14 +97,22 @@
                                                     </select>
                                                 </div>
                                                     </div>
-                                                </div>
-
-                                            </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label class="form-control-label" for="field_address_state">Année d'experience</label>
+                                                            <select class="form-control" id="field_exp_duration" name="degree" formControlName="experienceDurationId" >
+                                                                <option [ngValue]="null" hidden> choisir... </option>
+                                                                <option [ngValue]="experienceDurationOption.id"  *ngFor="let experienceDurationOption of experienceDurations; trackBy: trackById" [selected]="experienceDurationOption.selected == true">{{ experienceDurationOption.value }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                             </div>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                 </section>
 
@@ -199,6 +209,83 @@
                                             </div>
                                 </section>
                                         </div>
+                <div formArrayName="academicExperiences">
+                    <section id="multiple-column-form2">
+                        <div class="row match-height">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="form-title">Experience Academique</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div *ngFor="let expAcad of academicExperiences.controls; let i=index">
+                                                <div *ngIf="expAcad === academicExperiences.controls[currentIndexExpAcademic]">
+                                                    <div [formGroupName]="i">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-control-label" for="field_place">Nom de l'entreprise</label>
+                                                                    <input type="string" class="form-control" formControlName="place" placeholder="entreprise" id="field_acad_place{{i}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-control-label" for="field_post"> diplome</label>
+                                                                    <input type="string" class="form-control" formControlName="degreeName" placeholder="diplome" id="field_acad_degree{{i}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="form-control-label" for="description">Description</label>
+                                                            <textarea class="form-control" formControlName="description" placeholder="description" id="field_acad_description{{i}}"> </textarea>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="form-group">
+
+                                                                    <label class="form-control-label" for="field_start_date"> Date de début</label>
+                                                                    <ngb-datepicker  #d="ngbDatepicker" #d [startDate]="{year: expAcad.value.startYear, month:expAcad.value.startMonth, day: expAcad.value.startDay}"   class="form-control" formControlName="startDate"  id="field_acad_start_date{{i}}">
+                                                                    </ngb-datepicker>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-control-label" for="field_end_date"> Date de fin</label>
+                                                                    <ngb-datepicker
+                                                                        #d="ngbDatepicker" #d [startDate]="{year: expAcad.value.endYear, month:expAcad.value.endMonth, day: expAcad.value.endDay}"
+                                                                        class="form-control" formControlName="endDate"  id="field_acad_end_date{{i}}">
+                                                                    </ngb-datepicker>
+                                                                </div>
+                                                            </div>
+                                                            <!--  <button (click)="removeSkill(i)">Remove</button> -->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="text-right">
+                                                <button type="button" class=" btn btn-info  " [disabled]="isFirstAcadExp()"  (click)="previousAcad()">prec </button>
+                                                <button type="button" class=" btn btn-info  " [disabled]="isLastAcadExp()"  (click)="nextAcad()">suiv </button>
+
+                                            </div>
+                                            <button type="button" class=" btn-info btn-sm " (click)="addAcademicExperience()">Ajouter Une experience </button>
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
                                     </div>
 
 

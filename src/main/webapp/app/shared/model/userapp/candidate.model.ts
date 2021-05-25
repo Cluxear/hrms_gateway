@@ -20,6 +20,9 @@ export interface ICandidate {
   professionalExperience?: IProfessionalExperience[];
   academicExperience?: IAcademicExperience[];
   certification?: ICertification[];
+   experienceDurationId?: number;
+  experienceDurationName?: string;
+
   country?: ICountry;
   degreeId?: IDegreeLevel;
   degreeName?: string;
@@ -38,6 +41,8 @@ export class Candidate implements ICandidate {
     public personalStatement?: string,
     public phone?: number,
     public userId?: string,
+    public experienceDurationId?: number,
+    public experienceDurationName?: string,
     public address?: IAddress,
     public professionalExperience?: IProfessionalExperience[],
     public academicExperience?: IAcademicExperience[],

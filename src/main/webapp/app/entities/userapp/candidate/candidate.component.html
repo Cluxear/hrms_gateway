@@ -1,11 +1,11 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="hrmsGatewayApp.userappCandidate.home.title">Candidates</span>
+        <span jhiTranslate="hrmsGatewayApp.userappCandidate.home.title">Candidats</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-candidate" [routerLink]="['/candidate/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="hrmsGatewayApp.userappCandidate.home.createLabel">
-            Create a new Candidate
+            <span>
+            Create un nouveau candidat
             </span>
         </button>
     </h2>
@@ -25,9 +25,9 @@
                     <th scope="col"  jhiSortBy="id"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="personalStatement"><span>Email</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="phone"><span>Télephone</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"><span>Compétence</span> </th>
 
-                    <th scope="col"  jhiSortBy="degreeId"><span>Niveau educatif</span> <fa-icon icon="sort"></fa-icon></th>
+
+                    <th scope="col"  jhiSortBy="degreeId"><span>Niveau d'étude</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col" ><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -37,11 +37,7 @@
                     <td><a [routerLink]="['/candidate', candidate.id, 'view']">{{ candidate.firstName }} {{ candidate.lastName}}</a></td>
                     <td>{{ candidate.email }}</td>
                     <td>{{ candidate.phone }}</td>
-                    <td>
-                        <div *ngIf="candidate.id">
-                            <button type="button" class="btn-info"   [routerLink]="['/skill', candidate.id, 'matrix-skills' ]" >Matrice de competence</button>
-                        </div>
-                    </td>
+                  
                     <td>
                         <div *ngIf="candidate.degreeId">
                             <a [routerLink]="['/degree-level', candidate.degreeId , 'view']" >{{ candidate.degreeName }}</a>
@@ -51,7 +47,7 @@
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
-                                    [routerLink]="['/candidate', candidate.id, 'view']"
+                                    [routerLink]="['/user_details',  candidate.id,  1 ]"
                                     class=" btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>

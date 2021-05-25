@@ -25,8 +25,17 @@
             <div class="card">
                 <div class="card-body">
                     <!-- Add css class to center image -->
-                    <div  class="m-t-30 profile-center "> <img src="../../content/images/jhipster_family_member_0_head-256.png" class="img-circle" width="150" />
-                        <h4 class="card-title m-t-10">{{candidate.firstName}}</h4>
+                    <div  class="m-t-30 profile-center "> <img src="../../content/images/jhipster_family_member_0_head-256.png" class="img-circle" width="150" (click)="selectImage.click()" />
+                        <h4 class="card-title m-t-10">{{candidate.firstName}}
+                            <div class="card-title m-t-10 ">
+
+                                <input type="file" class="btn-file"
+                                       #selectImage
+                                       id="file" style="display: none"
+                                       (change)="uploadProfilePic($event)">
+                            </div>
+                        </h4>
+
                         <h6 class="card-subtitle">Accounts Manager Amix corp</h6>
                         <div class="row text-center justify-content-md-center">
                             <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>

@@ -1,62 +1,124 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <form class="form-horizontal form-material" name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-employee-heading" jhiTranslate="hrmsGatewayApp.userappEmployee.home.createOrEditLabel">Create or edit a Employee</h2>
+
+
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
+                <section id="multiple-column-form">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="form-title">Information </h3>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappEmployee.salary" for="field_salary">Salary</label>
-                    <input type="number" class="form-control" name="salary" id="field_salary"
-                           formControlName="salary"/>
-                </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_firstName">Prénom</label>
+                                                    <input type="text" class="form-control form-control-line" name="firstName" id="field_firstName"
+                                                           formControlName="firstName"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_lastName">Nom</label>
+                                                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                                                           formControlName="lastName"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_salary">login </label>
+                                                    <input type="text" class="form-control" name="login" id="field_login"
+                                                           formControlName="login"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_address_street">Address email</label>
+                                                    <input type="email" class="form-control" name="email" id="field_email"
+                                                           formControlName="email"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <input type="password" formControlName="password" class="form-control" />
+                                           <!--     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                                                </div> -->
+                                            </div>
+                                                </div>
+                                            <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="field_salary">Salaire mensuelle (TND) </label>
+                                                <input type="number" class="form-control" name="salary" id="field_salary"
+                                                       formControlName="salary"/>
+                                            </div>
+                                            </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappEmployee.phone" for="field_phone">Phone</label>
-                    <input type="number" class="form-control" name="phone" id="field_phone"
-                           formControlName="phone"/>
-                </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappEmployee.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" formControlName="userId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
-                    </select>
-                </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="field_address_state">Niveau d'étude</label>
+                                                    <select class="form-control" id="field_degree" name="degree" formControlName="degreeId" >
+                                                        <option [ngValue]="null" hidden> choisir... </option>
+                                                        <option [ngValue]="degreeLevelOption.id"  *ngFor="let degreeLevelOption of degreelevels; trackBy: trackById" [selected]="degreeLevelOption.selected == true">{{ degreeLevelOption.name }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappEmployee.position" for="field_position">Position</label>
-                    <select class="form-control" id="field_position" name="position" formControlName="positionId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="positionOption.id" *ngFor="let positionOption of positions; trackBy: trackById">{{ positionOption.id }}</option>
-                    </select>
-                </div>
+                                            <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="field_seniorityLevel">Ancienneté</label>
+                                                <select class="form-control" id="field_seniorityLevel" name="seniorityLevel" formControlName="seniorityLevelId">
+                                                    <option [ngValue]="null"></option>
+                                                    <option [ngValue]="seniorityLevelOption.id" *ngFor="let seniorityLevelOption of senioritylevels; trackBy: trackById">{{ seniorityLevelOption.name }}</option>
+                                                </select>
+                                            </div>
+                                                </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappEmployee.degree" for="field_degree">Degree</label>
-                    <select class="form-control" id="field_degree" name="degree" formControlName="degreeId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="degreeLevelOption.id" *ngFor="let degreeLevelOption of degreelevels; trackBy: trackById">{{ degreeLevelOption.id }}</option>
-                    </select>
-                </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappEmployee.position" for="field_position">Position</label>
+                                                <select class="form-control" id="field_position" name="position" formControlName="positionId">
+                                                    <option [ngValue]="null"></option>
+                                                    <option [ngValue]="positionOption.id" *ngFor="let positionOption of positions; trackBy: trackById">{{ positionOption.jobTitle }}</option>
+                                                </select>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.userappEmployee.seniorityLevel" for="field_seniorityLevel">Seniority Level</label>
-                    <select class="form-control" id="field_seniorityLevel" name="seniorityLevel" formControlName="seniorityLevelId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="seniorityLevelOption.id" *ngFor="let seniorityLevelOption of senioritylevels; trackBy: trackById">{{ seniorityLevelOption.id }}</option>
-                    </select>
-                </div>
-            </div>
+                                    </div>
 
-            <div>
+                                </div>
+                            </div>
+
+
+
+                </section>
+
+
+
+</div>
+
+
+
+
+
+
+
+            <div class="text-right">
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>

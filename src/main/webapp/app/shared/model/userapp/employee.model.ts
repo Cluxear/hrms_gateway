@@ -5,6 +5,7 @@ export interface IEmployee {
   userId?: string;
   positionId?: string;
   degreeId?: string;
+  login?: string;
   seniorityLevelId?: string;
 }
 
@@ -13,6 +14,7 @@ export class Employee implements IEmployee {
     public id?: string,
     public salary?: number,
     public phone?: number,
+    public login?: string,
     public userId?: string,
     public positionId?: string,
     public degreeId?: string,
