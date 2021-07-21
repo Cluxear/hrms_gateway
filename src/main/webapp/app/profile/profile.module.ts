@@ -7,6 +7,7 @@ import { UserappCandidateModule } from 'app/entities/userapp/candidate/candidate
 import { DashboardHRComponent } from 'app/home/dashboardHR.component';
 import { UserDetailsComponent } from 'app/profile/userDetails.component';
 import { SkillappSkillModule } from 'app/entities/skillapp/skill/skill.module';
+import {CandidateInterviewsListComponent} from "app/profile/candidate.interviews.list.component";
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { SkillappSkillModule } from 'app/entities/skillapp/skill/skill.module';
     UserappCandidateModule,
     SkillappSkillModule,
   ],
-  declarations: [ProfileComponent , UserDetailsComponent],
+  declarations: [ProfileComponent , UserDetailsComponent, CandidateInterviewsListComponent],
   exports: [UserDetailsComponent, ProfileComponent],
 })
 export class HrmsGatewayProfileModule {}

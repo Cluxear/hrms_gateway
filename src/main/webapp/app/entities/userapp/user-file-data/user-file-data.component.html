@@ -1,0 +1,65 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="hrmsGatewayApp.userappUserFileData.home.title">User File Data</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-file-data" [routerLink]="['/user-file-data/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="hrmsGatewayApp.userappUserFileData.home.createLabel">
+            Create a new User File Data
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="userFileData?.length === 0">
+        <span jhiTranslate="hrmsGatewayApp.userappUserFileData.home.notFound">No userFileData found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="userFileData && userFileData.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.userappUserFileData.filename">Filename</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.userappUserFileData.url">Url</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.userappUserFileData.size">Size</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let userFileData of userFileData ;trackBy: trackId">
+                    <td><a [routerLink]="['/user-file-data', userFileData.id, 'view']">{{ userFileData.id }}</a></td>
+                    <td>{{ userFileData.filename }}</td>
+                    <td>{{ userFileData.url }}</td>
+                    <td>{{ userFileData.size }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/user-file-data', userFileData.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/user-file-data', userFileData.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(userFileData)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

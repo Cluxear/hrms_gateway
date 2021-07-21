@@ -1,0 +1,10 @@
+{
+  "hrmsGatewayApp": {
+    "InterviewResult": {
+      "null": "",
+      "POSITIVE": "positif",
+      "NEGATIVE": "negatif",
+      "PENDING": "en cours"
+    }
+  }
+}

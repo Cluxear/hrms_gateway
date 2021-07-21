@@ -16,7 +16,9 @@ import { CandidateDeleteDialogComponent } from './candidate-delete-dialog.compon
 })
 export class CandidateComponent implements OnInit, OnDestroy {
   candidates: ICandidate[];
+  filteredCandidates? : ICandidate[];
   eventSubscriber?: Subscription;
+  searchText = '';
   itemsPerPage: number;
   links: any;
   page: number;
@@ -38,7 +40,18 @@ export class CandidateComponent implements OnInit, OnDestroy {
     this.predicate = 'id';
     this.ascending = true;
   }
+onSearchChange() : void {
 
+  this.filteredCandidates = this.candidates.filter(it => {
+   const searchTextLocal = this.searchText.toLocaleLowerCase();
+
+    return (it.firstName !== null && it.firstName!.toLocaleLowerCase().includes(searchTextLocal))
+      || ( it.lastName !== null && it.lastName!.toLocaleLowerCase().includes(searchTextLocal))
+      || (it.degreeName !== null && it.degreeName!.toLocaleLowerCase().includes(searchTextLocal))
+      || (it.email !== null && it.email!.toLocaleLowerCase().includes(searchTextLocal));
+
+  });
+}
   loadAll(): void {
     this.candidateService
       .query({
@@ -100,6 +113,10 @@ export class CandidateComponent implements OnInit, OnDestroy {
       for (let i = 0; i < data.length; i++) {
         this.candidates.push(data[i]);
       }
+      this.filteredCandidates = this.candidates;
     }
+
   }
+
+
 }

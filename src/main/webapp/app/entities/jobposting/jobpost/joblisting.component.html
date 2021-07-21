@@ -20,7 +20,7 @@
                                           d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z"/>
                                 </svg>
                                 </div>
-                                <h4>Filter Jobs</h4>
+                                <h4>Filtrer par</h4>
                             </div>
                         </div>
                     </div>
@@ -37,11 +37,11 @@
                                 <div class="small-section-tittle2">
                                     <h4>Type de contrat</h4>
                                 </div>
-                                <label class="container">Full Time
+                                <label class="container">Plein temps
                                     <input [(ngModel)]="filter.fullTime" (ngModelChange)="filterChange()" type="checkbox" >
                                     <span class="checkmark"></span>
                                 </label>
-                                <label class="container">Internship
+                                <label class="container">Interne
                                     <input [(ngModel)]="filter.internship" (ngModelChange)="filterChange()" type="checkbox"  checked="checked active">
                                     <span class="checkmark"></span>
                                 </label>
@@ -80,7 +80,7 @@
                                     <input type="checkbox" >
                                     <span class="checkmark"></span>
                                 </label>
-                                <label class="container">Aujaurd'hui
+                                <label class="container">Aujourd'hui
                                     <input  [(ngModel)]="filter.today" (ngModelChange)="filterChange()" type="checkbox">
                                     <span class="checkmark"></span>
                                 </label>
@@ -162,14 +162,14 @@
                                 <div class="col-lg-12">
                                     <div class="count-job mb-35">
                                         <div *ngIf="filteredJobposts && filteredJobposts.length > 0">
-                                            <span>{{filteredJobposts.length! }} Jobs found</span>
+                                            <span>{{filteredJobposts.length! }} poste trouvé</span>
                                         </div>
 
                                         <!-- Select job items start -->
                                         <div class="select-job-items">
-                                            <span>Sort by</span>
+                                            <span>Sorté par</span>
                                             <select name="select">
-                                                <option value="">None</option>
+                                                <option value="">Aucun</option>
                                                 <option value="">job list</option>
                                                 <option value="">job list</option>
                                                 <option value="">job list</option>

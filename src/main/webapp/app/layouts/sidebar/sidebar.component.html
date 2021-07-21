@@ -11,6 +11,10 @@
 
                 <li *jhiHasAnyAuthority="'ROLE_CANDIDATE'" > <a class="waves-effect waves-dark" routerLink="/jobpost/joblisting"  aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Jobs</span></a>
                 </li>
+                <li *jhiHasAnyAuthority="'ROLE_CANDIDATE'" > <a class="waves-effect waves-dark" routerLink="/application/"  aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Mes Candidatures</span></a>
+                </li>
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'" > <a class="waves-effect waves-dark" routerLink="/application/"  aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Candidatures</span></a>
+                </li>
                 <li *jhiHasAnyAuthority="'ROLE_ADMIN'" > <a class="waves-effect waves-dark" routerLink="/jobpost"  aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Jobs</span></a>
                 </li>
                 <li *jhiHasAnyAuthority="'ROLE_ADMIN'"> <a class="waves-effect waves-dark" routerLink="/candidate" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Candidats</span></a>

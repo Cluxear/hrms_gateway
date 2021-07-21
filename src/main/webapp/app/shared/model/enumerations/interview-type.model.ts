@@ -1,0 +1,5 @@
+export const enum InterviewType {
+  TECHNICAL_INTERVIEW = 'TECHNICAL_INTERVIEW',
+
+  HR_INTERVIEW = 'HR_INTERVIEW',
+}

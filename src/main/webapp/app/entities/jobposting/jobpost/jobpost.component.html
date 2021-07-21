@@ -17,8 +17,8 @@
     <div class="alert alert-warning" id="no-result" *ngIf="jobposts?.length === 0">
         <span jhiTranslate="hrmsGatewayApp.jobpostingJobpost.home.notFound">No jobposts found</span>
     </div>
-
-    <div class="table-responsive" id="entities" *ngIf="jobposts && jobposts.length > 0">
+    <input type="text" class="form-control" placeholder="titre, position, mode travail, type d'emploi, niveau d'etude " [(ngModel)]="searchText" (input) ="onSearchChange()"> <a class="srh-btn"></a>
+    <div class="table-responsive" id="entities" *ngIf="filteredJobposts && filteredJobposts.length > 0">
         <table  class="table vm no-th-brd pro-of-month" aria-describedby="page-heading" id="table1">
             <thead>
                 <tr>
@@ -37,7 +37,7 @@
             <tbody>
 
 
-                <tr *ngFor="let jobpost of jobposts ;trackBy: trackId">
+                <tr *ngFor="let jobpost of filteredJobposts ;trackBy: trackId">
                     <td>{{ jobpost.title }}</td>
                     <td>{{ jobpost.estimatedSalary }} TND</td>
                     <td >

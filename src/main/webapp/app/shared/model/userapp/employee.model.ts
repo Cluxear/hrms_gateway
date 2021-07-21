@@ -3,10 +3,17 @@ export interface IEmployee {
   salary?: number;
   phone?: number;
   userId?: string;
-  positionId?: string;
-  degreeId?: string;
+  positionId?: number;
+  positionName?: string;
+  degreeName?: string;
+  degreeId?: number;
   login?: string;
-  seniorityLevelId?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  seniorityLevelId?: number;
+  seniorityLevelName?: string;
+
 }
 
 export class Employee implements IEmployee {
@@ -14,10 +21,18 @@ export class Employee implements IEmployee {
     public id?: string,
     public salary?: number,
     public phone?: number,
+    public firstName?: string,
+    public lastName?: string,
+    public email?: string,
     public login?: string,
     public userId?: string,
-    public positionId?: string,
-    public degreeId?: string,
-    public seniorityLevelId?: string
-  ) {}
+    public positionId?: number,
+    public  positionName?: string,
+    public degreeName?: string,
+    public degreeId?: number,
+    public seniorityLevelId?: number,
+    public seniorityLevelName?: string
+
+
+) {}
 }

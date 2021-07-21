@@ -21,6 +21,7 @@ import {ActivatedRoute} from "@angular/router";
 export class SkillMatrixComponent implements OnInit, OnDestroy {
   skills?: ISkill[];
   user: ICandidate = new Candidate();
+   localUserId = '';
   eventSubscriber?: Subscription;
   @Input() userId?: string;
   constructor(
@@ -33,11 +34,11 @@ export class SkillMatrixComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll(): void {
-    let localUserId;
+
     this.activatedRoute.params.subscribe(param => {
 
       if(param.userId) {
-        localUserId = param.userId;
+        this.localUserId = param.userId;
         this.skillService.findSkillsByUserId(param.userId).subscribe( skills => {
           this.skills = skills.body || [];
 
@@ -47,7 +48,7 @@ export class SkillMatrixComponent implements OnInit, OnDestroy {
     if (this.userId !== undefined) {
       this.skillService.findSkillsByUserId(this.userId).subscribe(skills => (this.skills = skills.body || []));
     }
-    else if (localUserId === undefined) {
+    else if (this.localUserId === undefined) {
       const login = this.accountService.getLogin();
       // TODO : add getUserBylogin in userResource
       this.candidateService.findByLogin(login).subscribe((res: HttpResponse<ICandidate>) => {

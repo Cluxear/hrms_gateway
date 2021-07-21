@@ -27,6 +27,10 @@
         "skillappDomain": "Domain",
         "dataappSkillJobPost": "Skill Job Post",
         "dataappUserSkill": "User Skill",
+        "interviewappInterview": "Interview",
+        "interviewappEvaluationSheet": "Evaluation Sheet",
+        "userappUserFileData": "User File Data",
+        "dataappUserInterview": "User Interview",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

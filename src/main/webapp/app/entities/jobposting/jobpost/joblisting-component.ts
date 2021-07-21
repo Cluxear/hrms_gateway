@@ -38,6 +38,7 @@ export class JoblistingComponent implements OnInit, OnDestroy {
       if (account!.authorities.includes('ROLE_CANDIDATE')) {
         this.jobpostService.findCurrentUserUnappliedForJobposts().subscribe((res: HttpResponse<IJobpost[]>) => {
           this.jobposts = res.body || [];
+          this.filteredJobposts = this.jobposts;
         });
 
       } else {

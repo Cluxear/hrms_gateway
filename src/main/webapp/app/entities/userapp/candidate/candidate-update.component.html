@@ -1,4 +1,6 @@
-<div class="row justify-content-center">
+
+
+<div class="row justify-content-center" [class.blurred]="showSpinner">
     <div class="col-8">
         <form class="form-horizontal form-material" name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
 
@@ -7,6 +9,10 @@
                 <input type="file" class="btn-file"
                        id="file"
                        (change)="uploadFile($event)">
+                <div *ngIf="showSpinner">
+                    <fa-icon icon="sync"    [spin]="showSpinner"></fa-icon>
+                </div>
+
             </div>
 
             <div>
@@ -81,7 +87,7 @@
                                                         </div>
                                                             <div class="col-md-6 col-12">
                                                             <div class="form-group">
-                                                    <label class="form-control-label" for="field_address_state">Gouvernerat</label>
+                                                    <label class="form-control-label" for="field_address_state">Province</label>
                                                     <input type="string" class="form-control" name="state" id="field_address_state"
                                                            formControlName="state"/>
                                                             </div>
@@ -184,6 +190,8 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                 <!--  <button (click)="removeSkill(i)">Remove</button> -->
+                                                                    <button type="button" class=" btn-danger btn-sm " (click)="deleteProfessionalExperience(exp)">Supprimer cette experience </button>
+
                                                                 </div>
 
                                                             </div>
@@ -196,6 +204,7 @@
 
                                                         </div>
                                                         <button type="button" class=" btn-info btn-sm " (click)="addProfessionalExperience()">Ajouter Une experience </button>
+
 
 
                                                     </div>
@@ -261,6 +270,8 @@
                                                                 </div>
                                                             </div>
                                                             <!--  <button (click)="removeSkill(i)">Remove</button> -->
+                                                            <button type="button" class=" btn-danger btn-sm " (click)="deleteAcadExperience(expAcad)">Supprimer cette experience </button>
+
                                                         </div>
 
                                                     </div>
@@ -317,11 +328,10 @@
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <div  *ngFor="let exp of userskills.controls; let i=index">
+                                                <div   *ngFor="let exp of userskills.controls; let i=index">
 
-    <div class="row">
-                                                    <div class="col-lg-3" >
-                                                        <div [formGroupName]="i" >
+
+                                                        <div class="col-lg-6" [formGroupName]="i" >
 
                                                             <div *ngIf=" exp.value.changeable; else elseBlock">
                                                                 <select class="form-control" id="field_skills{{i}}" name="skills{{i}}" formControlName="id" >
@@ -349,8 +359,7 @@
 
                                                             <!--  <button (click)="removeSkill(i)">Remove</button> -->
                                                         </div>
-                                                    </div>
-        </div>
+
                                                 </div>
                                                 <button type="button" class="btn-info btn-sm" (click)="addSkill()">Ajouter une compétence </button>
 
@@ -370,8 +379,6 @@
                         </button>
                     </div>
                             </div>
-
-
 
         </form>
     </div>

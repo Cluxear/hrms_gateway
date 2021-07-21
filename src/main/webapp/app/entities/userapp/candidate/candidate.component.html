@@ -5,7 +5,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-candidate" [routerLink]="['/candidate/new']">
             <fa-icon icon="plus"></fa-icon>
             <span>
-            Create un nouveau candidat
+            Créer un nouveau candidat
             </span>
         </button>
     </h2>
@@ -17,7 +17,7 @@
     <div class="alert alert-warning" id="no-result" *ngIf="candidates?.length === 0">
         <span jhiTranslate="hrmsGatewayApp.userappCandidate.home.notFound">No candidates found</span>
     </div>
-
+    <input type="text" class="form-control" placeholder="Nom, position, email " [(ngModel)]="searchText" (input) ="onSearchChange()"> <a class="srh-btn"></a>
     <div class="table-responsive" id="entities" *ngIf="candidates && candidates.length > 0">
             <table class=" table .table-hover" aria-describedby="page-heading">
             <thead>
@@ -33,11 +33,11 @@
                 </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-                <tr *ngFor="let candidate of candidates ;trackBy: trackId">
+                <tr *ngFor="let candidate of filteredCandidates trackBy: trackId">
                     <td><a [routerLink]="['/candidate', candidate.id, 'view']">{{ candidate.firstName }} {{ candidate.lastName}}</a></td>
                     <td>{{ candidate.email }}</td>
                     <td>{{ candidate.phone }}</td>
-                  
+
                     <td>
                         <div *ngIf="candidate.degreeId">
                             <a [routerLink]="['/degree-level', candidate.degreeId , 'view']" >{{ candidate.degreeName }}</a>
@@ -46,6 +46,12 @@
 
                     <td class="text-right">
                         <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/skill', candidate.id, 'matrix-skills' ]"
+                                    class=" btn-warning btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">Compétences</span>
+                            </button>
                             <button type="submit"
                                     [routerLink]="['/user_details',  candidate.id,  1 ]"
                                     class=" btn-info btn-sm">

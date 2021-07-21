@@ -1,5 +1,6 @@
 export interface IManagedUser {
-  id?: any;
+  id?: string;
+  userId?: string;
   login?: string;
   firstName?: string;
   salary?: number;
@@ -21,7 +22,8 @@ export interface IManagedUser {
 
 export class ManagedUser implements IManagedUser {
   constructor(
-    public id?: any,
+    public id?: string,
+    public userId?: string,
     public login?: string,
     public firstName?: string,
     public lastName?: string,

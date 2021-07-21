@@ -9,6 +9,8 @@ import { ICandidate } from '../../shared/model/userapp/candidate.model';
 import { IUserDetails } from 'app/shared/model/userapp/cvUserDetails.model';
 import {IManagedUser, ManagedUser} from "app/core/user/managedUser.model";
 import {Authority} from "app/shared/constants/authority.constants";
+import {IApplication} from "app/shared/model/applicationapp/application.model";
+import {Employee} from "app/shared/model/userapp/employee.model";
 type EntityResponseType = HttpResponse<IUser>;
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -39,9 +41,25 @@ export class UserService {
 
     return this.http.post<IUserDetails>(`${this.userResourceUrl}/detailsOfCV`, formData, { observe: 'response' });
   }
+
+  getImage(id: String) : Observable<Blob> {
+    return this.http.get(`${this.resourceUrl}/image/${id}`, {
+      responseType: 'blob'
+    });
+  }
   register(user: ManagedUser) : Observable<EntityResponseType> {
 
     //user.authorities?.push(Authority.CANDIDATE, Authority.USER);
     return this.http.post<IManagedUser>(`${this.userResourceUrl}/register`, user , { observe: 'response' });
+  }
+  recruteCandidate(application: IApplication) : Observable<HttpResponse<Employee>> {
+
+    return this.http.post<Employee>(`${this.userResourceUrl}/recrute`, application , { observe: 'response' });
+
+  }
+  exportUserToExcel(userId: string) : Observable<any> {
+    return this.http.get(`${this.userResourceUrl}/export/excel/${userId}`, {
+      responseType: 'blob'
+    });
   }
 }

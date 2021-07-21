@@ -18,6 +18,8 @@ import { DegreeLevelService } from '../degree-level/degree-level.service';
 })
 export class JobpostComponent implements OnInit, OnDestroy {
   jobposts?: IJobpost[];
+  filteredJobposts?: IJobpost[];
+  searchText = '';
   eventSubscriber?: Subscription;
   degreeLevel?: IDegreeLevel;
   constructor(
@@ -41,11 +43,26 @@ export class JobpostComponent implements OnInit, OnDestroy {
         this.jobpostService.query().subscribe((res: HttpResponse<IJobpost[]>) => (this.jobposts = res.body || []));
 
       } else {
-        this.jobpostService.query().subscribe((res: HttpResponse<IJobpost[]>) => (this.jobposts = res.body || []));
+        this.jobpostService.query().subscribe((res: HttpResponse<IJobpost[]>) => {
+          (this.jobposts = res.body || [])
+          this.filteredJobposts = this.jobposts;
+        });
       }
     });
   }
+  onSearchChange() : void {
 
+    this.filteredJobposts = this.jobposts!.filter(it => {
+      const searchTextLocal = this.searchText.toLocaleLowerCase();
+
+      return it.type!.toLocaleLowerCase().includes(searchTextLocal)
+        ||it.degreeLevelName!.toLocaleLowerCase().includes(searchTextLocal)
+        || it.employmentType!.toLocaleLowerCase().includes(searchTextLocal)
+        || it.title!.toLocaleLowerCase().includes(searchTextLocal)
+        || it.positionName!.toLocaleLowerCase().includes(searchTextLocal);
+
+    });
+  }
   ngOnInit(): void {
     this.loadAll();
     this.registerChangeInJobposts();

@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-interview-heading" jhiTranslate="hrmsGatewayApp.interviewappInterview.home.createOrEditLabel">Create or edit a Interview</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.interviewappInterview.interviewDate" for="field_interviewDate">Interview Date</label>
+                    <div class="d-flex">
+                        <input id="field_interviewDate" type="datetime-local" class="form-control" name="interviewDate" formControlName="interviewDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.interviewappInterview.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="TECHNICAL_INTERVIEW">Entretien Téchnique</option>
+                        <option value="HR_INTERVIEW">Entretien RH</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.interviewappInterview.result" for="field_result">Result</label>
+                    <select class="form-control" name="result" formControlName="result" id="field_result">
+                        <option value="POSITIVE"> Positif</option>
+                        <option value="NEGATIVE">Négatif</option>
+                        <option value="PENDING">En cours </option>
+                    </select>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="hrmsGatewayApp.interviewappInterview.note" for="field_note">Note</label>
+                    <input type="text" class="form-control" name="note" id="field_note"
+                           formControlName="note"/>
+                </div>
+
+
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="recruter_field">Recruteur chargé </label>
+                        <select class="form-control" id="recruter_field" name="degree" formControlName="recruterId" >
+                            <option [ngValue]="null" hidden> choisir... </option>
+                            <option [ngValue]="employeeOption.id"  *ngFor="let employeeOption of employeesList; trackBy: trackById" [selected]="employeeOption.id === recruterId">{{ employeeOption.firstName + " " + employeeOption.lastName }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

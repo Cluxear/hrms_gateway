@@ -35,4 +35,7 @@ export class UserApplicationService {
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+  deleteByApplicationId(id: number): Observable<HttpResponse<{}>> {
+    return this.http.delete(`${this.resourceUrl}/application/${id}`, { observe: 'response' });
+  }
 }

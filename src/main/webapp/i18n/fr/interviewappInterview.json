@@ -1,0 +1,34 @@
+{
+  "hrmsGatewayApp": {
+    "interviewappInterview": {
+      "home": {
+        "title": "Interviews",
+        "createLabel": "Créer un nouveau Interview",
+        "createOrEditLabel": "Créer ou éditer un Interview",
+        "notFound": "Aucun Interview trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Interview {{ id }} ?"
+      },
+      "detail": {
+        "title": "Interview"
+      },
+      "interviewDate": "Interview Date",
+      "createdAt": "Created At",
+      "modifiedAt": "Modified At",
+      "resultAttributedAt": "Result Attributed At",
+      "type": "Type",
+      "result": "Result",
+      "isDateFixed": "Is Date Fixed",
+      "note": "Note",
+      "evaluationSheet": "Evaluation Sheet"
+    }
+  },
+  "interviewappApp": {
+    "interviewappInterview": {
+      "created": "Un nouveau Interview a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Interview avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Interview avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

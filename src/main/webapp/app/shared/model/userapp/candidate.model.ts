@@ -14,13 +14,14 @@ export interface ICandidate {
   userId?: string;
   login?: string;
   firstName?: string;
+  code?: string;
   lastName?: string;
   email?: string;
   address?: IAddress;
   professionalExperience?: IProfessionalExperience[];
   academicExperience?: IAcademicExperience[];
   certification?: ICertification[];
-   experienceDurationId?: number;
+  experienceDurationId?: number;
   experienceDurationName?: string;
 
   country?: ICountry;
@@ -36,6 +37,7 @@ export class Candidate implements ICandidate {
     public id?: string,
     public firstName?: string,
     public lastName?: string,
+    public code?: string,
     public email?: string,
     public login?: string,
     public personalStatement?: string,

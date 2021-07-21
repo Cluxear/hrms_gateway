@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="interview">
+            <h2><span jhiTranslate="hrmsGatewayApp.interviewappInterview.detail.title">Interview</span> {{ interview.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.interviewDate">Interview Date</span></dt>
+                <dd>
+                    <span>{{ interview.interviewDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{ interview.createdAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.modifiedAt">Modified At</span></dt>
+                <dd>
+                    <span>{{ interview.modifiedAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.resultAttributedAt">Result Attributed At</span></dt>
+                <dd>
+                    <span>{{ interview.resultAttributedAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.type">Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hrmsGatewayApp.InterviewType.' + interview.type }}">{{ interview.type }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.result">Result</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'hrmsGatewayApp.InterviewResult.' + interview.result }}">{{ interview.result }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.isDateFixed">Is Date Fixed</span></dt>
+                <dd>
+                    <span>{{ interview.isDateFixed }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.note">Note</span></dt>
+                <dd>
+                    <span>{{ interview.note }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappInterview.evaluationSheet">Evaluation Sheet</span></dt>
+                <dd>
+                    <div *ngIf="interview.evaluationSheetId">
+                        <a [routerLink]="['/evaluation-sheet', interview.evaluationSheetId, 'view']">{{ interview.evaluationSheetId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/interview', interview.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -80,6 +80,23 @@ import { RouterModule } from '@angular/router';
         path: 'user-skill',
         loadChildren: () => import('./dataapp/user-skill/user-skill.module').then(m => m.DataappUserSkillModule),
       },
+      {
+        path: 'interview',
+        loadChildren: () => import('./interviewapp/interview/interview.module').then(m => m.InterviewappInterviewModule),
+      },
+      {
+        path: 'evaluation-sheet',
+        loadChildren: () =>
+          import('./interviewapp/evaluation-sheet/evaluation-sheet.module').then(m => m.InterviewappEvaluationSheetModule),
+      },
+      {
+        path: 'user-file-data',
+        loadChildren: () => import('./userapp/user-file-data/user-file-data.module').then(m => m.UserappUserFileDataModule),
+      },
+      {
+        path: 'user-interview',
+        loadChildren: () => import('./dataapp/user-interview/user-interview.module').then(m => m.DataappUserInterviewModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

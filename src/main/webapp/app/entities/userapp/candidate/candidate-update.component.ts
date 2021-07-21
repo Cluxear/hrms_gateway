@@ -41,6 +41,8 @@ import { IUserDetails, UserDetails } from 'app/shared/model/userapp/cvUserDetail
 import {finished} from "stream";
 import {IExperienceDuration} from "app/shared/model/userapp/experience-duration.model";
 import {ExperienceDurationService} from "app/entities/userapp/experience-duration/experience-duration.service";
+import {UserFileDataService} from "app/entities/userapp/user-file-data/user-file-data.service";
+
 
 type SelectableEntity = IUser | IAddress | IDegreeLevel | ISeniorityLevel | ISkill | IPosition | IExperienceDuration;
 
@@ -66,13 +68,14 @@ export class CandidateUpdateComponent implements OnInit {
   positions: IPosition[] = [];
   url: UrlSegment[] = [];
   _candidate: ICandidate = new Candidate();
-
+  showSpinner = false;
   currentIndex = -1;
   currentIndexExpAcademic = -1;
   editForm = this.fb.group({
     id: [],
     personalStatement: [],
     phone: [],
+    code: String,
     firstName: String,
     lastName: String,
     email: String,
@@ -96,6 +99,7 @@ export class CandidateUpdateComponent implements OnInit {
     academicExperiences: this.fb.array([]),
   });
 
+
   constructor(
     protected candidateService: CandidateService,
     protected applicationService: ApplicationService,
@@ -112,8 +116,10 @@ export class CandidateUpdateComponent implements OnInit {
     protected experienceDurationService: ExperienceDurationService,
     protected positionService: PositionService,
     protected skillService: SkillService,
+    protected userFileDataService: UserFileDataService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+
   ) {}
 
   ngOnInit(): void {
@@ -212,6 +218,7 @@ export class CandidateUpdateComponent implements OnInit {
       firstName: candidate.firstName != null ? candidate.firstName : '',
       lastName: candidate.lastName,
       email: candidate.email,
+      code: candidate.code,
       phone: candidate.phone,
       experienceDurationId: candidate.experienceDurationId,
       userId: candidate.userId,
@@ -267,6 +274,7 @@ export class CandidateUpdateComponent implements OnInit {
     this.address.id = this.editForm.get(['addressId'])!.value;
     candidate.firstName = this.editForm.get(['firstName'])!.value;
     candidate.lastName = this.editForm.get(['lastName'])!.value;
+    candidate.code = this.editForm.get(['code'])!.value;
     candidate.email = this.editForm.get(['email'])!.value;
     candidate.address = this.address;
     candidate.experienceDurationId = this.editForm.get(['experienceDurationId'])!.value;
@@ -499,11 +507,11 @@ export class CandidateUpdateComponent implements OnInit {
      return  !(this.currentIndex + 1 < this.professionalExperiences.length);
   }
   isFirstExp() : boolean {
-    return !(this.currentIndex - 1 >= 0) ;
+    return !(this.currentIndex - 1 >= 0);
   }
 
   isFirstAcadExp() : boolean {
-    return !(this.currentIndexExpAcademic - 1 >= 0) ;
+    return !(this.currentIndexExpAcademic - 1 >= 0);
   }
 
   isLastAcadExp() : boolean{
@@ -532,11 +540,19 @@ export class CandidateUpdateComponent implements OnInit {
     });
   }
   uploadFile(event: Event): void {
+    this.showSpinner = true;
     // TODO: check user authority and based on it update accordingly
     const HTMLevent = event as HTMLInputEvent;
     const file: File = (HTMLevent.target.files as FileList)[0];
     /** call the extract  **/
     let userDetails: IUserDetails = new UserDetails();
+    if(this._candidate.id !== undefined) {
+
+      this.userFileDataService
+        .uploadFileForCandidate(file,this._candidate.id).subscribe(next => console.log(" File uploaded "));
+
+    }
+
     this.userService.getUserInfoFromCV(file).subscribe(res => {
 
       userDetails = res.body!;
@@ -544,7 +560,13 @@ export class CandidateUpdateComponent implements OnInit {
       this._candidate.firstName = userDetails.info_perso?.firstName;
       this._candidate.lastName = userDetails.info_perso?.lastName;
       this._candidate.email = userDetails.info_perso?.email;
+      this.userskills.clear();
+      this._candidate.skills = userDetails.skillList;
+      this.showSpinner = false;
+
       this.updateForm(this._candidate);
+
+
     });
 
     //file.text().then(fi => console.log(fi.toString()));
@@ -555,5 +577,24 @@ export class CandidateUpdateComponent implements OnInit {
   }
 
 
+  deleteProfessionalExperience(exp: AbstractControl) : void {
 
+
+    // a list of abstract control and
+      if(exp.value!== undefined && exp.value.id !== undefined) {
+
+        this.professionalExperienceService.delete(this.professionalExperiences.at(this.currentIndex).value.id).subscribe((next) => console.log("experience deleted"));
+      }
+    this.professionalExperiences.removeAt(this.currentIndex);
+
+  }
+
+  deleteAcadExperience(expAcad: AbstractControl) : void {
+
+    if(expAcad.value!== undefined && expAcad.value.id !== undefined) {
+
+      this.academicExperienceService.delete(this.academicExperiences.at(this.currentIndex).value.id).subscribe((next) => console.log(" Academical experience  deleted"));
+    }
+    this.academicExperiences.removeAt(this.currentIndex);
+  }
 }

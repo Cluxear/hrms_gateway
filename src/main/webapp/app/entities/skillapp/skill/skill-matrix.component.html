@@ -28,8 +28,8 @@
                 <span *ngIf="skill.skillLevel!.toString() === 'EXPERT'">
                     expert
                 </span>
-                <span *ngIf="skill.skillLevel!.toString() === 'Novice'">
-                    débutant
+                <span *ngIf="skill.skillLevel!.toString() === 'NOVICE'">
+                    novice
                 </span>
                 <span *ngIf="skill.skillLevel!.toString() === 'INTERMEDIATE'">
                     moyen
@@ -49,4 +49,5 @@
             </tbody>
         </table>
     </div>
+    <jhi-skill-candidate-update [userId]="this.localUserId"> </jhi-skill-candidate-update>
 </div>

@@ -8,6 +8,7 @@ export interface IApplication {
   creationDate?: Moment;
   conclusion?: ConclusionType;
   jobpostId?: number;
+  position?: number;
   statuses?: IApplicationRecrutementStatus[];
   fullName?: string;
   experienceDurationName?: string;
@@ -24,6 +25,7 @@ export class Application implements IApplication {
     public statuses?: IApplicationRecrutementStatus[],
     public fullName?: string,
     public email?: string,
+    public position?: number,
     public experienceDurationName?: string,
     public candidateId?: string,
     jobpostId?: number

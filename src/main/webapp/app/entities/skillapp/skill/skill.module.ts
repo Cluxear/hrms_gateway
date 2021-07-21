@@ -9,6 +9,7 @@ import { SkillDeleteDialogComponent } from './skill-delete-dialog.component';
 import { skillRoute } from './skill.route';
 import { SkillMatrixComponent } from './skill-matrix.component';
 import { JobpostCandidateSkillsDetailsComponent } from './jobpostCandidateSkills-details.component';
+import {SkillCandidateUpdateComponent} from "app/entities/skillapp/skill/skill.candidate.update.component";
 
 @NgModule({
   imports: [HrmsGatewaySharedModule, RouterModule.forChild(skillRoute)],
@@ -19,6 +20,7 @@ import { JobpostCandidateSkillsDetailsComponent } from './jobpostCandidateSkills
     SkillDeleteDialogComponent,
     SkillMatrixComponent,
     JobpostCandidateSkillsDetailsComponent,
+    SkillCandidateUpdateComponent
   ],
   entryComponents: [SkillDeleteDialogComponent],
   exports: [SkillMatrixComponent],

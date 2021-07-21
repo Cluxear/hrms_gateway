@@ -1,0 +1,28 @@
+{
+  "hrmsGatewayApp": {
+    "userappUserFileData": {
+      "home": {
+        "title": "UserFileData",
+        "createLabel": "Créer un nouveau User File Data",
+        "createOrEditLabel": "Créer ou éditer un User File Data",
+        "notFound": "Aucun User File Data trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le User File Data {{ id }} ?"
+      },
+      "detail": {
+        "title": "User File Data"
+      },
+      "filename": "Filename",
+      "url": "Url",
+      "size": "Size"
+    }
+  },
+  "userappApp": {
+    "userappUserFileData": {
+      "created": "Un nouveau User File Data a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User File Data avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User File Data avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

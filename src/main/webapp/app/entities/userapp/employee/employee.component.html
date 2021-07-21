@@ -22,37 +22,35 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="salary"><span jhiTranslate="hrmsGatewayApp.userappEmployee.salary">Salary</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="phone"><span jhiTranslate="hrmsGatewayApp.userappEmployee.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="userId"><span jhiTranslate="hrmsGatewayApp.userappEmployee.user">User</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="positionId"><span jhiTranslate="hrmsGatewayApp.userappEmployee.position">Position</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="degreeId"><span jhiTranslate="hrmsGatewayApp.userappEmployee.degree">Degree</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="seniorityLevelId"><span jhiTranslate="hrmsGatewayApp.userappEmployee.seniorityLevel">Seniority Level</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="id"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="personalStatement"><span>Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phone"><span>Télephone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="positionId"><span>Poste</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="degreeId"><span>Niveau d'étude</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="degreeId"><span>Ancienneté</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" ><span>Action</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let employee of employees ;trackBy: trackId">
-                    <td><a [routerLink]="['/employee', employee.id, 'view']">{{ employee.id }}</a></td>
-                    <td>{{ employee.salary }}</td>
+                    <td>{{ employee.firstName }} {{ employee.lastName}} </td>
+                    <td>{{ employee.email }}</td>
                     <td>{{ employee.phone }}</td>
-                    <td>
-                        {{ employee.userId }}
-                    </td>
+
                     <td>
                         <div *ngIf="employee.positionId">
-                            <a [routerLink]="['/position', employee.positionId , 'view']" >{{ employee.positionId }}</a>
+                            <a [routerLink]="['/position', employee.positionId , 'view']" >{{ employee.positionName }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="employee.degreeId">
-                            <a [routerLink]="['/degree-level', employee.degreeId , 'view']" >{{ employee.degreeId }}</a>
+                            <a [routerLink]="['/degree-level', employee.degreeId , 'view']" >{{ employee.degreeName }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="employee.seniorityLevelId">
-                            <a [routerLink]="['/seniority-level', employee.seniorityLevelId , 'view']" >{{ employee.seniorityLevelId }}</a>
+                            <a [routerLink]="['/seniority-level', employee.seniorityLevelId , 'view']" >{{ employee.seniorityLevelName }}</a>
                         </div>
                     </td>
                     <td class="text-right">

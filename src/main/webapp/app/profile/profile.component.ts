@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
   skills: ISkill[] = [];
   candidateSaved: ICandidate = new Candidate();
   positions: IPosition[] = [];
-  url: UrlSegment[] = [];
+  url: any;
   _candidate: ICandidate = new Candidate();
   candidate: ICandidate = new Candidate();
 
@@ -557,24 +557,20 @@ export class ProfileComponent implements OnInit {
     //degreeLevel
 
   }
-  uploadProfilePic(event: Event): void {
+  uploadProfilePic(event: any): void {
     // TODO: check user authority and based on it update accordingly
     /*    const HTMLevent = event as HTMLInputEvent;
         const file: File = (HTMLevent.target.files as FileList)[0];
 
      */
-    /** call the extract  **/
-    /*   let userDetails: IUserDetails = new UserDetails();
-       this.userService.getUserInfoFromCV(file).subscribe(res => {
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
 
-         userDetails = res.body!;
-
-         this._candidate.firstName = userDetails.info_perso?.firstName;
-         this._candidate.lastName = userDetails.info_perso?.lastName;
-         this._candidate.email = userDetails.info_perso?.email;
-         this.updateForm(this._candidate);
-    });
-*/
+    reader.onload = (_event) => {
+      this.url = reader.result;
+    }
+    /** Upload image to server
+     * fetch that image from the server and display it  **/
   }
 
 

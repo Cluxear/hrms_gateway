@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.tw.gateway",
       "nativeLanguage": "fr",
-      "microservicePath": "../userapp-main"
+      "microservicePath": "../dataapp-main"
     },
     "jhipsterVersion": "6.10.5",
     "applicationType": "gateway",

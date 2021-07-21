@@ -1,8 +1,13 @@
+
+
+
 <div>
     <h2 id="page-heading">
         <div *ngIf="jobpostInQuestion">
         <span *jhiHasAnyAuthority="'ROLE_ADMIN'">Candidatures pour le poste <a [routerLink]="['/jobpost', jobpostInQuestion.id, 'view']"> {{ jobpostInQuestion.positionName }}  </a> </span>
         </div>
+
+
         <!--
                 <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-application" [routerLink]="['/application/new']">
                     <fa-icon icon="plus"></fa-icon>
@@ -13,22 +18,29 @@
         -->
     </h2>
 
+    <div class="small-section-tittle2"> Filtre</div>
+    <input   class="form-check-input"  type="checkbox" value="" id="filterPreSelection" [(ngModel)]="filter.preselected" (ngModelChange)="filterChange()" >
+    <label class="form-check-label" for="filterPreSelection">
+        en preselection
+    </label>
+
+
     <jhi-alert-error></jhi-alert-error>
 
     <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="applications?.length === 0">
+    <div class="alert alert-warning" id="no-result" *ngIf="filteredApplications?.length === 0">
         <span jhiTranslate="hrmsGatewayApp.applicationappApplication.home.notFound">No applications found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="applications && applications.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="filteredApplications && filteredApplications.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>
 
                     <th scope="col" *jhiHasAnyAuthority="'ROLE_ADMIN'" ><span >Candidat</span></th>
                     <th scope="col" ><span>Presélection</span></th>
-                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.applicationappApplication.creationDate">Date d'application</span></th>
+                    <th scope="col" ><span>Date de postulation</span></th>
                     <th scope="col" ><span>Status</span></th>
                     <th scope="col"></th>
                 </tr>
@@ -37,16 +49,27 @@
                 <tr *ngFor="let application of applications ;trackBy: trackId">
                     <td *jhiHasAnyAuthority="'ROLE_ADMIN'" ><a [routerLink]="['/application', application.id, 'view']">{{ application.fullName }}</a></td>
                     <td>
-                        <ng-container *ngIf="application.shortListed">
+                        <div class="form-check">
+                            <input *jhiHasAnyAuthority="'ROLE_ADMIN'"   class="form-check-input"  type="checkbox" value="" id="flexCheckCheckedAdmin" (change)="addPreselected(application)" [checked]="application.shortListed">
+                            <label class="form-check-label" for="flexCheckCheckedAdmin">
+
+                            </label>
+                            <input *jhiHasAnyAuthority="'ROLE_CANDIDATE'" class="form-check-input" [disabled] = true type="checkbox" value="" id="flexCheckChecked"  [checked]="application.shortListed">
+                            <label class="form-check-label" for="flexCheckChecked">
+
+                            </label>
+                        </div>
+
+                    <!--    <ng-container *ngIf="application.shortListed">
                             oui
                         </ng-container>
                         <ng-container *ngIf="!application.shortListed ">
                             non
-                        </ng-container>
+                        </ng-container> -->
 
                     </td>
                     <td>{{ application.creationDate | date:'medium' }}</td>
-                    <td>{{ application.conclusion }}</td>
+                    <td jhiTranslate="{{'hrmsGatewayApp.ConclusionType.'+ application.conclusion}}">{{ application.conclusion }}</td>
                     <td *jhiHasAnyAuthority="'ROLE_CANDIDATE'">
                         <button type="button"
                                 [routerLink]="['/jobpost',  application.jobpostId,  'view']"
@@ -61,20 +84,26 @@
                                     [routerLink]="['/user_details',application.candidateId,  application.id ]"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline">détails de la candidatures</span>
+                                <span class="d-none d-md-inline">détails de la candidature</span>
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/application', application.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
+                                    (click) = accept(application)
+                                    class="btn btn-primary btn-sm" *jhiHasAnyAuthority="'ROLE_ADMIN'">
                                 <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline">Accepter</span>
+                                <span class="d-none d-md-inline" >Accepter</span>
                             </button>
 
-                            <button type="submit" (click)="delete(application)"
-                                    class="btn btn-danger btn-sm">
+                            <button type="submit" (click)="reject(application)"
+
+                                    class="btn btn-danger btn-sm"  *jhiHasAnyAuthority="'ROLE_ADMIN'">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline">Rejeter</span>
+                            </button>
+                            <button type="submit" (click)="delete(application.id!)"
+                                    class="btn btn-danger btn-sm" *jhiHasAnyAuthority="'ROLE_CANDIDATE'">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Annuler</span>
                             </button>
                         </div>
                     </td>

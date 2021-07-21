@@ -1,0 +1,54 @@
+<div class="table-responsive m-t-20 no-wrap">
+    <table class="table vm no-th-brd pro-of-month">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th scope="col" >Date de l'entretien</th>
+            <th colspan="2">note</th>
+            <th>Status </th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let interview of interviews">
+            <td>
+                 <span *ngIf="interview.type !== undefined && interview.type.toString() === 'HR_INTERVIEW'">
+
+                entretien RH
+            </span>
+                <span *ngIf="interview.type !== undefined && interview.type.toString() === 'TECHNICAL_INTERVIEW'">
+                entretien technique
+
+            </span>
+            </td>
+            <td>{{interview.interviewDate | date: 'medium' }} </td>
+            <td colspan="2">  {{ interview.note  }}</td>
+            <td jhiTranslate="{{'hrmsGatewayApp.InterviewResult.'+ interview.result}}">
+
+                {{interview.result}}
+          <!--         <span *ngIf="interview.result !== undefined && interview.result.toString() === 'POSITIVE'">
+
+                positif
+                   </span>
+                <span *ngIf="interview.result !== undefined && interview.result.toString() === 'NEGATIVE'">
+Négatif
+            </span>
+                <span *ngIf=" interview.result !== undefined  && interview.result.toString() === 'PENDING'">
+En cours
+            </span> -->
+            </td>
+            <td>
+                <a [routerLink]="['/interview', applicationId, interview.id, 'edit']"> Editer </a>
+                <button type="submit" (click)="deleteInterview(interview)"
+                        class=" btn-danger btn-sm">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                </button>
+
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</div>

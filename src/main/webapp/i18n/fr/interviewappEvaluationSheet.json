@@ -1,0 +1,27 @@
+{
+  "hrmsGatewayApp": {
+    "interviewappEvaluationSheet": {
+      "home": {
+        "title": "EvaluationSheets",
+        "createLabel": "Créer un nouveau Evaluation Sheet",
+        "createOrEditLabel": "Créer ou éditer un Evaluation Sheet",
+        "notFound": "Aucun Evaluation Sheet trouvé"
+      },
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Evaluation Sheet {{ id }} ?"
+      },
+      "detail": {
+        "title": "Evaluation Sheet"
+      },
+      "atout": "Atout",
+      "faibless": "Faibless"
+    }
+  },
+  "interviewappApp": {
+    "interviewappEvaluationSheet": {
+      "created": "Un nouveau Evaluation Sheet a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Evaluation Sheet avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Evaluation Sheet avec l'identifiant {{ param }} a été supprimé"
+    }
+  }
+}

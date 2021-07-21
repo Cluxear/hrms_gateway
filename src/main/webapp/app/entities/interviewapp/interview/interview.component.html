@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="hrmsGatewayApp.interviewappInterview.home.title">Interviews</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-interview" [routerLink]="['/interview/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="hrmsGatewayApp.interviewappInterview.home.createLabel">
+            Create a new Interview
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="interviews?.length === 0">
+        <span jhiTranslate="hrmsGatewayApp.interviewappInterview.home.notFound">No interviews found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="interviews && interviews.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.interviewDate">Interview Date</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.createdAt">Created At</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.modifiedAt">Modified At</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.resultAttributedAt">Result Attributed At</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.type">Type</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.result">Result</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.isDateFixed">Is Date Fixed</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.note">Note</span></th>
+                    <th scope="col" ><span jhiTranslate="hrmsGatewayApp.interviewappInterview.evaluationSheet">Evaluation Sheet</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let interview of interviews ;trackBy: trackId">
+                    <td><a [routerLink]="['/interview', interview.id, 'view']">{{ interview.id }}</a></td>
+                    <td>{{ interview.interviewDate | date:'medium' }}</td>
+                    <td>{{ interview.createdAt | date:'medium' }}</td>
+                    <td>{{ interview.modifiedAt | date:'medium' }}</td>
+                    <td>{{ interview.resultAttributedAt | date:'medium' }}</td>
+                    <td jhiTranslate="{{ 'hrmsGatewayApp.InterviewType.' + interview.type }}">{{ interview.type }}</td>
+                    <td jhiTranslate="{{ 'hrmsGatewayApp.InterviewResult.' + interview.result }}">{{ interview.result }}</td>
+                    <td>{{ interview.isDateFixed }}</td>
+                    <td>{{ interview.note }}</td>
+                    <td>
+                        <div *ngIf="interview.evaluationSheetId">
+                            <a [routerLink]="['/evaluation-sheet', interview.evaluationSheetId , 'view']" >{{ interview.evaluationSheetId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/interview', interview.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/interview', interview.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(interview)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -2,9 +2,9 @@
   "hrmsGatewayApp": {
     "ConclusionType": {
       "null": "",
-      "HIRED": "HIRED",
-      "REJECTED": "REJECTED",
-      "PENDING": "PENDING"
+      "HIRED": "hired",
+      "REJECTED": "rejected",
+      "PENDING": "pending"
     }
   }
 }

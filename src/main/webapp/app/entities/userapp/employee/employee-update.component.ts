@@ -29,6 +29,7 @@ export class EmployeeUpdateComponent implements OnInit {
 
   /** TODO: Changing account info for already existing accounts **/
   isSaving = false;
+  isUpdate = false;
   users: IUser[] = [];
   positions: IPosition[] = [];
   degreelevels: IDegreeLevel[] = [];
@@ -62,6 +63,8 @@ export class EmployeeUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ employee }) => {
+      if(employee.id)
+          this.isUpdate = true;
       this.updateForm(employee);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
@@ -98,6 +101,9 @@ export class EmployeeUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: employee.id,
       salary: employee.salary,
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      email: employee.email,
       phone: employee.phone,
       login: employee.login,
       userId: employee.userId,
@@ -126,6 +132,7 @@ export class EmployeeUpdateComponent implements OnInit {
     return {
       ...new ManagedUser(),
       id: this.editForm.get(['id'])!.value,
+      userId: this.editForm.get(['id'])!.value,
       salary: this.editForm.get(['salary'])!.value,
 
       positionId: this.editForm.get(['positionId'])!.value,

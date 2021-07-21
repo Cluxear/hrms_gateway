@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="evaluationSheet">
+            <h2><span jhiTranslate="hrmsGatewayApp.interviewappEvaluationSheet.detail.title">Evaluation Sheet</span> {{ evaluationSheet.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappEvaluationSheet.atout">Atout</span></dt>
+                <dd>
+                    <span>{{ evaluationSheet.atout }}</span>
+                </dd>
+                <dt><span jhiTranslate="hrmsGatewayApp.interviewappEvaluationSheet.faibless">Faibless</span></dt>
+                <dd>
+                    <span>{{ evaluationSheet.faibless }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/evaluation-sheet', evaluationSheet.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

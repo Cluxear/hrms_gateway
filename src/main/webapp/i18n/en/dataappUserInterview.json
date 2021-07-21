@@ -1,0 +1,27 @@
+{
+  "hrmsGatewayApp": {
+    "dataappUserInterview": {
+      "home": {
+        "title": "User Interviews",
+        "createLabel": "Create a new User Interview",
+        "createOrEditLabel": "Create or edit a User Interview",
+        "notFound": "No User Interviews found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete User Interview {{ id }}?"
+      },
+      "detail": {
+        "title": "User Interview"
+      },
+      "userId": "User Id",
+      "interviewId": "Interview Id"
+    }
+  },
+  "dataappApp": {
+    "dataappUserInterview": {
+      "created": "A new User Interview is created with identifier {{ param }}",
+      "updated": "A User Interview is updated with identifier {{ param }}",
+      "deleted": "A User Interview is deleted with identifier {{ param }}"
+    }
+  }
+}

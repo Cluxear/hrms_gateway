@@ -25,7 +25,8 @@
             <div class="card">
                 <div class="card-body">
                     <!-- Add css class to center image -->
-                    <div  class="m-t-30 profile-center "> <img src="../../content/images/jhipster_family_member_0_head-256.png" class="img-circle" width="150" (click)="selectImage.click()" />
+                    <div  class="m-t-30 profile-center "> <img *ngIf="!url" src="../../content/images/jhipster_family_member_0_head-256.png" class="img-circle" width="150" (click)="selectImage.click()" />
+                        <img [src] = url *ngIf=url src="../../content/images/jhipster_family_member_0_head-256.png" class="img-circle" width="150" (click)="selectImage.click()" />
                         <h4 class="card-title m-t-10">{{candidate.firstName}}
                             <div class="card-title m-t-10 ">
 

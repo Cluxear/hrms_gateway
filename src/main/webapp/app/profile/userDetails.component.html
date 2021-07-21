@@ -6,9 +6,12 @@
         <h3 class="text-themecolor">Profile</h3>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-            <li class="breadcrumb-item active">Profile</li>
+            <li class="breadcrumb-item"   (click) = "showUploads = false" > <a href="javascript:void(0)">Profile</a></li>
+            <li class="breadcrumb-item" (click)="showUploads = true"> <a> uploads </a> </li>
         </ol>
     </div>
+
+
 
 </div>
 <!-- ============================================================== -->
@@ -24,12 +27,17 @@
         <div class="card">
             <div class="card-body">
                 <!-- Add css class to center image -->
-                <div  class="m-t-30 profile-center "> <img src="../../content/images/jhipster_family_member_0_head-256.png" class="img-circle" width="150" />
+                <div  class="m-t-30 profile-center ">
+                    <img [src]="image"
+                         alt="Place image title"
+                         *ngIf="!isImageLoading; else noImageFound">
+                    <ng-template #noImageFound>
+                        <img src="../../content/images/jhipster_family_member_0_head-256.png" alt="Fallbackimage">
+                    </ng-template>
                     <h4 class="card-title m-t-10"></h4>
                     <h6 class="card-subtitle">Accounts Manager Amix corp</h6>
                     <div class="row text-center justify-content-md-center">
-                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
-                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
+                        <div class="col-6"><a href="javascript:void(0)" class="link" (click)="export()"><i class="icon-picture"></i> <font class="font-medium">Exporter en Excel</font></a></div>
                     </div>
                 </div>
             </div>
@@ -39,10 +47,11 @@
 
     <!-- Column -->
     <!-- Column -->
-
-
+<div class="col-lg-6" *ngIf="showUploads">
+       <jhi-user-file-list [userId] = candidate.id  > </jhi-user-file-list>
  <!--   <div class="col-lg-8 col-xlg-9 col-md-7"> -->
-        <div class="col-lg-3">
+</div>
+        <div class="col-lg-3" *ngIf="!showUploads">
             <div class="card">
 
                 <div class="card-body profile-center">
@@ -53,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" *ngIf="!showUploads">
         <div class="card">
             <!-- Tab panes -->
 
@@ -130,7 +139,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" >
         <div class="col-lg-3">
         <div class="card">
             <div class="card-body">
@@ -153,7 +162,7 @@
                                           </p>
                                       </div> -->
                             <!-- table head dark -->
-                            <div class="table-responsive">
+                            <div class="table-responsive" >
                                 <table class="table mb-0">
 
                                     <tbody>
@@ -198,7 +207,7 @@
             </div>
         </div>
     </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3" *ngIf="!showUploads">
             <div class="card">
 
                 <div class="card-body profile-center">
@@ -209,13 +218,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" *ngIf= "!showUploads">
             <div class="card">
                 <!-- Tab panes -->
 
                 <div class="card-body">
 
-                    <div class="table-responsive" *ngIf=" candidate.professionalExperience && candidate.professionalExperience.length > 0">
+                    <div class="table-responsive" *ngIf=" candidate.professionalExperience && candidate.professionalExperience.length > 0 ">
                         <table class="table mb-0">
                             <thead class="thead-light">
                             <th> Entreprise </th>
@@ -240,10 +249,23 @@
     </div>
 
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12" *ngIf="!showUploads">
         <jhi-skill-matrix [userId]="candidate.id"></jhi-skill-matrix>
             </div>
+        <div class="card col-lg-12 m-t-30 m-b-10">
+            <div class="card-body">
+                <div class="card-title m-t-10">
+                    <h3>Liste d'entretiens </h3>
+                    <button type="submit"  class="text-right btn-primary btn-sm" [routerLink]="['/interview', appId, 'new']"> Ajouter un entretien </button>
+                </div>
+
+        <div class="col-lg-12" *ngIf="!showUploads">
+            <jhi-candidate-interview-list [applicationId]="appId"></jhi-candidate-interview-list>
+        </div>
+            </div>
+        </div>
     </div>
+
 
     <!-- Column -->
 
